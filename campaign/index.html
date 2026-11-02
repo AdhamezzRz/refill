@@ -1,0 +1,122 @@
+<title>Refill Pre-Opening Campaign</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Inter:wght@400;500&display=swap">
+<style>
+/* Layout: a contact-sheet wall. Each concept is one row: the idea in words on the left, the work hung large on the right. */
+:root{
+  --bg:#F3EFE6; --surface:#FBF9F4; --line:#DDD3C7; --fg:#15120F; --muted:#6B5D50; --accent:#5C6050; --stage:#352317; --stage-fg:#F3EFE6;
+  --display:"Montserrat",ui-sans-serif,system-ui,Arial,sans-serif; --body:"Inter",ui-sans-serif,system-ui,Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17120E;--surface:#211A15;--line:#3A2F27;--fg:#EDE6DA;--muted:#B5A796;--accent:#A3AA8C;--stage:#0E0B09;--stage-fg:#EDE6DA;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#17120E;--surface:#211A15;--line:#3A2F27;--fg:#EDE6DA;--muted:#B5A796;--accent:#A3AA8C;--stage:#0E0B09;--stage-fg:#EDE6DA;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:400 1rem/1.6 var(--body);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
+p{margin:0;max-width:62ch}
+.label{font-family:var(--display);font-weight:500;font-size:.75rem;letter-spacing:.32em;text-transform:uppercase;color:var(--muted)}
+header{padding-block:56px 40px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px}
+.mark{font-family:var(--display);font-weight:600;font-size:clamp(2.2rem,6vw,4rem);letter-spacing:.6em;margin-right:-.6em;line-height:1}
+.mark small{display:block;font-size:.8rem;letter-spacing:.5em;font-weight:500;margin-top:12px}
+header .intro{max-width:46ch;color:var(--muted)}
+.concept{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:32px 56px;padding-block:56px;border-top:1px solid var(--line)}
+@media (max-width:900px){.concept{grid-template-columns:1fr}}
+.concept .text{display:flex;flex-direction:column;gap:16px;align-self:start;position:sticky;top:24px}
+@media (max-width:900px){.concept .text{position:static}}
+.concept h2{font-weight:600;font-size:1.75rem;letter-spacing:.06em;text-transform:uppercase;line-height:1.15}
+.kind{display:flex;flex-wrap:wrap;gap:8px}
+.kind span{border:1px solid var(--line);padding:4px 10px;font-family:var(--display);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.caption{border-left:2px solid var(--accent);padding-left:14px;font-size:.92rem}
+.caption .ar{font-family:"Noto Sans Arabic",Tahoma,sans-serif;direction:rtl;text-align:right;color:var(--muted);margin-top:6px}
+.stage{background:var(--stage);padding:20px;min-width:0}
+.slides{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
+.slides img{flex:0 0 min(78%,340px);width:min(78%,340px);scroll-snap-align:start;aspect-ratio:4/5;object-fit:cover}
+.pano{margin-top:14px}
+.pano img{width:100%;display:block}
+.stage .note{color:var(--stage-fg);opacity:.75;font-size:.8rem;margin-top:10px}
+.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px;align-items:start}
+.pair figure{margin:0;display:flex;flex-direction:column;gap:8px;min-width:0}
+.pair figcaption{color:var(--stage-fg);opacity:.75;font-size:.78rem;font-family:var(--display);letter-spacing:.16em;text-transform:uppercase}
+video,.pair img{width:100%;display:block;background:#000}
+.phone{aspect-ratio:9/16}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:.9rem}
+.steps li{display:grid;grid-template-columns:22px 1fr;gap:10px}
+.steps b{font-family:var(--display);color:var(--accent)}
+footer{padding-block:48px 72px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="stack">
+    <div class="label" style="margin-bottom:20px">Pre-opening campaign &middot; El Shorouk</div>
+    <h1 class="mark">REFILL<small>Specialty Coffee</small></h1>
+  </div>
+  <p class="intro">Three pieces built on the real site photos. The founder appears as a faceless line-art character, recognisable only by his silhouette, hair, beard and polo. Every line of type is real Montserrat, set in brand colours.</p>
+</header>
+
+<section class="concept" aria-labelledby="c1">
+  <div class="text">
+    <div class="label">Coming soon</div>
+    <h2 id="c1">Drawn before it's brewed</h2>
+    <div class="kind"><span>Carousel</span><span>5 slides</span><span>4:5</span></div>
+    <p>The founder draws the finished café from the 3D renders over the raw concrete: coffee bags in the empty niches, olive trees growing out of the bare planter, a cushion on the rough ledge. One pencil line runs unbroken across all five slides, ticks off what's being built, and ends by rising into the REFILL arch.</p>
+    <div class="caption">Right now: dust, drills and a man with a very big pencil. Soon: your new favourite seat in El Shorouk. Swipe to see what we're drawing.<div class="ar" lang="ar">دلوقتي: تراب وشغل ورسمة كبيرة. قريب: أحلى قعدة في الشروق.</div></div>
+  </div>
+  <div class="stage">
+    <div class="slides" tabindex="0" aria-label="Carousel slides, scroll sideways">
+      <img src="01-coming-soon-carousel/carousel-01.jpg" alt="Slide 1: Something is brewing. Line-art founder on a real ladder drawing coffee bags into the raw wall niches and an espresso machine onto the steel bar frame">
+      <img src="01-coming-soon-carousel/carousel-02.jpg" alt="Slide 2: Planters poured, plants pending. Founder watering the bare concrete planter as line-art olive trees sprout">
+      <img src="01-coming-soon-carousel/carousel-03.jpg" alt="Slide 3: The best seat is already taken. Founder sipping coffee on the raw window ledge">
+      <img src="01-coming-soon-carousel/carousel-04.jpg" alt="Slide 4: Heavy lifting in progress. Founder carrying a giant coffee cup like a beam across the site">
+      <img src="01-coming-soon-carousel/carousel-05.jpg" alt="Slide 5: Refilling soon. Founder on a ladder at the building front beside the REFILL sign, line-art terrace tables in front">
+    </div>
+    <div class="pano"><img src="01-coming-soon-carousel/carousel-overview.jpg" alt="All five slides side by side, showing the single pencil line that crosses every slide and ends as the REFILL cup-arch icon"></div>
+    <p class="note">Swipe view above; the strip below shows the line crossing every seam.</p>
+  </div>
+</section>
+
+<section class="concept" aria-labelledby="c2">
+  <div class="text">
+    <div class="label">Almost done</div>
+    <h2 id="c2">Same room. Soon.</h2>
+    <div class="kind"><span>Reel</span><span>16 s</span><span>9:16</span></div>
+    <p>Locked-off shots of the real site. The line-art founder walks in, and the finished room follows him, wave by wave: plaster, olive trees, cushions, light. At the bar it fills from the floor up, like a cup. The headline completes itself, "Same room." becoming "Same room. Soon.", and the reel closes on the arch with the founder pouring into it.</p>
+    <div class="caption">Same room. Soon. Refill Specialty Coffee, El Shorouk.<div class="ar" lang="ar">نفس المكان. قريب جدًا.</div></div>
+  </div>
+  <div class="stage">
+    <div class="pair">
+      <figure><video class="phone" src="02-same-room-soon-reel/same-room-soon-reel-1080x1920.mp4" controls muted loop playsinline preload="metadata" poster="02-same-room-soon-reel/same-room-endcard-1080x1920.jpg"></video><figcaption>Reel &middot; silent, add a trending sound</figcaption></figure>
+      <figure><img class="phone" src="02-same-room-soon-reel/same-room-endcard-1080x1920.jpg" alt="End card: founder in ink line art standing on the arch's lid, pouring into the REFILL cup-arch icon, with Almost there, El Shorouk, Cairo"><figcaption>End card</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="concept" aria-labelledby="c3">
+  <div class="text">
+    <div class="label">Almost done &middot; countdown</div>
+    <h2 id="c3">92% refilled</h2>
+    <div class="kind"><span>Reel 8 s</span><span>Story</span><span>Feed 4:5</span></div>
+    <p>The REFILL cup-arch icon becomes a measuring cup laid over the real bar. The founder stands on its lid pouring from a pour-over kettle, and the finished café rises inside it like coffee, aligned to the same camera angle. Outside the cup, the site stays raw. The counter stops at 92%.</p>
+    <ol class="steps">
+      <li><b>1</b><span>Post the 92% reel and story now.</span></li>
+      <li><b>2</b><span>Re-render at 96% and 99% with one command as the opening nears.</span></li>
+      <li><b>3</b><span>100% on opening day switches the line to "Now open."</span></li>
+    </ol>
+    <div class="caption">92% refilled. The last 8% is the best part: the coffee.<div class="ar" lang="ar">خلصنا ٩٢٪. الـ ٨٪ الباقيين أحلى حاجة: القهوة.</div></div>
+  </div>
+  <div class="stage">
+    <div class="pair">
+      <figure><video class="phone" src="03-refilled-92/refilled-92-reel-1080x1920.mp4" controls muted loop playsinline preload="metadata" poster="03-refilled-92/refilled-92-story-1080x1920.jpg"></video><figcaption>Reel &middot; fills 0 to 92%</figcaption></figure>
+      <figure><img src="03-refilled-92/refilled-92-feed-1080x1350.jpg" alt="Feed post: real raw bar photo with a giant REFILL cup-arch outline; inside it the finished bar rises to 92 percent, founder pouring from the lid, 92% REFILLED. Almost ready." style="aspect-ratio:4/5"><figcaption>Feed post 4:5</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Made with Higgsfield (GPT Image 2.5, MiniMax H3), composited in brand type.</span>
+  <span>Before posting: slide 05 shows the building's existing blue and green fascia; retouch or crop it if it reads as another brand.</span>
+</footer>
+</div>
