@@ -1,0 +1,424 @@
+<title>Refill Brand Study</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Inter:wght@400;500;600&family=Alexandria:wght@300;500;600&display=swap">
+<style>
+/* Layout: a gallery wall. Plaster ground, wide tracked labels, renders hung large, findings set beside them like museum captions. */
+:root{
+  --plaster:#F3EFE6; --greige:#C2B1A2; --taupe:#A39077; --olive:#5C6050; --espresso:#352317; --ink:#0D0D0D;
+  --bg:var(--plaster); --surface:#FBF9F4; --line:#DDD3C7; --fg:#1A1714; --muted:#6B5D50; --accent:var(--olive); --accent-fg:#F3EFE6;
+  --ok:#4F6B45; --warn:#8A6A1F; --bad:#9A3F2E;
+  --display:"Montserrat",ui-sans-serif,system-ui,"Segoe UI",Arial,sans-serif;
+  --body:"Inter",ui-sans-serif,system-ui,"Segoe UI",Arial,sans-serif;
+  --arabic:"Alexandria","Noto Sans Arabic",Tahoma,sans-serif;
+  --step--1:.8125rem; --step0:1rem; --step1:1.25rem; --step2:1.75rem; --step3:2.5rem; --step4:clamp(2.75rem,8vw,5.5rem);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#17120E; --surface:#211A15; --line:#3A2F27; --fg:#EDE6DA; --muted:#B5A796; --accent:#A3AA8C; --accent-fg:#17120E;
+  --ok:#9DBB8F; --warn:#D9B260; --bad:#E08C78; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#17120E; --surface:#211A15; --line:#3A2F27; --fg:#EDE6DA; --muted:#B5A796; --accent:#A3AA8C; --accent-fg:#17120E;
+  --ok:#9DBB8F; --warn:#D9B260; --bad:#E08C78; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:400 var(--step0)/1.6 var(--body);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+section{padding-block:clamp(56px,9vw,112px);border-top:1px solid var(--line)}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+h2{font-weight:500;font-size:var(--step3);letter-spacing:.01em;line-height:1.1}
+h3{font-weight:600;font-size:var(--step0);letter-spacing:.2em;text-transform:uppercase}
+p{margin:0;max-width:65ch}
+.label{font-family:var(--display);font-weight:500;font-size:var(--step--1);letter-spacing:.32em;text-transform:uppercase;color:var(--muted)}
+.lede{font-size:var(--step1);line-height:1.5;color:var(--fg);max-width:52ch}
+.stack{display:flex;flex-direction:column;gap:16px}
+.head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:24px 56px;align-items:end;margin-bottom:48px}
+@media (max-width:820px){.head{grid-template-columns:1fr}}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+img{display:block;width:100%;height:auto;max-width:100%}
+.mono{font-variant-numeric:tabular-nums;font-family:var(--display);font-weight:500;letter-spacing:.06em}
+
+/* hero */
+.hero{padding-block:clamp(40px,7vw,88px) 0;border:0}
+.hero .mark{font-family:var(--display);font-weight:600;font-size:var(--step4);letter-spacing:.6em;margin-right:-.6em;line-height:1}
+.hero .sub{font-family:var(--display);font-weight:500;letter-spacing:.5em;font-size:clamp(.7rem,1.6vw,.95rem);text-transform:uppercase;margin-top:14px}
+.hero-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px 40px;margin-bottom:40px}
+.hero-meta{display:grid;grid-template-columns:auto auto;gap:4px 20px;font-size:var(--step--1);color:var(--muted)}
+.hero-meta dt{font-family:var(--display);letter-spacing:.24em;text-transform:uppercase;font-weight:500}
+.hero-meta dd{margin:0;color:var(--fg)}
+.hero figure{margin:0;position:relative}
+.hero figure img{aspect-ratio:16/8.2;object-fit:cover;object-position:50% 40%}
+.thesis{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px 56px;padding-block:48px 8px}
+.thesis p.big{font-family:var(--display);font-weight:400;font-size:var(--step2);line-height:1.3;letter-spacing:.005em;max-width:24ch}
+@media (max-width:820px){.thesis{grid-template-columns:1fr}}
+
+/* DNA */
+.dna{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.dna > div{background:var(--bg);padding:28px 24px;display:flex;flex-direction:column;gap:10px}
+.dna .q{font-family:var(--display);font-weight:600;font-size:var(--step1);letter-spacing:.14em;text-transform:uppercase;line-height:1.35}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);padding:5px 12px;font-family:var(--display);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+
+/* space */
+.gallery{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
+.gallery figure{margin:0;display:flex;flex-direction:column;gap:10px;min-width:0}
+.gallery figcaption{font-size:var(--step--1);color:var(--muted);max-width:52ch}
+.gallery figcaption b{font-family:var(--display);font-weight:600;letter-spacing:.16em;text-transform:uppercase;font-size:.72rem;color:var(--fg);display:block;margin-bottom:2px}
+.g-a{grid-column:span 7}.g-b{grid-column:span 5}.g-c{grid-column:span 4}.g-d{grid-column:span 4}.g-e{grid-column:span 4}
+.gallery img{aspect-ratio:4/3;object-fit:cover}
+@media (max-width:820px){.g-a,.g-b,.g-c,.g-d,.g-e{grid-column:span 12}}
+.materials{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:24px;margin-top:56px}
+.mat{display:flex;flex-direction:column;gap:10px}
+.mat .sw{height:64px;border:1px solid var(--line)}
+.mat .n{font-family:var(--display);font-weight:600;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase}
+.mat p{font-size:var(--step--1);color:var(--muted)}
+
+/* color */
+.palette{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+@media (max-width:980px){.palette{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:520px){.palette{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.swatch{display:flex;flex-direction:column;min-width:0}
+.swatch .chipc{aspect-ratio:3/4;padding:14px;display:flex;flex-direction:column;justify-content:space-between;border:1px solid var(--line)}
+.swatch .chipc span{font-family:var(--display);font-weight:600;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase}
+.swatch .meta{padding-top:12px;display:flex;flex-direction:column;gap:2px}
+.swatch .nm{font-family:var(--display);font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-size:.82rem}
+.swatch .hx{font-variant-numeric:tabular-nums;font-size:var(--step--1);color:var(--muted)}
+.swatch .role{font-size:var(--step--1)}
+.tag{align-self:flex-start;font-family:var(--display);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;padding:3px 8px;border:1px solid currentColor;margin-top:6px}
+.tag.new{color:var(--accent)} .tag.keep{color:var(--muted)}
+.ratio{display:flex;height:44px;margin-top:40px;border:1px solid var(--line)}
+.ratio div{display:flex;align-items:center;padding-inline:12px;font-family:var(--display);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;overflow:hidden}
+.ratio-key{display:flex;flex-wrap:wrap;gap:6px 20px;margin-top:10px;font-size:var(--step--1);color:var(--muted)}
+.findings{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:40px 56px;margin-top:64px}
+.finding{display:flex;flex-direction:column;gap:12px;border-top:2px solid var(--fg);padding-top:18px}
+.finding h3{font-size:.82rem}
+.ramp{display:flex;gap:4px;align-items:flex-end;margin-top:4px}
+.ramp div{flex:1;display:flex;flex-direction:column;gap:6px;font-size:.72rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.ramp i{display:block;height:56px;border:1px solid var(--line)}
+.tablewrap{overflow-x:auto;margin-top:8px}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:var(--step--1)}
+th,td{text-align:left;padding:10px 12px 10px 0;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-family:var(--display);font-weight:600;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+td.num{font-variant-numeric:tabular-nums;font-family:var(--display);font-weight:600}
+.pair{display:inline-flex;align-items:center;justify-content:center;width:64px;height:30px;font-family:var(--display);font-weight:600;font-size:.8rem;letter-spacing:.12em;border:1px solid var(--line)}
+.pill{font-family:var(--display);font-weight:600;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;padding:3px 8px;border:1px solid currentColor;white-space:nowrap}
+.pill.ok{color:var(--ok)}.pill.warn{color:var(--warn)}.pill.bad{color:var(--bad)}
+
+/* type */
+.typegrid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:48px}
+@media (max-width:900px){.typegrid{grid-template-columns:1fr}}
+.spec{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.spec .row{display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px;padding-block:18px;border-bottom:1px solid var(--line);align-items:baseline}
+@media (max-width:520px){.spec .row{grid-template-columns:1fr;gap:6px}}
+.spec .k{font-family:var(--display);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.spec .k small{display:block;letter-spacing:.06em;text-transform:none;font-family:var(--body);font-size:.72rem;margin-top:2px}
+.s-h1{font-family:var(--display);font-weight:600;font-size:clamp(1.4rem,3.4vw,2.3rem);letter-spacing:.2em;text-transform:uppercase;line-height:1}
+.s-h2{font-family:var(--display);font-weight:500;font-size:clamp(1.25rem,2.6vw,1.75rem);letter-spacing:.02em}
+.s-h3{font-family:var(--display);font-weight:500;font-size:var(--step1);line-height:1.3}
+.s-h4{font-family:var(--display);font-weight:500;font-size:.85rem;letter-spacing:.3em;text-transform:uppercase}
+.s-body{font-family:var(--body);font-size:var(--step0);line-height:1.5}
+.s-small{font-family:var(--body);font-weight:500;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.menu-card{background:var(--surface);border:1px solid var(--line);padding:28px;display:flex;flex-direction:column;gap:18px}
+.menu-card .brand{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.menu-card .wm{font-family:var(--display);font-weight:600;letter-spacing:.6em;font-size:1.1rem}
+.menu-card .ar-wm{font-family:var(--arabic);font-weight:600;font-size:1.15rem}
+.menu-card ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.menu-card li{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:12px;align-items:baseline;padding-block:10px;border-bottom:1px solid var(--line)}
+.menu-card .en{font-family:var(--display);font-weight:500;font-size:.8rem;letter-spacing:.22em;text-transform:uppercase}
+.menu-card .ar{font-family:var(--arabic);font-weight:300;text-align:right;direction:rtl}
+.menu-card .pr{font-family:var(--display);font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.menu-card .foot{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-family:var(--display)}
+.conflict{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;margin-top:40px}
+.conflict div{border:1px solid var(--line);padding:18px;display:flex;flex-direction:column;gap:6px}
+.conflict .where{font-size:.72rem;color:var(--muted)}
+.conflict .what{font-family:var(--display);font-weight:600;letter-spacing:.06em}
+.conflict .verdict{margin-top:6px}
+
+/* logo */
+.logo-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
+@media (max-width:900px){.logo-grid{grid-template-columns:1fr}}
+.arch-demo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.arch-demo div{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;border:1px solid var(--line)}
+.arch-demo span{font-family:var(--display);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase}
+.arch-demo svg{width:42%;height:auto}
+.crop{aspect-ratio:1;overflow:hidden}
+.crop img{width:100%;height:100%;object-fit:cover}
+
+/* qa */
+.qa{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:0 56px}
+.qa-item{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 16px;padding-block:20px;border-bottom:1px solid var(--line)}
+.qa-item .sev{grid-row:span 2;align-self:start;margin-top:3px}
+.qa-item b{font-family:var(--display);font-weight:600;font-size:.95rem}
+.qa-item p{font-size:var(--step--1);color:var(--muted)}
+
+/* bench + next */
+.bench{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:40px}
+.bench div{display:flex;flex-direction:column;gap:10px}
+.bench .rule{font-family:var(--display);font-weight:600;font-size:var(--step1);line-height:1.3}
+.next{counter-reset:n;list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.next li{counter-increment:n;display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:8px 24px;padding-block:22px;border-bottom:1px solid var(--line);align-items:baseline}
+.next li::before{content:counter(n,decimal-leading-zero);font-family:var(--display);font-weight:600;font-size:var(--step2);color:var(--accent);line-height:1}
+.next b{font-family:var(--display);font-weight:600;font-size:1.05rem;display:block;margin-bottom:4px}
+.next p{font-size:var(--step--1);color:var(--muted)}
+.next .who{font-family:var(--display);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+@media (max-width:620px){.next li{grid-template-columns:48px minmax(0,1fr)}.next .who{grid-column:2}}
+footer{padding-block:56px 72px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;color:var(--muted);font-size:var(--step--1)}
+footer .wm{font-family:var(--display);font-weight:600;letter-spacing:.6em;color:var(--fg)}
+@media (prefers-reduced-motion:no-preference){
+  .hero figure img{animation:settle 1.6s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes settle{from{transform:scale(1.035);filter:saturate(.85)}to{transform:none;filter:none}}
+}
+</style>
+
+<div class="wrap">
+
+<!-- HERO -->
+<section class="hero" aria-labelledby="t">
+  <div class="hero-top">
+    <div>
+      <div class="label" style="margin-bottom:22px">Brand study &middot; El Shorouk, Cairo</div>
+      <h1 id="t" class="mark">REFILL</h1>
+      <div class="sub">Specialty Coffee</div>
+    </div>
+    <dl class="hero-meta">
+      <dt>Studied</dt><dd>BigBee guideline, 11 pages</dd>
+      <dt></dt><dd>Interior 3D renders, 8 views</dd>
+      <dt>Method</dt><dd>Colors sampled from the files, contrast measured to WCAG 2.2</dd>
+      <dt>Date</dt><dd class="mono">02.11.26</dd>
+    </dl>
+  </div>
+  <figure>
+    <img src="img/facade.jpg" alt="3D render of the Refill facade: limewash plaster wall, black REFILL letters, black steel glazing and a terrace of oak and bouclé chairs">
+  </figure>
+  <div class="thesis">
+    <p class="big">The space is already world class. The brand system has to catch up with it.</p>
+    <div class="stack">
+      <p>The renders show a calm, material-led room: limewash plaster, hand-cut stone, oak, olive planting and a long view over green. That is the level of a top specialty roaster. The guideline has the right instincts (restraint, a tracked wordmark, warm neutrals), but it describes two logo systems, two type systems and three palettes at once.</p>
+      <p>This study reads every page, names what to keep, and sets out one system that matches the room.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DNA -->
+<section aria-labelledby="dna-h">
+  <div class="head">
+    <div class="stack"><div class="label">What Refill is</div><h2 id="dna-h">The brand in four lines</h2></div>
+    <p class="lede">Drawn only from the guideline's own words. These are the lines every menu, post and cup should be checked against.</p>
+  </div>
+  <div class="dna">
+    <div><div class="label">Promise</div><div class="q">Specialty coffee, made to refill your day.</div></div>
+    <div><div class="label">Line</div><div class="q">Good coffee.<br>Better days.</div></div>
+    <div><div class="label">Pillars</div><div class="q">Coffee / People / Good days</div></div>
+    <div><div class="label">Voice</div><div class="chips"><span class="chip">Clear</span><span class="chip">Conversational</span><span class="chip">Confident</span><span class="chip">Warm</span><span class="chip">Cultured</span></div><p style="font-size:var(--step--1);color:var(--muted)">Simple language, no coffee jargon, direct and never exaggerated.</p></div>
+  </div>
+</section>
+
+<!-- SPACE -->
+<section aria-labelledby="space-h">
+  <div class="head">
+    <div class="stack"><div class="label">The 3D look</div><h2 id="space-h">A soft, mineral room</h2></div>
+    <p class="lede">The interior is the strongest brand asset. Everything printed or posted should feel as if it was made from the same materials.</p>
+  </div>
+  <div class="gallery">
+    <figure class="g-a"><img src="img/bar.jpg" alt="Main bar: white solid-surface counter breaking into rough stone, black REFILL letters, two menu boards, stone niches with retail bags"><figcaption><b>The bar</b>Smooth white surface tearing into raw stone. This contrast of polished and rough is the room's signature, and the brand's best visual idea.</figcaption></figure>
+    <figure class="g-b"><img src="img/window-bench.jpg" alt="Window bench with tufted cushion over a rough stone plinth, taupe pedestal tables, a carved stone form hanging in the corner"><figcaption><b>The view</b>A long bench facing the green horizon. Taupe pedestal tables are the Warm Taupe of the palette made physical.</figcaption></figure>
+    <figure class="g-c"><img src="img/planter-lounge.jpg" alt="Curved plaster planter-bench with olive cushions and white pedestal tables in front of panoramic windows"><figcaption><b>Olive, found</b>The only colored accent in the room is the olive cushions and planting. It matches #5C6050 almost exactly.</figcaption></figure>
+    <figure class="g-d"><img src="img/interior-wide.jpg" alt="Wide interior view: bar on the left, arched door with a round porthole, carved stone column, planters and windows"><figcaption><b>The arch</b>The arched door with its round window repeats the arch of the cup icon. The mark is already built into the architecture.</figcaption></figure>
+    <figure class="g-e"><img src="img/washroom.jpg" alt="Washroom with a travertine column basin, travertine pendant lights, gunmetal fittings and an oak door"><figcaption><b>Even here</b>Travertine, gunmetal and oak. The detailing carries all the way to the washroom, which is how a world-class room reads.</figcaption></figure>
+  </div>
+  <div class="materials" aria-label="Material palette sampled from the renders">
+    <div class="mat"><div class="sw" style="background:#E9E3DA"></div><div class="n">Limewash plaster</div><p>Walls, bar, planters. Reads warm grey in daylight, close to Plaster #F3EFE6.</p></div>
+    <div class="mat"><div class="sw" style="background:linear-gradient(135deg,#D9CFC3,#BFB2A3 55%,#E6DED3)"></div><div class="n">Hand-cut stone</div><p>Bar front, niches, hanging forms. The texture to borrow for packaging and print.</p></div>
+    <div class="mat"><div class="sw" style="background:#B59A7E"></div><div class="n">Oak</div><p>Chairs, tables, doors. Warmer than any swatch in the guideline.</p></div>
+    <div class="mat"><div class="sw" style="background:#5C6050"></div><div class="n">Olive</div><p>Cushions and plants. The one accent.</p></div>
+    <div class="mat"><div class="sw" style="background:#2B2B2A"></div><div class="n">Black steel</div><p>Window frames, letters, fittings. Matches the logo black.</p></div>
+  </div>
+</section>
+
+<!-- COLOR -->
+<section aria-labelledby="color-h">
+  <div class="head">
+    <div class="stack"><div class="label">Color, measured</div><h2 id="color-h">One palette, six colors</h2></div>
+    <p class="lede">The guideline lists different colors on different pages. Below is one palette that resolves them, keeps every hex the agency already chose where possible, and matches the room.</p>
+  </div>
+  <div class="palette">
+    <div class="swatch"><div class="chipc" style="background:#F3EFE6;color:#0D0D0D"><span>Base</span><span>Aa</span></div><div class="meta"><span class="nm">Plaster</span><span class="hx">#F3EFE6</span><span class="role">Backgrounds, cups, bags</span><span class="tag keep">From guideline</span></div></div>
+    <div class="swatch"><div class="chipc" style="background:#C2B1A2;color:#0D0D0D;border-color:#C2B1A2"><span>Main</span><span>Aa</span></div><div class="meta"><span class="nm">Greige</span><span class="hx">#C2B1A2</span><span class="role">Social tiles, packaging fields</span><span class="tag keep">From guideline</span></div></div>
+    <div class="swatch"><div class="chipc" style="background:#A39077;color:#0D0D0D;border-color:#A39077"><span>Secondary</span><span>Aa</span></div><div class="meta"><span class="nm">Taupe</span><span class="hx">#A39077</span><span class="role">Furniture, large type on photos</span><span class="tag keep">From guideline</span></div></div>
+    <div class="swatch"><div class="chipc" style="background:#5C6050;color:#F3EFE6;border-color:#5C6050"><span>Accent</span><span>Aa</span></div><div class="meta"><span class="nm">Olive</span><span class="hx">#5C6050</span><span class="role">Aprons, retail bag, one CTA per layout</span><span class="tag keep">From guideline</span></div></div>
+    <div class="swatch"><div class="chipc" style="background:#352317;color:#F3EFE6;border-color:#352317"><span>Warm dark</span><span>Aa</span></div><div class="meta"><span class="nm">Espresso</span><span class="hx">#352317</span><span class="role">Dark tiles, menu boards, coffee bags</span><span class="tag new">Add officially</span></div></div>
+    <div class="swatch"><div class="chipc" style="background:#0D0D0D;color:#F3EFE6;border-color:#0D0D0D"><span>Logo</span><span>Aa</span></div><div class="meta"><span class="nm">Ink</span><span class="hx">#0D0D0D</span><span class="role">Wordmark, signage, body text</span><span class="tag keep">From guideline</span></div></div>
+  </div>
+  <div class="ratio" role="img" aria-label="Recommended color proportion: Plaster 60 percent, Greige and Taupe 20 percent, Espresso and Ink 12 percent, Olive 8 percent">
+    <div style="flex:60;background:#F3EFE6;color:#0D0D0D">Plaster 60</div>
+    <div style="flex:20;background:#C2B1A2;color:#0D0D0D">Greige / Taupe 20</div>
+    <div style="flex:12;background:#352317;color:#F3EFE6">Dark 12</div>
+    <div style="flex:8;background:#5C6050;color:#F3EFE6">8</div>
+  </div>
+  <div class="ratio-key"><span>Proportion for any layout, shelf or feed: mostly plaster, olive used sparingly.</span><span>BigBee yellow #F1D058 is the agency's color and never appears on Refill.</span></div>
+
+  <div class="findings">
+    <div class="finding">
+      <h3>Three browns are one color</h3>
+      <p>Warm Taupe, Stone Beige and Light Greige share the same hue (about 30°) and saturation (about 20%). Only lightness changes: 55%, 66%, 70%. Stone Beige and Light Greige are 4 points apart, too close to tell apart on a cup or a screen.</p>
+      <div class="ramp" aria-label="Lightness ramp of the three browns">
+        <div><i style="background:#A39077"></i>A39077 &middot; L55</div>
+        <div><i style="background:#B9A897"></i>B9A897 &middot; L66</div>
+        <div><i style="background:#C2B1A2"></i>C2B1A2 &middot; L70</div>
+      </div>
+      <p><strong>Decision:</strong> drop Stone Beige. Keep Taupe and Greige.</p>
+    </div>
+    <div class="finding">
+      <h3>The dark brown is used but never named</h3>
+      <p>The photoshoot and social pages both end in a deep coffee brown (sampled #352317 and #5C4233). A darker brown, sampled #78614F, also appears in the logo color variations. None of them is in a palette list, so every designer will pick a different one.</p>
+      <p><strong>Decision:</strong> make Espresso #352317 official and retire the others.</p>
+    </div>
+    <div class="finding">
+      <h3>Olive is the bridge to the room</h3>
+      <p>The guideline sheet calls olive an accent, and the 3D renders use it on cushions and plants. It is also the only mid-tone that passes contrast with Plaster in both directions (5.64:1).</p>
+      <p><strong>Decision:</strong> olive is the only accent. Use it once per layout.</p>
+    </div>
+  </div>
+
+  <div style="margin-top:64px" class="stack">
+    <h3>Text contrast, measured</h3>
+    <p style="color:var(--muted);font-size:var(--step--1)">WCAG 2.2: 4.5:1 for body text, 3:1 for large text (24px+, or 19px+ bold).</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Sample</th><th>Text on background</th><th>Ratio</th><th>Use for</th></tr></thead>
+        <tbody>
+          <tr><td><span class="pair" style="background:#F3EFE6;color:#0D0D0D">Aa</span></td><td>Ink on Plaster</td><td class="num">16.94</td><td><span class="pill ok">Any text</span></td></tr>
+          <tr><td><span class="pair" style="background:#F3EFE6;color:#352317">Aa</span></td><td>Espresso on Plaster</td><td class="num">13.03</td><td><span class="pill ok">Any text</span></td></tr>
+          <tr><td><span class="pair" style="background:#C2B1A2;color:#0D0D0D">Aa</span></td><td>Ink on Greige</td><td class="num">9.35</td><td><span class="pill ok">Any text</span></td></tr>
+          <tr><td><span class="pair" style="background:#A39077;color:#0D0D0D">Aa</span></td><td>Ink on Taupe</td><td class="num">6.31</td><td><span class="pill ok">Any text</span></td></tr>
+          <tr><td><span class="pair" style="background:#5C6050;color:#F3EFE6">Aa</span></td><td>Plaster on Olive</td><td class="num">5.64</td><td><span class="pill ok">Any text</span></td></tr>
+          <tr><td><span class="pair" style="background:#A39077;color:#FFFFFF">Aa</span></td><td>White on Taupe</td><td class="num">3.08</td><td><span class="pill warn">Large text only</span></td></tr>
+          <tr><td><span class="pair" style="background:#F3EFE6;color:#A39077">Aa</span></td><td>Taupe on Plaster</td><td class="num">2.69</td><td><span class="pill bad">Never for text</span></td></tr>
+          <tr><td><span class="pair" style="background:#C2B1A2;color:#FFFFFF">Aa</span></td><td>White on Greige</td><td class="num">2.08</td><td><span class="pill bad">Never for text</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:var(--step--1);color:var(--muted)">The social grid's "GOOD COFFEE BETTER DAYS" tiles set white type on taupe. That holds at headline size only. The small caps captions on taupe need Ink or Espresso instead.</p>
+  </div>
+</section>
+
+<!-- TYPE -->
+<section aria-labelledby="type-h">
+  <div class="head">
+    <div class="stack"><div class="label">Typography</div><h2 id="type-h">Montserrat leads, Inter supports, Arabic is missing</h2></div>
+    <p class="lede">The wordmark is drawn in a geometric sans with wide tracking, so Montserrat is the right primary. Three other type choices in the files compete with it.</p>
+  </div>
+  <div class="typegrid">
+    <div class="spec" aria-label="Type hierarchy from the guideline, set live">
+      <div class="row"><div class="k">H1 Display<small>Montserrat SemiBold, caps</small></div><div class="s-h1">Refill your day.</div></div>
+      <div class="row"><div class="k">H2 Headline<small>Montserrat Medium</small></div><div class="s-h2">Good coffee. Better days.</div></div>
+      <div class="row"><div class="k">H3 Subhead<small>Montserrat Medium</small></div><div class="s-h3">Specialty coffee made for everyday routines, good conversations and more.</div></div>
+      <div class="row"><div class="k">H4 Label<small>Montserrat Medium, caps</small></div><div class="s-h4">Coffee / People / Good days</div></div>
+      <div class="row"><div class="k">Body<small>Inter Regular</small></div><div class="s-body">From carefully selected beans to every detail in the cup, Refill is your place to pause, recharge and move forward.</div></div>
+      <div class="row"><div class="k">Small<small>Inter Medium, caps</small></div><div class="s-small">El Shorouk, Cairo &nbsp;|&nbsp; 250 ml &nbsp;|&nbsp; Keep refrigerated</div></div>
+    </div>
+    <div class="menu-card" aria-label="Example bilingual menu card built with the recommended system">
+      <div class="brand"><span class="wm">REFILL</span><span class="ar-wm" lang="ar" dir="rtl">ريفيل</span></div>
+      <div class="label">Cold &middot; <span lang="ar" style="font-family:var(--arabic);letter-spacing:0">بارد</span></div>
+      <ul>
+        <li><span class="en">Iced latte</span><span class="pr">85</span><span class="ar" lang="ar">لاتيه مثلج</span></li>
+        <li><span class="en">Spanish latte</span><span class="pr">95</span><span class="ar" lang="ar">سبانيش لاتيه</span></li>
+        <li><span class="en">Cold brew</span><span class="pr">90</span><span class="ar" lang="ar">كولد برو</span></li>
+        <li><span class="en">Iced matcha</span><span class="pr">110</span><span class="ar" lang="ar">ماتشا مثلجة</span></li>
+      </ul>
+      <div class="foot">Sample prices in EGP &middot; type test only</div>
+    </div>
+  </div>
+  <div class="conflict">
+    <div><span class="where">Guideline p.4</span><span class="what">Montserrat + Inter</span><span class="verdict pill ok">Keep: the system</span></div>
+    <div><span class="where">Guideline p.3 sheet</span><span class="what">Canva Sans + The Seasons</span><span class="verdict pill bad">Remove</span></div>
+    <div><span class="where">Mockups p.6, p.7</span><span class="what">Handwritten script</span><span class="verdict pill bad">Remove</span></div>
+    <div><span class="where">Menu boards in renders</span><span class="what">Lowercase "menu / drinks"</span><span class="verdict pill warn">Reset in Montserrat caps</span></div>
+    <div><span class="where">Not in any file</span><span class="what">Arabic typeface</span><span class="verdict pill warn">Add: test Alexandria or IBM Plex Sans Arabic</span></div>
+  </div>
+</section>
+
+<!-- LOGO -->
+<section aria-labelledby="logo-h">
+  <div class="head">
+    <div class="stack"><div class="label">The mark</div><h2 id="logo-h">Wordmark first, arch second</h2></div>
+    <p class="lede">Page 2 shows a wordmark-only system. Page 3 adds a cup-arch icon. The renders use only the wordmark. Both can live together if each has a clear job.</p>
+  </div>
+  <div class="logo-grid">
+    <div class="stack">
+      <img src="img/guide-logo-system.jpg" alt="Guideline page 3 logo sheet: cup-arch icon above the REFILL wordmark, stacked, horizontal and circular badge versions, clear space and incorrect usage examples" style="border:1px solid var(--line)">
+      <p style="font-size:var(--step--1);color:var(--muted)">Guideline page 3: the cup-arch system. Its clear-space rule (one icon height on all sides) and minimum sizes (25 mm print, 80 px digital) are sound and should be kept.</p>
+    </div>
+    <div class="stack" style="gap:28px">
+      <div class="stack">
+        <h3>Primary: the wordmark</h3>
+        <p>REFILL in Montserrat SemiBold, tracking +600, with SPECIALTY COFFEE beneath. It is already on the facade and the bar, so it is the brand's public face. Ink on light, Plaster on dark. No other color.</p>
+      </div>
+      <div class="stack">
+        <h3>Secondary: the arch</h3>
+        <p>The cup-arch icon is the same shape as the arched door in the renders. Use it where the wordmark is too long: cup lids, sleeves, stamps, app icon, latte stencil, retail-bag seal, highlight covers.</p>
+      </div>
+      <div class="arch-demo" aria-label="Cup-arch icon on three brand backgrounds">
+        <div style="background:#F3EFE6;color:#0D0D0D"><svg viewBox="0 0 60 64" fill="none" stroke="currentColor" stroke-width="4" aria-hidden="true"><path d="M6 4h48"/><path d="M12 14v18a18 18 0 0 0 36 0V14z"/></svg><span>Plaster</span></div>
+        <div style="background:#5C6050;color:#F3EFE6;border-color:#5C6050"><svg viewBox="0 0 60 64" fill="none" stroke="currentColor" stroke-width="4" aria-hidden="true"><path d="M6 4h48"/><path d="M12 14v18a18 18 0 0 0 36 0V14z"/></svg><span>Olive</span></div>
+        <div style="background:#352317;color:#F3EFE6;border-color:#352317"><svg viewBox="0 0 60 64" fill="none" stroke="currentColor" stroke-width="4" aria-hidden="true"><path d="M6 4h48"/><path d="M12 14v18a18 18 0 0 0 36 0V14z"/></svg><span>Espresso</span></div>
+      </div>
+      <p style="font-size:var(--step--1);color:var(--muted)">Icon redrawn here as a reference sketch. Final artwork must come from the agency's master file.</p>
+    </div>
+  </div>
+</section>
+
+<!-- QA -->
+<section aria-labelledby="qa-h">
+  <div class="head">
+    <div class="stack"><div class="label">Quality bar</div><h2 id="qa-h">What to fix before anything is printed</h2></div>
+    <p class="lede">Small errors are what separate a good local brand from a world-class one. Each of these is in the current files.</p>
+  </div>
+  <div class="qa">
+    <div class="qa-item"><span class="sev pill bad">High</span><b>Wrong name on mockups</b><p>The olive bag, storefront and card on pages 6 and 7 read "REFILL COFFEE CO." The brand is REFILL SPECIALTY COFFEE.</p></div>
+    <div class="qa-item"><span class="sev pill bad">High</span><b>Two logo systems, no rule</b><p>Pages 2 and 3 present different primary logos. Adopt wordmark primary, arch secondary, and reissue one logo page.</p></div>
+    <div class="qa-item"><span class="sev pill bad">High</span><b>No Arabic</b><p>A Cairo café needs bilingual menus, signage and receipts. No Arabic typeface, wordmark or rules exist yet.</p></div>
+    <div class="qa-item"><span class="sev pill warn">Medium</span><b>Highlight icons are clip-art</b><p>Page 9 uses filled stock icons in a brown (#3E261B) that is not in the palette. Redraw as line icons at the arch's stroke weight, in Espresso.</p></div>
+    <div class="qa-item"><span class="sev pill warn">Medium</span><b>Location spelled two ways</b><p>"Shorouk, Cairo" in the files, "El-Shrouk" in conversation. Pick one spelling, for example El Shorouk, Cairo, and use it everywhere.</p></div>
+    <div class="qa-item"><span class="sev pill warn">Medium</span><b>Menu boards off-system</b><p>The renders show lowercase "menu" and "drinks" in a face that is not Montserrat. Set boards in the H4 label style, bilingual.</p></div>
+    <div class="qa-item"><span class="sev pill ok">Low</span><b>Typos in the guideline</b><p>"GUIDELIINE" (cover), "STRUCTRUE" (p.9), "Offers Ads Direct, catchy, action-oriented /" (p.7) and "Feedback" icon under a "Reviews" title.</p></div>
+    <div class="qa-item"><span class="sev pill ok">Low</span><b>Agency styling inside the brand book</b><p>The yellow dashed frames and serif headings are BigBee's deck style. Keep them out of anything Refill-facing.</p></div>
+  </div>
+</section>
+
+<!-- BENCHMARK -->
+<section aria-labelledby="bench-h">
+  <div class="head">
+    <div class="stack"><div class="label">The world-class bar</div><h2 id="bench-h">What the best specialty brands do</h2></div>
+    <p class="lede">Brands like % Arabica, Blue Bottle and Aesop's retail stores share a few habits. Refill's room already has them. The rest of the brand should follow.</p>
+  </div>
+  <div class="bench">
+    <div><div class="rule">One symbol, used everywhere</div><p>A single mark on the cup, the bag, the door and the app. For Refill: the arch.</p></div>
+    <div><div class="rule">Materials do the talking</div><p>The store's surfaces become the brand's textures. Photograph the stone, plaster and oak and use them as backgrounds on packaging and posts.</p></div>
+    <div><div class="rule">One accent, used rarely</div><p>Mostly neutral, with a single color reserved for a few objects. For Refill: olive.</p></div>
+    <div><div class="rule">Every touchpoint designed</div><p>Lids, sleeves, receipts, wifi card, napkins, washroom signage, staff aprons. Nothing defaults to a supplier's template.</p></div>
+  </div>
+</section>
+
+<!-- NEXT -->
+<section aria-labelledby="next-h">
+  <div class="head">
+    <div class="stack"><div class="label">Next steps</div><h2 id="next-h">In order of priority</h2></div>
+    <p class="lede">The first three unblock printing and signage. The rest raise the brand to the level of the room.</p>
+  </div>
+  <ol class="next">
+    <li><div><b>Lock one logo page</b><p>Wordmark primary, arch secondary, clear space and minimum sizes from page 3, colors limited to Ink and Plaster.</p></div><span class="who">Agency</span></li>
+    <li><div><b>Publish the six-color palette</b><p>Plaster, Greige, Taupe, Olive, Espresso, Ink, with the contrast table above as the usage rule. Retire Stone Beige.</p></div><span class="who">Agency</span></li>
+    <li><div><b>Commission the Arabic layer</b><p>An Arabic wordmark drawn to match REFILL's geometry, a paired Arabic typeface, and bilingual menu and signage templates.</p></div><span class="who">Agency + type designer</span></li>
+    <li><div><b>Correct the mockups and typos</b><p>Remove "COFFEE CO." and script lettering, fix the spelling errors, rebuild the highlight icons.</p></div><span class="who">Agency</span></li>
+    <li><div><b>Build the touchpoint kit</b><p>Cup and lid, sleeve, bean bag, receipt, menu boards, wifi card, apron, wayfinding. Proof each against the renders.</p></div><span class="who">Refill + agency</span></li>
+    <li><div><b>Shoot the room</b><p>Once built, photograph the stone, plaster and light at morning and golden hour. These images become the brand's textures.</p></div><span class="who">Photographer</span></li>
+  </ol>
+</section>
+
+<footer>
+  <span class="wm">REFILL</span>
+  <span>Brand study prepared from the BigBee guideline and the interior 3D renders. Colors sampled from the supplied files.</span>
+</footer>
+</div>

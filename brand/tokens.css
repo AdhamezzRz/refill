@@ -1,0 +1,26 @@
+/* Refill Specialty Coffee — unified brand tokens (from brand study, 02.11.26) */
+:root {
+  /* Palette: 60 plaster / 20 greige+taupe / 12 espresso+ink / 8 olive */
+  --refill-plaster:  #F3EFE6; /* base: backgrounds, cups, bags */
+  --refill-greige:   #C2B1A2; /* main: social tiles, packaging fields */
+  --refill-taupe:    #A39077; /* secondary: large type on photos only when white */
+  --refill-olive:    #5C6050; /* the only accent, once per layout */
+  --refill-espresso: #352317; /* warm dark: menu boards, dark tiles, bean bags */
+  --refill-ink:      #0D0D0D; /* wordmark, signage, body text */
+
+  /* Type */
+  --refill-font-display: "Montserrat", system-ui, sans-serif;  /* headlines, labels, numbers */
+  --refill-font-body:    "Inter", system-ui, sans-serif;       /* body, menus, UI */
+  --refill-font-arabic:  "Alexandria", "IBM Plex Sans Arabic", sans-serif; /* to be confirmed */
+
+  /* Tracking */
+  --refill-track-logo:  0.6em;  /* wordmark, fixed: never change */
+  --refill-track-label: 0.2em;  /* H4 labels, categories */
+  --refill-track-head:  0.02em; /* headlines */
+  --refill-track-body:  0;
+}
+/* Contrast rules (WCAG 2.2)
+   Ink on Plaster 16.94 | Espresso on Plaster 13.03 | Ink on Greige 9.35
+   Ink on Taupe 6.31 | Plaster on Olive 5.64          -> any text
+   White on Taupe 3.08                                -> large text only
+   Taupe on Plaster 2.69 | White on Greige 2.08       -> never for text */
