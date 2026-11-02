@@ -1,0 +1,96 @@
+<title>Refill Instagram Kit</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&family=Inter:wght@400;500&display=swap">
+<style>
+/* Layout: one long specimen sheet. The profile in context first, then the parts laid out like a type specimen. */
+:root{--bg:#F3EFE6;--surface:#FBF9F4;--line:#DDD3C7;--fg:#15120F;--muted:#6B5D50;--accent:#5C6050;--glyph:#352317;
+--display:"Montserrat",ui-sans-serif,system-ui,Arial,sans-serif;--body:"Inter",ui-sans-serif,system-ui,Arial,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17120E;--surface:#211A15;--line:#3A2F27;--fg:#EDE6DA;--muted:#B5A796;--accent:#A3AA8C;--glyph:#EDE6DA;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#17120E;--surface:#211A15;--line:#3A2F27;--fg:#EDE6DA;--muted:#B5A796;--accent:#A3AA8C;--glyph:#EDE6DA;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:400 1rem/1.6 var(--body);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
+p{margin:0;max-width:62ch}
+.label{font-family:var(--display);font-weight:500;font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--muted)}
+section{padding-block:56px;border-top:1px solid var(--line)}
+header{padding-block:56px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:32px 56px;align-items:center}
+@media (max-width:860px){header{grid-template-columns:1fr}}
+.mark{font-family:var(--display);font-weight:600;font-size:clamp(2rem,5vw,3.4rem);letter-spacing:.6em;margin-right:-.6em;line-height:1}
+.mark small{display:block;font-size:.75rem;letter-spacing:.5em;font-weight:500;margin-top:12px}
+.intro{display:flex;flex-direction:column;gap:18px}
+.mocks{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mocks img{width:100%;display:block;border:1px solid var(--line)}
+h2{font-weight:600;font-size:1.5rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+.lede{color:var(--muted);margin-bottom:32px}
+.profiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+@media (max-width:620px){.profiles{grid-template-columns:1fr 1fr}}
+.profiles figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+.profiles img{width:min(100%,220px);aspect-ratio:1;border-radius:50%;display:block}
+.profiles figcaption{font-size:.85rem;color:var(--muted)}.profiles figcaption b{display:block;color:var(--fg);font-family:var(--display);letter-spacing:.14em;text-transform:uppercase;font-size:.75rem}
+.set{display:flex;flex-direction:column;gap:16px;padding-block:24px;border-bottom:1px solid var(--line)}
+.sethead{display:flex;flex-wrap:wrap;gap:6px 20px;align-items:baseline}
+.sethead h3{font-weight:600;font-size:.82rem;letter-spacing:.24em;text-transform:uppercase}
+.sethead p{color:var(--muted);font-size:.9rem}
+.row{display:flex;gap:18px;overflow-x:auto;padding-bottom:6px}
+.hl{margin:0;flex:none;width:96px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.ring{width:96px;height:96px;border-radius:50%;border:1px solid var(--line);padding:4px}
+.ring img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+.hl figcaption{font-size:.78rem;white-space:nowrap}
+.glyphs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+@media (max-width:620px){.glyphs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.glyph{margin:0;background:var(--surface);padding:24px 16px 16px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.glyph .g{width:min(100%,150px);color:var(--glyph);background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:10% 10%}
+.glyph svg{display:block;width:100%;height:auto}
+.glyph figcaption{font-family:var(--display);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:24px}
+.how div{display:flex;flex-direction:column;gap:6px;border-top:2px solid var(--fg);padding-top:14px}
+.how b{font-family:var(--display);font-size:.9rem}.how p{font-size:.9rem;color:var(--muted)}
+footer{padding-block:40px 64px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}
+</style>
+<div class="wrap">
+<header>
+  <div class="intro">
+    <div class="label">Instagram kit</div>
+    <h1 class="mark">REFILL<small>Specialty Coffee</small></h1>
+    <p>A profile picture and eight highlight covers, all drawn on the measured geometry of the Refill cup-arch: same stroke, same proportions, brand colours only. Several icons borrow from the interior itself, such as the arched door with its porthole and the olive planting.</p>
+  </div>
+  <div class="mocks">
+    <img src="png/mockup/profile-mockup-light.png" alt="Instagram profile mockup in light mode: espresso profile picture with the plaster arch, a row of plaster highlight covers, and the campaign posts below">
+    <img src="png/mockup/profile-mockup-dark.png" alt="The same profile mockup in dark mode">
+  </div>
+</header>
+
+<section aria-labelledby="p">
+  <h2 id="p">Profile picture</h2>
+  <p class="lede">The arch alone, which stays legible at Instagram's smallest size. It is optically centred (lifted 1.2%, because the round bottom reads heavier) and sized to clear the circle crop.</p>
+  <div class="profiles">
+    <figure><img src="png/profile/profile-espresso-1080.png" alt="Plaster arch on espresso"><figcaption><b>Espresso</b>Recommended</figcaption></figure>
+    <figure><img src="png/profile/profile-plaster-1080.png" alt="Ink arch on plaster"><figcaption><b>Plaster</b>Light alternative</figcaption></figure>
+    <figure><img src="png/profile/profile-olive-1080.png" alt="Plaster arch on olive"><figcaption><b>Olive</b>Seasonal or event swap</figcaption></figure>
+  </div>
+</section>
+
+<section aria-labelledby="h">
+  <h2 id="h">Highlight covers</h2>
+  <p class="lede">The covers follow the guideline's structure. There is no text inside the circles, because Instagram already prints the label underneath. Each cover is 1080 x 1920, so it can be posted as a story and set as the cover.</p>
+  <div class="set"><div class="sethead"><h3>Plaster</h3><p>Recommended. Espresso line icons on Plaster: calm, and it contrasts with the dark profile picture.</p></div><div class="row"><figure class="hl"><div class="ring"><img src="png/highlights-plaster/location.png" alt="Location highlight cover, plaster set"></div><figcaption>Location</figcaption></figure><figure class="hl"><div class="ring"><img src="png/highlights-plaster/menu.png" alt="Menu highlight cover, plaster set"></div><figcaption>Menu</figcaption></figure><figure class="hl"><div class="ring"><img src="png/highlights-plaster/best-sellers.png" alt="Best sellers highlight cover, plaster set"></div><figcaption>Best sellers</figcaption></figure><figure class="hl"><div class="ring"><img src="png/highlights-plaster/about.png" alt="About Refill highlight cover, plaster set"></div><figcaption>About Refill</figcaption></figure><figure class="hl"><div class="ring"><img src="png/highlights-plaster/beans.png" alt="Beans highlight cover, plaster set"></div><figcaption>Beans</figcaption></figure><figure class="hl"><div class="ring"><img src="png/highlights-plaster/seasonal.png" alt="Seasonal highlight cover, plaster set"></div><figcaption>Seasonal</figcaption></figure><figure class="hl"><div class="ring"><img src="png/highlights-plaster/reviews.png" alt="Reviews highlight cover, plaster set"></div><figcaption>Reviews</figcaption></figure><figure class="hl"><div class="ring"><img src="png/highlights-plaster/events.png" alt="Events highlight cover, plaster set"></div><figcaption>Events</figcaption></figure></div></div><div class="set"><div class="sethead"><h3>Espresso</h3><p>Plaster on Espresso: a bold, dark row.</p></div><div class="row"><figure class="hl"><div class="ring"><img src="png/highlights-espresso/location.png" alt="Location highlight cover, espresso set"></div><figcaption>Location</figcaption></figure><figure class="hl"><div class="ring"><img src="png/highlights-espresso/menu.png" alt="Menu highlight cover, espresso set"></div><figcaption>Menu</figcaption></figure><figure class="hl"><div class="ring"><img src="png/highlights-espresso/best-sellers.png" alt="Best sellers highlight cover, espresso set"></div><figcaption>Best sellers</figcaption></figure><figure class="hl"><div class="ring"><img src="png/highlights-espresso/about.png" alt="About Refill highlight cover, espresso set"></div><figcaption>About Refill</figcaption></figure><figure class="hl"><div class="ring"><img src="png/highlights-espresso/beans.png" alt="Beans highlight cover, espresso set"></div><figcaption>Beans</figcaption></figure><figure class="hl"><div class="ring"><img src="png/highlights-espresso/seasonal.png" alt="Seasonal highlight cover, espresso set"></div><figcaption>Seasonal</figcaption></figure><figure class="hl"><div class="ring"><img src="png/highlights-espresso/reviews.png" alt="Reviews highlight cover, espresso set"></div><figcaption>Reviews</figcaption></figure><figure class="hl"><div class="ring"><img src="png/highlights-espresso/events.png" alt="Events highlight cover, espresso set"></div><figcaption>Events</figcaption></figure></div></div><div class="set"><div class="sethead"><h3>Tonal</h3><p>Each cover takes a palette colour, so the row reads as a ramp from plaster to espresso.</p></div><div class="row"><figure class="hl"><div class="ring"><img src="png/highlights-tonal/location.png" alt="Location highlight cover, tonal set"></div><figcaption>Location</figcaption></figure><figure class="hl"><div class="ring"><img src="png/highlights-tonal/menu.png" alt="Menu highlight cover, tonal set"></div><figcaption>Menu</figcaption></figure><figure class="hl"><div class="ring"><img src="png/highlights-tonal/best-sellers.png" alt="Best sellers highlight cover, tonal set"></div><figcaption>Best sellers</figcaption></figure><figure class="hl"><div class="ring"><img src="png/highlights-tonal/about.png" alt="About Refill highlight cover, tonal set"></div><figcaption>About Refill</figcaption></figure><figure class="hl"><div class="ring"><img src="png/highlights-tonal/beans.png" alt="Beans highlight cover, tonal set"></div><figcaption>Beans</figcaption></figure><figure class="hl"><div class="ring"><img src="png/highlights-tonal/seasonal.png" alt="Seasonal highlight cover, tonal set"></div><figcaption>Seasonal</figcaption></figure><figure class="hl"><div class="ring"><img src="png/highlights-tonal/reviews.png" alt="Reviews highlight cover, tonal set"></div><figcaption>Reviews</figcaption></figure><figure class="hl"><div class="ring"><img src="png/highlights-tonal/events.png" alt="Events highlight cover, tonal set"></div><figcaption>Events</figcaption></figure></div></div>
+</section>
+
+<section aria-labelledby="g">
+  <h2 id="g">The icon set</h2>
+  <p class="lede">Drawn on a 100-unit grid with a 5.2-unit stroke, the same stroke-to-width ratio as the logo. Flat ends and sharp corners match the arch. They're delivered as SVG, so they can go on the website, menus and wayfinding too.</p>
+  <div class="glyphs"><figure class="glyph"><div class="g"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" color="currentColor"><g fill="none" stroke="currentColor" stroke-width="5.2" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"><path d="M31 42 A19 19 0 0 1 69 42 C69 56 58 66 50 78 C42 66 31 56 31 42 Z"/><circle cx="50" cy="42" r="6.5"/><line x1="36" y1="86" x2="64" y2="86"/></g></svg></div><figcaption>Location</figcaption></figure><figure class="glyph"><div class="g"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" color="currentColor"><g fill="none" stroke="currentColor" stroke-width="5.2" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"><line x1="27" y1="20" x2="73" y2="20"/><rect x="31" y="29" width="38" height="53"/><line x1="40" y1="43" x2="60" y2="43"/><line x1="40" y1="54" x2="60" y2="54"/><line x1="40" y1="65" x2="53" y2="65"/></g></svg></div><figcaption>Menu</figcaption></figure><figure class="glyph"><div class="g"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" color="currentColor"><g fill="none" stroke="currentColor" stroke-width="5.2" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"><line x1="20.82" y1="31.47" x2="71.19" y2="31.47"/><path d="M25.60 62.13 V44.49 H66.40 V62.13 A20.40 20.40 0 0 1 25.60 62.13 Z"/><path d="M76 12 L78.2 19.8 L86 22 L78.2 24.2 L76 32 L73.8 24.2 L66 22 L73.8 19.8 Z" fill="currentColor" stroke="none"/></g></svg></div><figcaption>Best sellers</figcaption></figure><figure class="glyph"><div class="g"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" color="currentColor"><g fill="none" stroke="currentColor" stroke-width="5.2" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"><path d="M34 82 V44 A16 16 0 0 1 66 44 V82"/><circle cx="50" cy="47" r="6.5"/><line x1="58.5" y1="62" x2="58.5" y2="70"/><line x1="22" y1="82" x2="78" y2="82"/></g></svg></div><figcaption>About Refill</figcaption></figure><figure class="glyph"><div class="g"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" color="currentColor"><g fill="none" stroke="currentColor" stroke-width="5.2" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"><g transform="rotate(32 50 50)"><ellipse cx="50" cy="50" rx="18" ry="27"/><path d="M50 23 C41 36 59 62 50 77"/></g></g></svg></div><figcaption>Beans</figcaption></figure><figure class="glyph"><div class="g"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" color="currentColor"><g fill="none" stroke="currentColor" stroke-width="5.2" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"><path d="M32 84 Q40 46 70 18"/><path transform="translate(38.78 62.10) rotate(-19.36)" d="M0 0 C6.3 -5.0 14.7 -5.0 21.0 0 C14.7 5.0 6.3 5.0 0 0 Z"/><path transform="translate(44.02 51.16) rotate(-109.52)" d="M0 0 C5.8 -4.7 13.6 -4.7 19.4 0 C13.6 4.7 5.8 4.7 0 0 Z"/><path transform="translate(50.38 40.72) rotate(-7.76)" d="M0 0 C5.3 -4.3 12.5 -4.3 17.8 0 C12.5 4.3 5.3 4.3 0 0 Z"/><path transform="translate(57.86 30.80) rotate(-98.20)" d="M0 0 C4.9 -3.9 11.3 -3.9 16.2 0 C11.3 3.9 4.9 3.9 0 0 Z"/><path transform="translate(70 18) rotate(-43.03)" d="M-2 0 C2 -4 8 -4 12 0 C8 4 2 4 -2 0 Z"/><line x1="41.92" y1="55.20" x2="50.92" y2="62.20"/><ellipse cx="54.92" cy="67.20" rx="5" ry="6.4" transform="rotate(-30 54.92 67.20)"/></g></svg></div><figcaption>Seasonal</figcaption></figure><figure class="glyph"><div class="g"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" color="currentColor"><g fill="none" stroke="currentColor" stroke-width="5.2" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"><path d="M26 24 H74 V58 A10 10 0 0 1 64 68 H44 L32 80 V68 H36 A10 10 0 0 1 26 58 Z"/><path d="M50.00 35.00 L52.82 42.12 L60.46 42.60 L54.57 47.48 L56.47 54.90 L50.00 50.80 L43.53 54.90 L45.43 47.48 L39.54 42.60 L47.18 42.12 Z" stroke-width="4.16"/></g></svg></div><figcaption>Reviews</figcaption></figure><figure class="glyph"><div class="g"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" color="currentColor"><g fill="none" stroke="currentColor" stroke-width="5.2" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4"><rect x="25" y="28" width="50" height="52"/><line x1="25" y1="42" x2="75" y2="42"/><line x1="38" y1="20" x2="38" y2="34"/><line x1="62" y1="20" x2="62" y2="34"/><rect x="34" y="51" width="5" height="5" fill="currentColor" stroke="none"/><rect x="47.5" y="51" width="5" height="5" fill="currentColor" stroke="none"/><rect x="61" y="51" width="5" height="5" fill="currentColor" stroke="none"/><rect x="34" y="64" width="5" height="5" fill="currentColor" stroke="none"/><rect x="47.5" y="64" width="5" height="5" fill="currentColor" stroke="none"/><circle cx="63.5" cy="66.5" r="5.8"/></g></svg></div><figcaption>Events</figcaption></figure></div>
+</section>
+
+<section aria-labelledby="u">
+  <h2 id="u">Setting it up</h2>
+  <div class="how">
+    <div><b>Profile picture</b><p>Upload profile-espresso-1080.png. Instagram crops it to a circle; the arch is already sized for that.</p></div>
+    <div><b>Covers</b><p>Post each cover PNG to your story, add it to its highlight, then choose Edit highlight, Edit cover, and select it.</p></div>
+    <div><b>Order</b><p>Location, Menu, Best sellers, About Refill, Beans, Seasonal, Reviews, Events. Most-tapped first.</p></div>
+  </div>
+</section>
+<footer>Files: png/profile, png/highlights-plaster, png/highlights-espresso, png/highlights-tonal, png/logo, svg/.</footer>
+</div>

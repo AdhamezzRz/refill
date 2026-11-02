@@ -1,0 +1,234 @@
+{
+ "jobs": [
+  {
+   "src": "/home/user/refill/instagram/svg/covers/plaster-location.svg",
+   "out": "/home/user/refill/instagram/png/highlights-plaster/location.png",
+   "w": 1080,
+   "h": 1920
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/covers/espresso-location.svg",
+   "out": "/home/user/refill/instagram/png/highlights-espresso/location.png",
+   "w": 1080,
+   "h": 1920
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/covers/tonal-location.svg",
+   "out": "/home/user/refill/instagram/png/highlights-tonal/location.png",
+   "w": 1080,
+   "h": 1920
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/covers/plaster-menu.svg",
+   "out": "/home/user/refill/instagram/png/highlights-plaster/menu.png",
+   "w": 1080,
+   "h": 1920
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/covers/espresso-menu.svg",
+   "out": "/home/user/refill/instagram/png/highlights-espresso/menu.png",
+   "w": 1080,
+   "h": 1920
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/covers/tonal-menu.svg",
+   "out": "/home/user/refill/instagram/png/highlights-tonal/menu.png",
+   "w": 1080,
+   "h": 1920
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/covers/plaster-best-sellers.svg",
+   "out": "/home/user/refill/instagram/png/highlights-plaster/best-sellers.png",
+   "w": 1080,
+   "h": 1920
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/covers/espresso-best-sellers.svg",
+   "out": "/home/user/refill/instagram/png/highlights-espresso/best-sellers.png",
+   "w": 1080,
+   "h": 1920
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/covers/tonal-best-sellers.svg",
+   "out": "/home/user/refill/instagram/png/highlights-tonal/best-sellers.png",
+   "w": 1080,
+   "h": 1920
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/covers/plaster-about.svg",
+   "out": "/home/user/refill/instagram/png/highlights-plaster/about.png",
+   "w": 1080,
+   "h": 1920
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/covers/espresso-about.svg",
+   "out": "/home/user/refill/instagram/png/highlights-espresso/about.png",
+   "w": 1080,
+   "h": 1920
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/covers/tonal-about.svg",
+   "out": "/home/user/refill/instagram/png/highlights-tonal/about.png",
+   "w": 1080,
+   "h": 1920
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/covers/plaster-beans.svg",
+   "out": "/home/user/refill/instagram/png/highlights-plaster/beans.png",
+   "w": 1080,
+   "h": 1920
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/covers/espresso-beans.svg",
+   "out": "/home/user/refill/instagram/png/highlights-espresso/beans.png",
+   "w": 1080,
+   "h": 1920
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/covers/tonal-beans.svg",
+   "out": "/home/user/refill/instagram/png/highlights-tonal/beans.png",
+   "w": 1080,
+   "h": 1920
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/covers/plaster-seasonal.svg",
+   "out": "/home/user/refill/instagram/png/highlights-plaster/seasonal.png",
+   "w": 1080,
+   "h": 1920
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/covers/espresso-seasonal.svg",
+   "out": "/home/user/refill/instagram/png/highlights-espresso/seasonal.png",
+   "w": 1080,
+   "h": 1920
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/covers/tonal-seasonal.svg",
+   "out": "/home/user/refill/instagram/png/highlights-tonal/seasonal.png",
+   "w": 1080,
+   "h": 1920
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/covers/plaster-reviews.svg",
+   "out": "/home/user/refill/instagram/png/highlights-plaster/reviews.png",
+   "w": 1080,
+   "h": 1920
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/covers/espresso-reviews.svg",
+   "out": "/home/user/refill/instagram/png/highlights-espresso/reviews.png",
+   "w": 1080,
+   "h": 1920
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/covers/tonal-reviews.svg",
+   "out": "/home/user/refill/instagram/png/highlights-tonal/reviews.png",
+   "w": 1080,
+   "h": 1920
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/covers/plaster-events.svg",
+   "out": "/home/user/refill/instagram/png/highlights-plaster/events.png",
+   "w": 1080,
+   "h": 1920
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/covers/espresso-events.svg",
+   "out": "/home/user/refill/instagram/png/highlights-espresso/events.png",
+   "w": 1080,
+   "h": 1920
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/covers/tonal-events.svg",
+   "out": "/home/user/refill/instagram/png/highlights-tonal/events.png",
+   "w": 1080,
+   "h": 1920
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/profile/profile-espresso.svg",
+   "out": "/home/user/refill/instagram/png/profile/profile-espresso-1080.png",
+   "w": 1080,
+   "h": 1080
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/profile/profile-plaster.svg",
+   "out": "/home/user/refill/instagram/png/profile/profile-plaster-1080.png",
+   "w": 1080,
+   "h": 1080
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/profile/profile-olive.svg",
+   "out": "/home/user/refill/instagram/png/profile/profile-olive-1080.png",
+   "w": 1080,
+   "h": 1080
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/profile/arch-icon-ink.svg",
+   "out": "/home/user/refill/instagram/png/logo/arch-icon-ink.png",
+   "w": 878,
+   "h": 957,
+   "transparent": true
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/profile/arch-icon-plaster.svg",
+   "out": "/home/user/refill/instagram/png/logo/arch-icon-plaster.png",
+   "w": 878,
+   "h": 957,
+   "transparent": true
+  },
+  {
+   "src": "/home/user/refill/instagram/svg/profile/arch-icon-espresso.svg",
+   "out": "/home/user/refill/instagram/png/logo/arch-icon-espresso.png",
+   "w": 878,
+   "h": 957,
+   "transparent": true
+  }
+ ],
+ "glyphs": [
+  [
+   "location",
+   "Location"
+  ],
+  [
+   "menu",
+   "Menu"
+  ],
+  [
+   "best-sellers",
+   "Best sellers"
+  ],
+  [
+   "about",
+   "About Refill"
+  ],
+  [
+   "beans",
+   "Beans"
+  ],
+  [
+   "seasonal",
+   "Seasonal"
+  ],
+  [
+   "reviews",
+   "Reviews"
+  ],
+  [
+   "events",
+   "Events"
+  ]
+ ],
+ "sets": [
+  "plaster",
+  "espresso",
+  "tonal"
+ ],
+ "colors": {
+  "plaster": "#F3EFE6",
+  "greige": "#C2B1A2",
+  "taupe": "#A39077",
+  "olive": "#5C6050",
+  "espresso": "#352317",
+  "ink": "#0D0D0D"
+ }
+}
