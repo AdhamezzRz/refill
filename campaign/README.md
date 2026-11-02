@@ -64,6 +64,6 @@ python3 tools/reel.py "$PWD/source" 02-same-room-soon-reel
 
 ## Before posting
 
-- Slide 05 shows the existing blue and green fascia band of the building. It is real, but it is not
-  Refill's colour. Retouch it to plaster or crop tighter if it reads as another brand.
+- Slide 05: the blue and green fascia band has been retouched to a neutral panel (original kept as
+  `source/gen/s5-original.jpg`). The small neighbouring building at the far left edge is untouched.
 - The REFILL sign on slide 05 and every line of type are set in real Montserrat, not AI-generated text.
