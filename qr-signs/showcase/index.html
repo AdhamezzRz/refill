@@ -1,0 +1,111 @@
+<title>Refill Table QR Signs</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&family=Inter:wght@400;500&display=swap">
+<style>
+/* Layout: a product catalogue. A hero shot of the family, then one spread per object: photo, flat art, spec sheet. */
+:root{--bg:#F3EFE6;--surface:#FBF9F4;--line:#DDD3C7;--fg:#15120F;--muted:#6B5D50;--accent:#5C6050;--ok:#4F6B45;--well:#E9E3D8;
+--display:"Montserrat",ui-sans-serif,system-ui,Arial,sans-serif;--body:"Inter",ui-sans-serif,system-ui,Arial,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17120E;--surface:#211A15;--line:#3A2F27;--fg:#EDE6DA;--muted:#B5A796;--accent:#A3AA8C;--ok:#9DBB8F;--well:#2A221C;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#17120E;--surface:#211A15;--line:#3A2F27;--fg:#EDE6DA;--muted:#B5A796;--accent:#A3AA8C;--ok:#9DBB8F;--well:#2A221C;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:400 1rem/1.6 var(--body);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
+p{margin:0;max-width:62ch}
+img{display:block;max-width:100%;height:auto}
+.label{font-family:var(--display);font-weight:500;font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--muted)}
+header{padding-block:48px 28px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px 48px}
+.mark{font-family:var(--display);font-weight:600;font-size:clamp(2rem,5vw,3.2rem);letter-spacing:.6em;margin-right:-.6em;line-height:1}
+.mark small{display:block;font-size:.72rem;letter-spacing:.5em;font-weight:500;margin-top:12px}
+header p{color:var(--muted);max-width:50ch}
+.hero img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.system{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:24px}
+@media (max-width:760px){.system{grid-template-columns:1fr}}
+.system div{background:var(--bg);padding:20px;display:flex;flex-direction:column;gap:6px}
+.system b{font-family:var(--display);font-size:.95rem}
+.system span{font-size:.88rem;color:var(--muted)}
+section.d{padding-block:64px;border-top:1px solid var(--line);margin-top:56px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:32px 48px}
+@media (max-width:900px){section.d{grid-template-columns:1fr}}
+.d h2{font-weight:600;font-size:1.9rem;letter-spacing:.04em;text-transform:uppercase;line-height:1.1}
+.d .txt{display:flex;flex-direction:column;gap:18px;min-width:0}
+.d .photo img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.flat{background:var(--well);padding:22px;display:flex;gap:16px;justify-content:center;align-items:flex-end;flex-wrap:wrap}
+.flat figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:8px}
+.flat img{max-height:300px;width:auto;filter:drop-shadow(0 6px 14px rgba(0,0,0,.18))}
+.flat figcaption{font-family:var(--display);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+dl.spec{display:grid;grid-template-columns:max-content 1fr;gap:8px 18px;margin:0;font-size:.9rem;border-top:1px solid var(--line);padding-top:16px}
+dl.spec dt{font-family:var(--display);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+dl.spec dd{margin:0}
+.copy{border-left:2px solid var(--accent);padding-left:14px;font-size:.92rem;display:flex;flex-direction:column;gap:4px}
+.copy .ar{font-family:"Noto Sans Arabic",Tahoma,sans-serif;direction:rtl;text-align:right;color:var(--muted)}
+.qa{padding-block:56px;border-top:1px solid var(--line);margin-top:56px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:24px 48px}
+@media (max-width:900px){.qa{grid-template-columns:1fr}}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:.85rem}
+th,td{text-align:left;padding:9px 12px 9px 0;border-bottom:1px solid var(--line)}
+th{font-family:var(--display);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.num{font-variant-numeric:tabular-nums}
+.pass{font-family:var(--display);font-weight:600;font-size:.66rem;letter-spacing:.16em;color:var(--ok);border:1px solid currentColor;padding:2px 7px}
+.note{margin-top:14px;font-size:.85rem;color:var(--muted)}
+footer{padding-block:40px 64px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;margin-top:24px}
+</style>
+<div class="wrap">
+<header>
+  <div><div class="label" style="margin-bottom:18px">Table QR signs &middot; El Shorouk</div><h1 class="mark">REFILL<small>Specialty Coffee</small></h1></div>
+  <p>Three objects, one system. Each one fits a different spot in the café, uses the same arch, palette and line-art founder, and carries a QR code tested by machine at phone distances.</p>
+</header>
+<div class="hero"><img src="m4-family.jpg" alt="The three signs together on travertine: cream arch standee in an oak base, olive tent card, and the round espresso Refill-o-meter disc in an oak base"></div>
+<div class="system" aria-label="Where each sign goes">
+  <div><span class="label">01 &middot; Window and pedestal tables</span><b>The Arch</b><span>Calm and premium, with a small footprint. Order on the front, rate on the back.</span></div>
+  <div><span class="label">02 &middot; Planter benches and shared tables</span><b>Don't Get Up.</b><span>The fun one. Two sides, so both sides of the table can read it.</span></div>
+  <div><span class="label">03 &middot; Bar counter and pick-up</span><b>The Refill-o-meter</b><span>Rating as a game, placed where people wait.</span></div>
+</div>
+
+<section class="d" aria-labelledby="d1">
+  <div class="photo"><img src="m1-arch.jpg" alt="Arch standee in an oak base on a taupe pedestal table by the window bench, flat white beside it, leaf shadows"></div>
+  <div class="txt">
+    <div class="label">Design 01</div><h2 id="d1">The Arch</h2>
+    <p>Cut in the shape of the café's arched doorway, with the porthole carried on as the logo badge. The QR code sits inside the frame brackets from the social grid. It's the quietest of the three, built to sit next to a flat white.</p>
+    <div class="flat"><figure><img src="01-arch-front.png" alt="Arch front: porthole badge, REFILL wordmark, QR code, SCAN TO ORDER, TABLE 07"><figcaption>Front &middot; order</figcaption></figure><figure><img src="01-arch-back.png" alt="Arch back in espresso: SCAN TO RATE"><figcaption>Back &middot; rate</figcaption></figure></div>
+    <div class="copy"><span>Stay seated. We'll bring it to you.</span><span class="ar" lang="ar">خليك مكانك، اطلب وإحنا نجيبهولك</span></div>
+    <dl class="spec"><dt>Size</dt><dd>90 x 130 mm die-cut arch, 3 mm bleed</dd><dt>Material</dt><dd>4 mm matte cream acrylic with white underlayer, or 2 mm Dibond</dd><dt>Base</dt><dd>Light oak block, 90 x 30 x 25 mm, 4 mm slot 12 mm deep</dd><dt>QR</dt><dd>40.5 mm, both sides</dd></dl>
+  </div>
+</section>
+
+<section class="d" aria-labelledby="d2">
+  <div class="photo"><img src="m2-tent.jpg" alt="Don't Get Up tent card on an oak table, a hand holding a phone showing the Refill menu in EGP, iced latte beside it"></div>
+  <div class="txt">
+    <div class="label">Design 02</div><h2 id="d2">Don't Get Up.</h2>
+    <p>The founder lounges across the top of the QR code with a coffee on his chest, doing exactly what the sign tells you to do. Turn the card round and he's your waiter, notepad in hand, asking how it was.</p>
+    <div class="flat"><figure><img src="02-tent-front.png" alt="Tent front: DON'T GET UP., founder lounging on the QR code, SCAN TO ORDER"><figcaption>Front &middot; order</figcaption></figure><figure><img src="02-tent-back.png" alt="Tent back in olive: LOVED IT? TELL EVERYONE., QR code, founder as waiter, SCAN TO RATE"><figcaption>Back &middot; rate</figcaption></figure></div>
+    <div class="copy"><span>Loved it? Tell everyone. Not quite right? Tell us first. We'll fix it.</span><span class="ar" lang="ar">عجبتك؟ قول للكل. مش مظبوطة؟ قولنا إحنا الأول</span></div>
+    <dl class="spec"><dt>Size</dt><dd>A6 per face, 105 x 148 mm; flat sheet 105 x 296 mm, imposed and scored</dd><dt>Material</dt><dd>400 gsm uncoated card, soft-touch matte laminate</dd><dt>QR</dt><dd>46 mm front, 44 mm back</dd></dl>
+  </div>
+</section>
+
+<section class="d" aria-labelledby="d3">
+  <div class="photo"><img src="m3-disc.jpg" alt="Refill-o-meter disc in a round oak base on the stone-edged bar counter, espresso and croissant, glowing stone niches behind"></div>
+  <div class="txt">
+    <div class="label">Design 03</div><h2 id="d3">The Refill-o-meter</h2>
+    <p>A gauge of five Refill cups filling from empty to full: Sleepy, Waking up, Getting there, Good day, Refilled. The needle sits on Refilled, and the founder peeks over the QR card. It asks one question, and the scan answers it.</p>
+    <div class="flat"><figure><img src="03-meter-disc.png" alt="Round espresso disc: five-cup gauge, founder peeking over the QR code, HOW REFILLED ARE YOU?"><figcaption>Front &middot; rate</figcaption></figure></div>
+    <div class="copy"><span>How refilled are you?</span><span class="ar" lang="ar">مزاجك اتملى قد إيه؟</span></div>
+    <dl class="spec"><dt>Size</dt><dd>100 mm round, die-cut, 3 mm bleed</dd><dt>Material</dt><dd>4 mm espresso acrylic, UV print with white underlayer</dd><dt>Base</dt><dd>Round light oak, 60 mm diameter, slotted</dd><dt>QR</dt><dd>35 mm</dd></dl>
+  </div>
+</section>
+
+<section class="qa" aria-labelledby="q">
+  <div class="txt" style="display:flex;flex-direction:column;gap:14px"><div class="label">Quality check</div><h2 id="q" style="font-weight:600;font-size:1.5rem;letter-spacing:.04em;text-transform:uppercase">Every code, decoded</h2>
+  <p>Each QR is rendered at 300 dpi and read back by a decoder, framed the way a phone frames it, at 100% down to 25% scale. A failing code stops the build. Tables 01 to 12 are generated and checked the same way.</p>
+  <p class="note">The links are placeholders until you add your ordering and review URLs to <code>config.json</code>. Then rebuild every table with one command.</p></div>
+  <div class="tablewrap"><table><thead><tr><th>Face</th><th>QR size</th><th>Framed 100/50/33/25%</th><th>Full face</th></tr></thead><tbody>
+  <tr><td>Arch &middot; front</td><td class="num">40.5 mm</td><td><span class="pass">PASS</span></td><td><span class="pass">PASS</span></td></tr>
+  <tr><td>Arch &middot; back</td><td class="num">40.5 mm</td><td><span class="pass">PASS</span></td><td><span class="pass">PASS</span></td></tr>
+  <tr><td>Tent &middot; front</td><td class="num">46 mm</td><td><span class="pass">PASS</span></td><td><span class="pass">PASS</span></td></tr>
+  <tr><td>Tent &middot; back</td><td class="num">44 mm</td><td><span class="pass">PASS</span></td><td><span class="pass">PASS</span></td></tr>
+  <tr><td>Refill-o-meter</td><td class="num">35 mm</td><td><span class="pass">PASS</span></td><td><span class="pass">PASS</span></td></tr>
+  </tbody></table></div>
+</section>
+<footer>The print PDFs are vector with embedded fonts, 3 mm bleed and exact trim boxes. Cut lines for the arch and disc are supplied as magenta proofs. Mockups were made with Higgsfield in the Refill interior.</footer>
+</div>

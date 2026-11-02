@@ -1,0 +1,90 @@
+{
+ "jobs": [
+  {
+   "name": "01-arch-front",
+   "w_mm": 96.0,
+   "h_mm": 136.0,
+   "html": "/home/user/refill/qr-signs/build/html/01-arch-front.html",
+   "note": "Die-cut arch, 3 mm bleed. Magenta = cut line. Bottom 12 mm sits in the oak base slot."
+  },
+  {
+   "name": "01-arch-back",
+   "w_mm": 96.0,
+   "h_mm": 136.0,
+   "html": "/home/user/refill/qr-signs/build/html/01-arch-back.html",
+   "note": "Die-cut arch, 3 mm bleed. Magenta = cut line. Bottom 12 mm sits in the oak base slot."
+  },
+  {
+   "name": "02-tent-front",
+   "w_mm": 111.0,
+   "h_mm": 154.0,
+   "html": "/home/user/refill/qr-signs/build/html/02-tent-front.html",
+   "note": "A6 face. Fold line on the top edge (see imposed sheet)."
+  },
+  {
+   "name": "02-tent-back",
+   "w_mm": 111.0,
+   "h_mm": 154.0,
+   "html": "/home/user/refill/qr-signs/build/html/02-tent-back.html",
+   "note": "A6 face."
+  },
+  {
+   "name": "02-tent-imposed-flat",
+   "w_mm": 111.0,
+   "h_mm": 302.0,
+   "html": "/home/user/refill/qr-signs/build/html/02-tent-imposed-flat.html",
+   "note": "Imposed flat: 105 x 296 mm + bleed. Cyan dashed = fold."
+  },
+  {
+   "name": "03-meter-disc",
+   "w_mm": 106.0,
+   "h_mm": 106.0,
+   "html": "/home/user/refill/qr-signs/build/html/03-meter-disc.html",
+   "note": "100 mm round, die-cut. Magenta = cut line."
+  }
+ ],
+ "qrs": [
+  {
+   "x_mm": 24.75,
+   "y_mm": 47.6,
+   "face": "01-arch-front",
+   "url": "https://example.com/refill/order?table=07",
+   "modules": 37,
+   "size_mm": 40.5
+  },
+  {
+   "x_mm": 24.75,
+   "y_mm": 47.6,
+   "face": "01-arch-back",
+   "url": "https://example.com/refill/rate?table=07",
+   "modules": 37,
+   "size_mm": 40.5
+  },
+  {
+   "x_mm": 29.5,
+   "y_mm": 73.2,
+   "face": "02-tent-front",
+   "url": "https://example.com/refill/order?table=07",
+   "modules": 37,
+   "size_mm": 46.0
+  },
+  {
+   "x_mm": 9.0,
+   "y_mm": 62.0,
+   "face": "02-tent-back",
+   "url": "https://example.com/refill/rate?table=07",
+   "modules": 37,
+   "size_mm": 44.0
+  },
+  {
+   "x_mm": 32.5,
+   "y_mm": 44.0,
+   "face": "03-meter-disc",
+   "url": "https://example.com/refill/rate?table=07",
+   "modules": 37,
+   "size_mm": 35.0
+  }
+ ],
+ "order_url": "https://example.com/refill/order?table=07",
+ "rate_url": "https://example.com/refill/rate?table=07"
+}

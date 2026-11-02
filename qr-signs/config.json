@@ -1,0 +1,5 @@
+{
+  "table": "07",
+  "order_url": "https://example.com/refill/order?table={table}",
+  "rate_url": "https://example.com/refill/rate?table={table}"
+}
