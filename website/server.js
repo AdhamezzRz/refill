@@ -18,7 +18,9 @@ const CFG = {
   googleReview: pick('GOOGLE_REVIEW_URL', 'googleReviewUrl'), webhook: pick('RATE_WEBHOOK_URL', 'rateWebhookUrl'),
 };
 for (const k of Object.keys(CFG)) if (CFG[k] && !isHttp(CFG[k])) { console.warn(`[config] ignoring ${k}: not an http(s) URL`); CFG[k] = ''; }
-const PUBLIC_CFG = { instagram: CFG.instagram, maps: CFG.maps, googleReview: CFG.googleReview };
+/* isOpen: false until opening day. While false the site says "Opening soon"; when true it shows live open/closed. */
+const IS_OPEN = /^(1|true|yes)$/i.test(String(process.env.IS_OPEN || file.isOpen || ''));
+const PUBLIC_CFG = { instagram: CFG.instagram, maps: CFG.maps, googleReview: CFG.googleReview, isOpen: IS_OPEN };
 
 /* ---- static files ---- */
 const TYPES = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
@@ -124,8 +126,10 @@ const server = http.createServer((req, res) => {
   if (p === '/order' || p === '/rate') {
     const target = p === '/order' ? CFG.order : CFG.rate;
     if (target) { res.writeHead(302, { ...HEADERS, Location: tableLink(target, cleanTable(url.searchParams)), 'Cache-Control': 'no-store' }); return res.end(); }
-    return send(req, res, path.join(PUB, p.slice(1) + '.html'));
+    // no external ordering yet: /order?table=4 opens the menu in table mode
+    return send(req, res, path.join(PUB, p === '/order' ? 'menu.html' : 'rate.html'));
   }
+  if (p === '/menu' || p === '/menu/') return send(req, res, path.join(PUB, 'menu.html'));
   if (p.endsWith('/')) p += 'index.html';
   const fp = path.normalize(path.join(PUB, p));
   if (fp !== PUB && !fp.startsWith(PUB + path.sep)) return text(res, 403, 'Forbidden');

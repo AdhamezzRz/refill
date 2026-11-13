@@ -4,5 +4,6 @@
   "orderUrl": "",
   "rateUrl": "",
   "googleReviewUrl": "",
-  "rateWebhookUrl": ""
+  "rateWebhookUrl": "",
+  "isOpen": false
 }

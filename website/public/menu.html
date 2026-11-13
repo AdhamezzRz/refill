@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Menu · REFILL</title>
+<meta name="description" content="Coffee, bakehouse and kitchen menu at Refill, El Shorouk.">
+<meta name="theme-color" content="#F3EFE6">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<link rel="stylesheet" href="/css/site.css">
+</head>
+<body class="menu-page">
+
+<header class="top top--solid js-top">
+  <a class="top__mark" href="/" aria-label="Refill, home">REFILL</a>
+  <nav class="top__nav" aria-label="Primary">
+    <a href="/menu" aria-current="page">Menu</a>
+    <a href="/#acts">The day</a>
+    <a href="/#room">The room</a>
+    <a href="/#visit">Visit</a>
+  </nav>
+  <div class="top__end">
+    <span class="status js-status"><i></i><span class="js-status-text">Opening soon</span></span>
+    <button class="top__index js-index-btn" type="button" aria-expanded="false" aria-controls="index"><span>Index</span><i></i></button>
+  </div>
+</header>
+
+<div class="index js-index" id="index" hidden>
+  <nav class="index__nav" aria-label="Index">
+    <a href="#coffee"><span>01</span>Coffee</a>
+    <a href="#bakehouse"><span>02</span>Bakehouse</a>
+    <a href="#kitchen"><span>03</span>Kitchen</a>
+    <a href="/"><span>04</span>Home</a>
+    <a href="/#visit"><span>05</span>Visit</a>
+  </nav>
+  <div class="index__foot">
+    <p>El Shorouk, New Cairo<br>Every day, 07:00 to 00:00</p>
+    <a data-link="instagram" target="_blank" rel="noopener">Instagram</a>
+  </div>
+</div>
+
+<main class="mn">
+  <section class="mn-hero">
+    <p class="label js-table-label">Menu · Served 07:00 to 00:00</p>
+    <h1 class="mn-hero__title"><span class="ln"><span>Poured, baked</span></span><span class="ln"><span>and fired.</span></span></h1>
+    <div class="mn-hero__foot">
+      <p class="mn-hero__lede">Everything we make, all day. Prices in Egyptian pounds and include VAT. Tap anything to see it up close.</p>
+      <p class="table-pill js-table" hidden></p>
+    </div>
+  </section>
+
+  <nav class="tabs js-tabs" aria-label="Menu sections">
+    <div class="tabs__in">
+      <a href="#coffee" data-tab="coffee">Coffee</a>
+      <a href="#bakehouse" data-tab="bakehouse">Bakehouse</a>
+      <a href="#kitchen" data-tab="kitchen">Kitchen</a>
+      <span class="tabs__ink js-ink" aria-hidden="true"></span>
+    </div>
+  </nav>
+
+  <div class="mn-body">
+    <div class="mn-list js-menu"></div>
+    <aside class="stage js-stage" aria-hidden="true">
+      <div class="stage__in">
+        <div class="stage__arch"><img class="stage__img js-stage-img" alt=""><img class="stage__img stage__img--b js-stage-img2" alt=""></div>
+        <div class="stage__meta">
+          <p class="stage__kicker js-stage-kicker"></p>
+          <h3 class="stage__name js-stage-name"></h3>
+          <p class="stage__notes js-stage-notes"></p>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <section class="mn-foot">
+    <div class="legend js-legend"></div>
+    <p>Allergies or preferences? Tell us at the bar and we will take care of you. Oat, almond and lactose-free milk at no extra cost.</p>
+    <p class="ar" lang="ar" dir="rtl">عندك حساسية من أي حاجة؟ قول لنا وإحنا نتصرف.</p>
+  </section>
+</main>
+
+<div class="sheet js-sheet" hidden>
+  <div class="sheet__scrim js-sheet-close"></div>
+  <article class="sheet__card" role="dialog" aria-modal="true" aria-labelledby="sheetName">
+    <button class="sheet__close js-sheet-close" type="button" aria-label="Close">×</button>
+    <div class="sheet__grab" aria-hidden="true"></div>
+    <div class="sheet__arch"><img class="js-sheet-img" alt=""></div>
+    <div class="sheet__body">
+      <p class="label js-sheet-kicker"></p>
+      <div class="sheet__row"><h3 id="sheetName" class="js-sheet-name"></h3><span class="sheet__price js-sheet-price"></span></div>
+      <p class="js-sheet-desc"></p>
+      <p class="sheet__notes js-sheet-notes"></p>
+      <div class="sheet__tags js-sheet-tags"></div>
+      <button class="sheet__pair js-sheet-pair" type="button" hidden></button>
+    </div>
+  </article>
+</div>
+
+<footer class="foot">
+  <svg class="foot__word" viewBox="0 0 1000 140" aria-label="REFILL" role="img"><text x="4" y="126" textLength="992" lengthAdjust="spacing">REFILL</text></svg>
+  <div class="foot__row">
+    <span>Good coffee. Better days.</span>
+    <span class="ar" lang="ar" dir="rtl">قهوة طيبة. أيام أحلى.</span>
+    <span>© 2026 Refill · El Shorouk</span>
+  </div>
+</footer>
+
+<script src="/config.js"></script>
+<script src="/js/menu-data.js"></script>
+<script src="/vendor/gsap.min.js"></script>
+<script src="/vendor/ScrollTrigger.min.js"></script>
+<script src="/vendor/lenis.min.js"></script>
+<script src="/js/site.js"></script>
+<script src="/js/menu.js"></script>
+</body>
+</html>

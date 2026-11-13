@@ -1,15 +1,19 @@
 # REFILL website
 
-**The website is a cup.** A quiet plaster page with one big moment: a small cup-shaped window of
-steam that opens to fill the whole screen. After that, a day at Refill: coffee in the morning, the
-bakehouse at noon, pizza after dark. Each chapter has one living window of real footage (espresso
-flowing, a croissant torn open, a pizza by the fire) poured in as you scroll. The line-art founder
-appears only twice: in the Refill-o-meter, and jumping when the wordmark fills to 100%.
+**A day at the bar.** The site opens on the real Refill bar at the real time in El Shorouk. At 08:00
+it's morning light; at 22:00 the pendants are on and the city is lit up outside the window. A small
+dial at the bottom lets you drag the sun through the whole day, 06:00 to midnight, and the light
+moves across the counter. A line at each hour says what's happening ("Second bake. Sourdough cooling
+on the rack."). The rest of the site is quiet: plaster, hairlines, one idea per screen.
 
-Built phone-first: a floating dock at thumb reach (fill gauge, menu, order), a full-screen menu, swipe
-gallery, and an optional café sound toggle.
-
-- `docs/walkthrough-desktop.mp4`, `docs/walkthrough-phone.mp4`: recordings of the real site.
+- **Home** (`/`): the day, a short statement, the day in three acts (coffee, bakehouse, pizza
+  soon), a swipeable "On the counter today", the room, and visit details.
+- **Menu** (`/menu`): the full demo menu. Desktop: point at an item and it appears on an arch to the
+  right. Phone: tap an item and a sheet slides up with the photo, tasting notes and a pairing
+  suggestion. It also has this week's beans with a roast scale, and a live "out of the oven" bake
+  schedule.
+- **Rate** (`/rate`): the page behind the rating QR code. Five arch "cups" to fill.
+- `docs/walkthrough-phone.mp4`, `docs/walkthrough-desktop.mp4`: recordings of the real site.
 - Zero dependencies. Plain Node `http` server, nothing to install, no build step.
 
 ## Run it
@@ -45,57 +49,62 @@ Needs a Business or Cloud hosting plan. Steps follow Hostinger's own docs
 
 The server listens on `process.env.PORT` and `0.0.0.0`, as Hostinger requires.
 
-## Settings: links, ordering and ratings
+## The menu (demo content)
+
+Everything on the menu comes from one file: **`public/js/menu-data.js`**. The names, prices,
+descriptions, beans and bake times in it are **placeholders** to show how a full menu looks. Replace
+them with the real menu before launch. Each item can have:
+
+- `name`, `desc`, `price` (EGP)
+- `img`: a cut-out photo in `public/assets/menu/` (without `.webp`); leave it out for text-only items
+- `notes`: "tastes like" line; `pairs`: id of another item to suggest
+- `tags`: `sig` signature, `v` vegetarian, `vg` vegan, `n` contains nuts, `new`, `soon` (not served yet)
+
+To add a photo, put a transparent PNG/WebP in `source/menu/` and run `bash tools/build-media.sh`.
+
+## Settings: links, opening, ordering and ratings
 
 Edit `site.config.json`, or set the matching environment variable in Hostinger (Environment variables):
 
 | `site.config.json` | Env variable | What it does |
 |---|---|---|
-| `instagram` | `INSTAGRAM_URL` | Shows the "Follow on Instagram" button. |
-| `maps` | `MAPS_URL` | Shows the "Get directions" button. |
-| `orderUrl` | `ORDER_URL` | `/order?table=07` redirects here with the table number. Empty: shows the "You are early" page. |
-| `rateUrl` | `RATE_URL` | `/rate?table=07` redirects here. Empty: shows the built-in Refill-o-meter rating page. |
+| `isOpen` | `IS_OPEN` | `false` (now): the top bar says "Opening soon". `true`: it shows live "Open now · until 00:00" or "Closed · opens 07:00". |
+| `instagram` | `INSTAGRAM_URL` | Shows the Instagram links. |
+| `maps` | `MAPS_URL` | Shows the "Directions" button. |
+| `orderUrl` | `ORDER_URL` | `/order?table=07` redirects here with the table number. Empty: opens the menu with a "Table 07" note. |
+| `rateUrl` | `RATE_URL` | `/rate?table=07` redirects here. Empty: shows the built-in rating page. |
 | `googleReviewUrl` | `GOOGLE_REVIEW_URL` | After a 4 or 5 cup rating, offers "Tell everyone on Google". |
 | `rateWebhookUrl` | `RATE_WEBHOOK_URL` | Each rating is also POSTed here as JSON (for example a Google Sheet or Zapier hook). |
 
-Buttons with no link set are hidden, so nothing on the site is a dead link.
+Links with nothing set are hidden, so nothing on the site is a dead link. Opening hours (07:00 to
+00:00) live in `menu-data.js` under `hours`.
 
 **Table QR signs:** point them at `https://YOUR-DOMAIN/order?table={table}` and
 `https://YOUR-DOMAIN/rate?table={table}` (see `../qr-signs/config.json`).
 
-**Ratings:** the built-in `/rate` page sends `{score, table, note}` to `/api/rate`. Each one is written
-to the server log as a `[rating]` line (Hostinger: Runtime logs) and forwarded to the webhook if set.
+**Ratings:** the `/rate` page sends `{score, table, note}` to `/api/rate`. Each one is written to the
+server log as a `[rating]` line (Hostinger: Runtime logs) and forwarded to the webhook if set.
 Hostinger wipes app files on every deploy, so ratings are deliberately not stored on disk. Set the
 webhook to keep them.
 
-## Edit the content
+## Before launch, check
 
-All copy is plain HTML in `public/index.html`. Before launch, check these placeholders:
-
-- Menu items in the Coffee and Bakehouse lists.
-- The "When" line in Visit (opening date and hours).
-- The copyright name in the footer.
-
-The clock in the menu bar is "Refill time" (it runs 06:00 to 23:59 as you scroll), not opening hours.
+- The whole menu in `public/js/menu-data.js` (all demo).
+- Exact address and the maps link; opening date; hours.
+- The images are AI visualisations made from the designer's 3D render (the bar in four lights,
+  three time-lapse clips) and AI product photos. Swap in real photography once the café is open.
 
 ## How it is built
 
-- `public/js/site.js`: one wave engine drives every liquid edge (section tides, window surfaces, the
-  wordmark fill, the loader, the gauge, the room clip). Scrolling fast makes it slosh.
-- `public/assets/video/*.mp4`: five short slow-motion clips made with Higgsfield. Each one sits on top
-  of its own first frame (`assets/img/v-*.webp`) and fades back to it before restarting, so the loop
-  never jumps. Clips load and play only while on screen. The server sends them with byte ranges,
-  which Safari on iPhone requires.
-- `public/assets/audio/cafe.mp3`: café ambience for the sound toggle. Off until the visitor asks.
-- `public/assets/poses/*.svg`: the founder, traced from the Higgsfield line art into centre-line
-  strokes by `tools/vectorize.py` so each line can be drawn in order.
-- GSAP, ScrollTrigger and Lenis are vendored in `public/vendor/`, and fonts are self-hosted, so the
-  site makes no third-party requests.
-- Reduced-motion visitors get a still, fully readable page. Phones get a swipe gallery instead of the
-  pinned sideways scroll.
-
-Re-trace the poses after changing `source/poses/*.png` (Python 3 with Pillow, numpy, scikit-image):
-
-```bash
-python3 tools/vectorize.py
-```
+- `public/js/day.js`: the hero. 49 frames (`public/assets/day/l` landscape, `/p` portrait for
+  phones) are drawn on a canvas and cross-faded, so the light moves smoothly at any minute. Key frames
+  load first, the rest stream in. On load the day plays from 06:00 to the current time in Cairo.
+- `public/js/menu.js`: renders the menu, the desktop stage, the phone sheet (swipe down to close),
+  the tab underline that follows your scroll, and the live bake schedule.
+- `public/js/site.js`: top bar, index overlay, reveals, smooth wheel scrolling (Lenis), the counter
+  rail.
+- `public/vendor/`: GSAP 3, ScrollTrigger and Lenis, vendored (no CDN).
+- `source/`: the Higgsfield originals (bar stills, time-lapse clips, product cut-outs).
+  `tools/build-media.sh` turns them into the web files.
+- Fonts are self-hosted: Montserrat (display), Inter (text), Alexandria (Arabic).
+- `prefers-reduced-motion` is respected: no intro, no parallax, the hero jumps straight to now.
