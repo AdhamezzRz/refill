@@ -1,0 +1,13 @@
+{
+  "name": "refill-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "REFILL: coffee, bakehouse and pizza in El Shorouk, Cairo. The website is a cup.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

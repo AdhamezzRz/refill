@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>REFILL · Coffee, Bakehouse, Pizza · El Shorouk, Cairo</title>
+<meta name="description" content="Refill is a café in El Shorouk, Cairo. Specialty coffee in the morning, a bakehouse at noon, pizza after dark. Opening soon.">
+<meta name="theme-color" content="#F3EFE6">
+<meta property="og:title" content="REFILL · Good coffee. Better days.">
+<meta property="og:description" content="Coffee in the morning. A bakehouse at noon. Pizza after dark. El Shorouk, Cairo. Opening soon.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="/assets/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<link rel="stylesheet" href="/css/site.css">
+</head>
+<body class="is-loading" data-nav="light" data-gauge="light">
+
+<!-- ============ LOADER: the arch fills, then the pour lifts away ============ -->
+<div class="loader" aria-hidden="true">
+  <div class="loader__inner">
+    <svg class="loader__cup" viewBox="0 0 120 124" fill="none">
+      <defs><clipPath id="loaderClip"><path d="M12 30H108V70A48 48 0 0 1 12 70Z"/></clipPath></defs>
+      <g clip-path="url(#loaderClip)"><path class="js-wave" data-wave="loader" fill="currentColor"/></g>
+      <path d="M2 6H118" stroke="currentColor" stroke-width="6"/>
+      <path d="M12 30H108V70A48 48 0 0 1 12 70Z" stroke="currentColor" stroke-width="6"/>
+    </svg>
+    <div class="loader__count"><span class="js-loader-count">0</span>%</div>
+    <div class="loader__label">Refilling</div>
+  </div>
+  <svg class="loader__skirt" viewBox="0 0 1440 90" preserveAspectRatio="none"><path class="js-wave" data-wave="skirt"/></svg>
+</div>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <a class="nav__mark" href="#top" aria-label="Refill, back to top">REFILL</a>
+  <nav class="nav__links" aria-label="Sections">
+    <a href="#coffee">Coffee</a><a href="#bakehouse">Bakehouse</a><a href="#pizza">Pizza</a><a href="#room">The room</a><a href="#visit">Visit</a>
+  </nav>
+  <div class="nav__right">
+    <div class="nav__clock" title="Refill time: it moves as you scroll"><span class="js-clock">06:00</span></div>
+    <a class="nav__cta" href="/order" data-magnetic>Order</a>
+  </div>
+</header>
+
+<!-- ============ GAUGE: the whole page is a cup ============ -->
+<aside class="gauge" aria-hidden="true">
+  <svg class="gauge__cup" viewBox="0 0 120 124" fill="none">
+    <defs><clipPath id="gaugeClip"><path d="M12 30H108V70A48 48 0 0 1 12 70Z"/></clipPath></defs>
+    <g clip-path="url(#gaugeClip)"><path class="js-wave" data-wave="gauge" fill="currentColor"/></g>
+    <path d="M2 6H118" stroke="currentColor" stroke-width="8"/>
+    <path d="M12 30H108V70A48 48 0 0 1 12 70Z" stroke="currentColor" stroke-width="8"/>
+  </svg>
+  <div class="gauge__pct"><span class="js-gauge-pct">0</span>%</div>
+  <div class="gauge__label">Refilled</div>
+</aside>
+
+<div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+
+<main id="top">
+
+<!-- ============ 01 HERO · 06:00 · running on empty ============ -->
+<section class="hero s-plaster" data-section data-clock="06:00">
+  <p class="eyebrow hero__eyebrow"><span class="js-greeting">Good morning</span><i></i>El Shorouk, Cairo<i></i>Opening soon</p>
+
+  <div class="hero__mark">
+    <button class="founder hero__founder" data-pose="sleepy" data-draw="load" type="button" aria-label="Wake the founder">
+      <span class="founder__bubble js-bubble">Tap to wake him</span>
+    </button>
+    <svg class="wordmark js-wordmark" data-wordmark="hero" viewBox="0 0 1000 150" role="img" aria-label="REFILL">
+      <defs><clipPath id="wmHero"><text class="wordmark__t" x="0" y="142">REFILL</text></clipPath></defs>
+      <text class="wordmark__t wordmark__outline" x="0" y="142">REFILL</text>
+      <g clip-path="url(#wmHero)"><path class="wordmark__liquid js-wave" data-wave="wm-hero"/></g>
+    </svg>
+    <div class="hero__level"><span class="js-hero-pct">6</span>% refilled</div>
+  </div>
+
+  <div class="hero__copy">
+    <h1 class="hero__title" data-split>Running on empty?</h1>
+    <div class="hero__text">
+      <p data-reveal>Coffee in the morning. A bakehouse at noon. Pizza after dark. Scroll, and we'll refill your day.</p>
+      <p class="ar" lang="ar" dir="rtl" data-reveal>قهوة الصبح، مخبوزات الضهر، وبيتزا بالليل.</p>
+    </div>
+  </div>
+
+  <a class="hero__cue" href="#coffee"><span>Scroll to refill</span><svg viewBox="0 0 14 40" fill="none"><path d="M7 0V38M1 32l6 6 6-6" stroke="currentColor" stroke-width="1.5"/></svg></a>
+</section>
+
+<!-- ============ 02 MANIFESTO ============ -->
+<section class="manifesto s-plaster" data-section data-clock="06:40">
+  <div class="marquee" aria-hidden="true"><div class="marquee__track">
+    <span>Coffee</span><b></b><span>People</span><b></b><span>Good days</span><b></b><span>Coffee</span><b></b><span>People</span><b></b><span>Good days</span><b></b>
+    <span>Coffee</span><b></b><span>People</span><b></b><span>Good days</span><b></b><span>Coffee</span><b></b><span>People</span><b></b><span>Good days</span><b></b>
+  </div></div>
+  <div class="wrap manifesto__grid">
+    <p class="eyebrow" data-reveal>What we're here for</p>
+    <h2 class="manifesto__line js-fillwords">Good coffee. Better days. A place to pause, recharge and move forward, made of plaster, stone, butter and beans.</h2>
+  </div>
+</section>
+
+<!-- ============ 03 COFFEE · 07:30 ============ -->
+<section id="coffee" class="chapter s-greige" data-section data-clock="07:30">
+  <svg class="tide" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path class="js-wave" data-wave="tide"/></svg>
+  <div class="wrap chapter__grid">
+    <div class="chapter__text">
+      <p class="chapter__time" data-reveal><span>07:00</span><i></i>Morning</p>
+      <h2 class="display" data-split>First, coffee.</h2>
+      <p class="lede" data-reveal>Specialty beans, pulled and poured by hand. No jargon, no lectures. Just a cup that makes the morning easier.</p>
+      <p class="ar" lang="ar" dir="rtl" data-reveal>أول حاجة: القهوة.</p>
+      <ul class="list" data-reveal-list>
+        <li><span>Iced latte</span></li><li><span>Spanish latte</span></li><li><span>Cold brew</span></li><li><span>Pistachio latte</span></li><li><span>Matcha latte</span></li>
+      </ul>
+    </div>
+    <div class="cup js-cup" data-label="Coffee">
+      <div class="founder cup__founder cup__founder--pour" data-pose="pour" data-draw="scroll"></div>
+      <div class="cup__lid"></div>
+      <div class="cup__stream"></div>
+      <div class="cup__body">
+        <div class="cup__liquid">
+          <img src="/assets/img/photo-coffee.webp" alt="Milk being poured into a flat white on a travertine counter" width="1200" height="1500" loading="lazy" decoding="async">
+          <svg class="cup__surface" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path class="js-wave" data-wave="surface"/></svg>
+        </div>
+      </div>
+      <div class="cup__ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="cup__pct"><span class="js-cup-pct">0</span>%<small>poured</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 BAKEHOUSE · 12:00 ============ -->
+<section id="bakehouse" class="chapter chapter--flip s-bright" data-section data-clock="12:00">
+  <svg class="tide" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path class="js-wave" data-wave="tide"/></svg>
+  <div class="wrap chapter__grid">
+    <div class="chapter__text">
+      <p class="chapter__time" data-reveal><span>12:00</span><i></i>Noon</p>
+      <h2 class="display" data-split>Then, something warm.</h2>
+      <p class="lede" data-reveal>Butter, flour and patience. Croissants, pain au chocolat and bread, baked through the day, so something is always just out of the oven.</p>
+      <p class="ar" lang="ar" dir="rtl" data-reveal>وبعدين حاجة سخنة، لسه طالعة من الفرن.</p>
+      <ul class="list" data-reveal-list>
+        <li><span>Butter croissant</span></li><li><span>Pain au chocolat</span></li><li><span>Fresh bread</span></li>
+      </ul>
+    </div>
+    <div class="cup js-cup" data-label="Bakehouse">
+      <div class="founder cup__founder cup__founder--tray" data-pose="tray" data-draw="scroll"></div>
+      <div class="cup__lid"></div>
+      <div class="cup__body">
+        <div class="cup__liquid">
+          <img src="/assets/img/photo-bakery.webp" alt="Butter croissants and pain au chocolat on an oak board" width="1200" height="1500" loading="lazy" decoding="async">
+          <svg class="cup__surface" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path class="js-wave" data-wave="surface"/></svg>
+        </div>
+      </div>
+      <div class="cup__ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="cup__pct"><span class="js-cup-pct">0</span>%<small>baked</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 PIZZA · 20:00 · the page goes dark ============ -->
+<section id="pizza" class="chapter s-espresso" data-section data-clock="20:00">
+  <svg class="tide" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path class="js-wave" data-wave="tide"/></svg>
+  <div class="wrap chapter__grid">
+    <div class="chapter__text">
+      <p class="chapter__time" data-reveal><span>20:00</span><i></i>After dark</p>
+      <h2 class="display" data-split>And after dark, pizza.</h2>
+      <p class="lede" data-reveal>Slow dough, a very hot oven, and not much else. Pizza is coming soon to Refill.</p>
+      <p class="ar" lang="ar" dir="rtl" data-reveal>وبالليل… بيتزا. قريب.</p>
+      <div class="stamp" data-reveal aria-label="Coming soon">
+        <svg viewBox="0 0 120 120"><defs><path id="stampArc" d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1 -88 0"/></defs>
+          <text><textPath href="#stampArc" startOffset="0">COMING SOON · COMING SOON · COMING SOON ·</textPath></text>
+          <g fill="none" stroke="currentColor" stroke-width="3.2"><path d="M44 46H76"/><path d="M47 54H73V63A13 13 0 0 1 47 63Z"/></g>
+        </svg>
+      </div>
+    </div>
+    <div class="cup js-cup" data-label="Pizza">
+      <div class="founder cup__founder cup__founder--pizza" data-pose="pizza" data-draw="scroll"></div>
+      <div class="cup__lid"></div>
+      <div class="cup__body">
+        <div class="cup__liquid">
+          <img src="/assets/img/photo-pizza.webp" alt="A Neapolitan pizza with a blistered crust on an oak peel" width="1200" height="1500" loading="lazy" decoding="async">
+          <svg class="cup__surface" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path class="js-wave" data-wave="surface"/></svg>
+        </div>
+      </div>
+      <div class="cup__ticks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="cup__pct"><span class="js-cup-pct">0</span>%<small>proved</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 THE ROOM · sideways walk-through ============ -->
+<section id="room" class="space s-olive" data-section data-clock="21:00">
+  <svg class="tide" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path class="js-wave" data-wave="tide"/></svg>
+  <div class="space__pin">
+    <div class="space__track js-track">
+      <div class="space__intro">
+        <p class="eyebrow" data-reveal>The room</p>
+        <h2 class="display" data-split>Plaster, stone, oak and a long view over green.</h2>
+        <p class="lede" data-reveal>Walk through. These are the design renders the room is being built from.</p>
+        <p class="space__hint" aria-hidden="true"><span class="hint-d">Keep scrolling</span><span class="hint-m">Swipe</span> <svg viewBox="0 0 40 14" fill="none"><path d="M0 7H38M32 1l6 6-6 6" stroke="currentColor" stroke-width="1.5"/></svg></p>
+      </div>
+      <div class="space__cards">
+      <figure class="card"><div class="card__img"><img src="/assets/img/space-facade.webp" alt="Render of the Refill front: limewash walls, black steel glazing and a terrace" loading="lazy" decoding="async" width="1600" height="1205"></div><figcaption><b>The front door</b><span>Limewash walls, black steel, a terrace in the sun.</span></figcaption></figure>
+      <figure class="card card--tall"><div class="founder card__founder" data-pose="lounge" data-draw="scroll"></div><div class="card__img"><img src="/assets/img/space-bar.webp" alt="Render of the bar: a white counter breaking into raw stone" loading="lazy" decoding="async" width="1600" height="1205"></div><figcaption><b>The bar</b><span>Smooth white, tearing into raw stone.</span></figcaption></figure>
+      <figure class="card"><div class="card__img"><img src="/assets/img/space-window-bench.webp" alt="Render of the window bench facing the view" loading="lazy" decoding="async" width="1600" height="1205"></div><figcaption><b>The view</b><span>A long bench, facing the green.</span></figcaption></figure>
+      <figure class="card card--tall"><div class="card__img"><img src="/assets/img/space-planter-lounge.webp" alt="Render of the curved planter bench with olive trees" loading="lazy" decoding="async" width="1600" height="1205"></div><figcaption><b>The planter</b><span>Olive trees, growing through the middle of the room.</span></figcaption></figure>
+      <figure class="card"><div class="card__img"><img src="/assets/img/space-interior-wide.webp" alt="Render of the interior with the arched door and round porthole" loading="lazy" decoding="async" width="1600" height="1205"></div><figcaption><b>The arch</b><span>Our doorway. Also our logo.</span></figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 SAME ROOM. SOON. · drag to refill ============ -->
+<section class="refillroom s-plaster" data-section data-clock="21:45">
+  <svg class="tide" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path class="js-wave" data-wave="tide"/></svg>
+  <svg class="defs" width="0" height="0" aria-hidden="true"><defs><clipPath id="roomClip" clipPathUnits="objectBoundingBox"><path class="js-wave" data-wave="room"/></clipPath></defs></svg>
+  <div class="wrap refillroom__grid">
+    <div class="refillroom__text">
+      <p class="eyebrow" data-reveal>Right now: dust and drills</p>
+      <h2 class="display" data-split>Same room. Soon.</h2>
+      <p class="lede" data-reveal>We're still building. Drag the line up to pour the finished room over the site as it stands today.</p>
+      <p class="ar" lang="ar" dir="rtl" data-reveal>نفس المكان. قريب جدًا.</p>
+      <div class="chips" role="tablist" aria-label="Choose a view" data-reveal>
+        <button class="chip is-on" role="tab" aria-selected="true" data-room="3809" type="button">The bar</button>
+        <button class="chip" role="tab" aria-selected="false" data-room="3805" type="button">The planter</button>
+      </div>
+      <p class="fine" data-reveal>Above the line: the site today. Below it: the design we're building.</p>
+    </div>
+    <div class="room js-room">
+      <div class="founder room__founder" data-pose="point" data-draw="scroll"></div>
+      <div class="cup__lid"></div>
+      <div class="room__frame" data-cursor="Drag">
+        <img class="room__now" src="/assets/img/room-3809-now.webp" alt="The bar area under construction today" loading="lazy" decoding="async" width="1080" height="1920" draggable="false">
+        <img class="room__soon" src="/assets/img/room-3809-soon.webp" alt="The same view, finished: stone niches, white bar and espresso machine" loading="lazy" decoding="async" width="1080" height="1920" draggable="false">
+        <div class="room__line"><span class="room__grip">Drag</span></div>
+        <input class="room__range" type="range" min="0" max="100" value="18" aria-label="How much of the finished room to show" orient="vertical">
+      </div>
+      <div class="cup__pct room__pct"><span class="js-room-pct">18</span>%<small>refilled</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 REFILL-O-METER ============ -->
+<section class="meter s-espresso" data-section data-clock="22:30">
+  <svg class="tide" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path class="js-wave" data-wave="tide"/></svg>
+  <div class="wrap meter__grid">
+    <div class="meter__text">
+      <p class="eyebrow" data-reveal>The Refill-o-meter</p>
+      <h2 class="display" data-split>How refilled are you?</h2>
+      <p class="ar" lang="ar" dir="rtl" data-reveal>مزاجك اتملى قد إيه؟</p>
+      <div class="meter__cups" role="radiogroup" aria-label="How refilled are you?" data-reveal>
+        <button class="mcup" role="radio" aria-checked="false" data-level="0" type="button"><i style="--l:0"></i><span>Sleepy</span></button>
+        <button class="mcup" role="radio" aria-checked="false" data-level="1" type="button"><i style="--l:.25"></i><span>Waking up</span></button>
+        <button class="mcup" role="radio" aria-checked="false" data-level="2" type="button"><i style="--l:.5"></i><span>Getting there</span></button>
+        <button class="mcup" role="radio" aria-checked="false" data-level="3" type="button"><i style="--l:.75"></i><span>Good day</span></button>
+        <button class="mcup" role="radio" aria-checked="false" data-level="4" type="button"><i style="--l:1"></i><span>Refilled</span></button>
+      </div>
+      <p class="meter__answer js-meter-answer" aria-live="polite">Pick a cup. We'll tell you what you need.</p>
+    </div>
+    <div class="meter__stage">
+      <div class="founder meter__founder js-meter-founder" data-pose="waiter" data-draw="scroll"></div>
+      <div class="meter__ground"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 VISIT + the wordmark, full ============ -->
+<section id="visit" class="visit s-plaster" data-section data-clock="23:15">
+  <svg class="tide" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path class="js-wave" data-wave="tide"/></svg>
+  <div class="wrap visit__grid">
+    <div>
+      <p class="eyebrow" data-reveal>Visit</p>
+      <h2 class="display" data-split>Come get refilled.</h2>
+    </div>
+    <div class="visit__info">
+      <dl data-reveal>
+        <div><dt>Where</dt><dd>El Shorouk, Cairo</dd></div>
+        <div><dt>When</dt><dd>Opening soon. Hours to follow.</dd></div>
+        <div><dt>What</dt><dd>Coffee · Bakehouse · Pizza</dd></div>
+      </dl>
+      <div class="visit__links" data-reveal>
+        <a class="btn" data-link="instagram" data-magnetic target="_blank" rel="noopener">Follow on Instagram</a>
+        <a class="btn" data-link="maps" data-magnetic target="_blank" rel="noopener">Get directions</a>
+        <a class="btn btn--ghost" href="/order" data-magnetic>Order from your table</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="finale">
+    <div class="founder finale__founder" data-pose="jump" data-draw="scroll"></div>
+    <svg class="wordmark js-wordmark" data-wordmark="finale" viewBox="0 0 1000 150" role="img" aria-label="REFILL">
+      <defs><clipPath id="wmFinale"><text class="wordmark__t" x="0" y="142">REFILL</text></clipPath></defs>
+      <text class="wordmark__t wordmark__outline" x="0" y="142">REFILL</text>
+      <g clip-path="url(#wmFinale)"><path class="wordmark__liquid js-wave" data-wave="wm-finale"/></g>
+    </svg>
+    <p class="finale__line"><span class="js-finale-pct">0</span>% refilled<i></i><em>Good coffee. Better days.</em></p>
+  </div>
+
+  <footer class="foot wrap">
+    <span>© <span class="js-year">2026</span> Refill</span>
+    <span>Coffee / People / Good days</span>
+    <a href="#top">Back to empty ↑</a>
+  </footer>
+</section>
+
+</main>
+
+<noscript><style>.loader{display:none}body.is-loading{overflow:auto}[data-reveal],[data-split]{opacity:1!important}</style></noscript>
+<script src="/config.js"></script>
+<script src="/vendor/gsap.min.js"></script>
+<script src="/vendor/ScrollTrigger.min.js"></script>
+<script src="/vendor/lenis.min.js"></script>
+<script src="/js/site.js"></script>
+</body>
+</html>

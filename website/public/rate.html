@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rate your visit · REFILL</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#352317">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<link rel="stylesheet" href="/css/site.css">
+</head>
+<body class="page-body" style="background:#352317">
+<main class="page s-espresso" data-section>
+  <header class="page__top"><a href="/" aria-label="Refill home">REFILL</a><small class="js-table">El Shorouk</small></header>
+  <div class="page__main">
+    <div class="page__text">
+      <p class="eyebrow">The Refill-o-meter</p>
+      <h1 class="display">How refilled are you?</h1>
+      <p class="ar" lang="ar" dir="rtl">مزاجك اتملى قد إيه؟</p>
+      <form class="js-rate page__text" novalidate>
+        <div class="meter__cups" role="radiogroup" aria-label="How refilled are you?">
+          <button class="mcup" role="radio" aria-checked="false" data-level="0" type="button"><i style="--l:0"></i><span>Sleepy</span></button>
+          <button class="mcup" role="radio" aria-checked="false" data-level="1" type="button"><i style="--l:.25"></i><span>Waking up</span></button>
+          <button class="mcup" role="radio" aria-checked="false" data-level="2" type="button"><i style="--l:.5"></i><span>Getting there</span></button>
+          <button class="mcup" role="radio" aria-checked="false" data-level="3" type="button"><i style="--l:.75"></i><span>Good day</span></button>
+          <button class="mcup" role="radio" aria-checked="false" data-level="4" type="button"><i style="--l:1"></i><span>Refilled</span></button>
+        </div>
+        <p class="meter__answer js-meter-answer" aria-live="polite">Pick a cup. Honest answers welcome.</p>
+        <label class="eyebrow" for="note">Anything to add? Optional</label>
+        <textarea class="field js-note" id="note" maxlength="500" placeholder="Tell us what was great, or what was not."></textarea>
+        <div class="visit__links"><button class="btn js-send" type="submit" disabled>Send</button></div>
+      </form>
+      <div class="js-thanks page__text" hidden>
+        <p class="meter__answer">Thank you. That goes straight to the team.</p>
+        <div class="visit__links"><a class="btn js-review" target="_blank" rel="noopener" hidden>Tell everyone on Google</a><a class="btn btn--ghost" href="/">Back to the site</a></div>
+      </div>
+    </div>
+    <div class="page__stage"><div class="founder js-meter-founder" data-pose="waiter"></div><div class="meter__ground"></div></div>
+  </div>
+  <footer class="page__foot"><span>Good coffee. Better days.</span><a href="/">Back to the site</a></footer>
+</main>
+<script src="/config.js"></script>
+<script src="/vendor/gsap.min.js"></script>
+<script src="/vendor/ScrollTrigger.min.js"></script>
+<script src="/js/site.js"></script>
+</body>
+</html>

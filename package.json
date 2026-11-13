@@ -1,0 +1,13 @@
+{
+  "name": "refill",
+  "version": "1.0.0",
+  "private": true,
+  "description": "REFILL brand, campaign and website. The Node.js web app lives in website/.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node website/server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
