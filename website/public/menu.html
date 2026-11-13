@@ -14,6 +14,21 @@
 </head>
 <body class="menu-page">
 
+<div class="curtain js-curtain" aria-hidden="true">
+  <div class="loader">
+    <svg class="loader__mark" viewBox="0 0 100 100">
+      <defs><clipPath id="refillCup"><path d="M16.72 55.52V27.04H83.28V55.52A33.28 33.28 0 0 1 16.72 55.52Z"/></clipPath></defs>
+      <g clip-path="url(#refillCup)"><path class="loader__coffee js-coffee" d="M0 100H100V100H0Z"/><path class="loader__crema js-crema" d=""/></g>
+      <path class="loader__cup" d="M13.36 55.52V23.68H86.64V55.52A36.64 36.64 0 0 1 13.36 55.52Z"/>
+      <path class="loader__lid js-lid" d="M6.2 3.36H93.8"/>
+    </svg>
+    <p class="loader__word">REFILL</p>
+    <p class="loader__sub">Specialty coffee</p>
+  </div>
+  <div class="curtain__foot"><span class="js-curtain-pct">Refilling</span><span class="js-curtain-count">El Shorouk</span></div>
+</div>
+
+
 <header class="top top--solid js-top">
   <a class="top__mark" href="/" aria-label="Refill, home">REFILL</a>
   <nav class="top__nav" aria-label="Primary">
@@ -44,28 +59,44 @@
 
 <main class="mn">
   <section class="mn-hero">
-    <p class="label js-table-label">Menu · Served 07:00 to 00:00</p>
-    <h1 class="mn-hero__title"><span class="ln"><span>Poured, baked</span></span><span class="ln"><span>and fired.</span></span></h1>
-    <div class="mn-hero__foot">
-      <p class="mn-hero__lede">Everything we make, all day. Prices in Egyptian pounds and include VAT. Tap anything to see it up close.</p>
-      <p class="table-pill js-table" hidden></p>
+    <div class="mn-hero__top">
+      <div>
+        <p class="label js-table-label">Menu · Served 07:00 to 00:00</p>
+        <h1 class="mn-hero__title"><span class="ln"><span>The menu</span></span></h1>
+      </div>
+      <div class="mn-hero__side">
+        <p class="mn-hero__lede">Prices in Egyptian pounds, VAT included. Tap anything to see it up close.</p>
+        <p class="table-pill js-table" hidden></p>
+      </div>
+    </div>
+
+    <nav class="toc js-toc" aria-label="Contents"></nav>
+
+    <div class="diet" role="group" aria-label="Dietary filter">
+      <span class="label">Show</span>
+      <button class="chip is-on" type="button" data-diet="">Everything</button>
+      <button class="chip" type="button" data-diet="v">Vegetarian</button>
+      <button class="chip" type="button" data-diet="vg">Vegan</button>
+      <button class="chip" type="button" data-diet="nf">Nut-free</button>
+      <span class="diet__count js-diet-count" aria-live="polite"></span>
     </div>
   </section>
 
   <nav class="tabs js-tabs" aria-label="Menu sections">
     <div class="tabs__in">
-      <a href="#coffee" data-tab="coffee">Coffee</a>
-      <a href="#bakehouse" data-tab="bakehouse">Bakehouse</a>
-      <a href="#kitchen" data-tab="kitchen">Kitchen</a>
+      <a href="#coffee" data-tab="coffee"><span>01</span>Coffee</a>
+      <a href="#bakehouse" data-tab="bakehouse"><span>02</span>Bakehouse</a>
+      <a href="#kitchen" data-tab="kitchen"><span>03</span>Kitchen</a>
       <span class="tabs__ink js-ink" aria-hidden="true"></span>
     </div>
+    <div class="subs js-subs" aria-label="Categories"></div>
   </nav>
 
   <div class="mn-body">
     <div class="mn-list js-menu"></div>
     <aside class="stage js-stage" aria-hidden="true">
       <div class="stage__in">
-        <div class="stage__arch"><img class="stage__img js-stage-img" alt=""><img class="stage__img stage__img--b js-stage-img2" alt=""></div>
+        <div class="stage__cup cupf js-stage-cup"><img class="js-stage-img" alt=""><img class="js-stage-img2" alt=""></div>
         <div class="stage__meta">
           <p class="stage__kicker js-stage-kicker"></p>
           <h3 class="stage__name js-stage-name"></h3>
@@ -87,7 +118,7 @@
   <article class="sheet__card" role="dialog" aria-modal="true" aria-labelledby="sheetName">
     <button class="sheet__close js-sheet-close" type="button" aria-label="Close">×</button>
     <div class="sheet__grab" aria-hidden="true"></div>
-    <div class="sheet__arch"><img class="js-sheet-img" alt=""></div>
+    <div class="sheet__cup cupf js-sheet-cup"><img class="js-sheet-img" alt=""></div>
     <div class="sheet__body">
       <p class="label js-sheet-kicker"></p>
       <div class="sheet__row"><h3 id="sheetName" class="js-sheet-name"></h3><span class="sheet__price js-sheet-price"></span></div>

@@ -18,11 +18,17 @@
 <body class="home">
 
 <div class="curtain js-curtain" aria-hidden="true">
-  <div class="curtain__mark">
-    <svg viewBox="0 0 100 120" class="arch-ico"><path d="M8 118V50a42 42 0 0 1 84 0v68" /></svg>
-    <span class="curtain__word">REFILL</span>
+  <div class="loader">
+    <svg class="loader__mark" viewBox="0 0 100 100">
+      <defs><clipPath id="refillCup"><path d="M16.72 55.52V27.04H83.28V55.52A33.28 33.28 0 0 1 16.72 55.52Z"/></clipPath></defs>
+      <g clip-path="url(#refillCup)"><path class="loader__coffee js-coffee" d="M0 100H100V100H0Z"/><path class="loader__crema js-crema" d=""/></g>
+      <path class="loader__cup" d="M13.36 55.52V23.68H86.64V55.52A36.64 36.64 0 0 1 13.36 55.52Z"/>
+      <path class="loader__lid js-lid" d="M6.2 3.36H93.8"/>
+    </svg>
+    <p class="loader__word">REFILL</p>
+    <p class="loader__sub">Specialty coffee</p>
   </div>
-  <span class="curtain__count js-curtain-count">06:00</span>
+  <div class="curtain__foot"><span class="js-curtain-pct">Refilling</span><span class="js-curtain-count">El Shorouk</span></div>
 </div>
 
 <header class="top js-top">
@@ -111,19 +117,19 @@
     </header>
     <div class="acts__rail">
       <a class="act" href="/menu#coffee" style="--tone:#DCD0C2">
-        <div class="act__arch"><img src="/assets/menu/flatwhite.webp" alt="Flat white with latte art" loading="lazy" width="900" height="900"></div>
+        <div class="act__arch cupf"><img src="/assets/menu/flatwhite.webp" alt="Flat white with latte art" loading="lazy" width="900" height="900"></div>
         <div class="act__meta"><span>Act I</span><span>From 07:00</span></div>
         <h2 class="act__title">Coffee</h2>
         <p class="act__text">Espresso bar, slow bar and a few signatures we are quietly proud of.</p>
       </a>
       <a class="act" href="/menu#bakehouse" style="--tone:#CDB9A2">
-        <div class="act__arch"><img src="/assets/menu/croissant.webp" alt="Butter croissant" loading="lazy" width="900" height="900"></div>
+        <div class="act__arch cupf"><img src="/assets/menu/croissant.webp" alt="Butter croissant" loading="lazy" width="900" height="900"></div>
         <div class="act__meta"><span>Act II</span><span>From 07:00</span></div>
         <h2 class="act__title">Bakehouse</h2>
         <p class="act__text">Laminated by hand every night. Baked in small batches until the case is empty.</p>
       </a>
       <a class="act act--dark" href="/menu#kitchen" style="--tone:#3B2A1E">
-        <div class="act__arch"><img src="/assets/menu/margherita.webp" alt="Margherita pizza" loading="lazy" width="900" height="900"><span class="act__soon">Soon</span></div>
+        <div class="act__arch cupf"><img src="/assets/menu/margherita.webp" alt="Margherita pizza" loading="lazy" width="900" height="900"><span class="act__soon">Soon</span></div>
         <div class="act__meta"><span>Act III</span><span>From 19:00</span></div>
         <h2 class="act__title">Pizza</h2>
         <p class="act__text">After dark the oven gets very hot. Forty-eight hour dough, on its way.</p>

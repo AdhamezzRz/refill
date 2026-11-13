@@ -51,16 +51,31 @@ The server listens on `process.env.PORT` and `0.0.0.0`, as Hostinger requires.
 
 ## The menu (demo content)
 
-Everything on the menu comes from one file: **`public/js/menu-data.js`**. The names, prices,
-descriptions, beans and bake times in it are **placeholders** to show how a full menu looks. Replace
-them with the real menu before launch. Each item can have:
+The menu is set like a printed restaurant menu: a contents page, three numbered sections (01 Coffee,
+02 Bakehouse, 03 Kitchen), numbered categories (1.1 Espresso bar, 1.2 Signatures …), dotted leaders,
+price columns where it matters (Hot / Iced, Half / Whole, Slice / Whole), an "Add" line for extras,
+dietary tags and a filter (Vegetarian, Vegan, Nut-free). A sticky bar keeps the section and category
+in view while you scroll.
 
-- `name`, `desc`, `price` (EGP)
-- `img`: a cut-out photo in `public/assets/menu/` (without `.webp`); leave it out for text-only items
-- `notes`: "tastes like" line; `pairs`: id of another item to suggest
-- `tags`: `sig` signature, `v` vegetarian, `vg` vegan, `n` contains nuts, `new`, `soon` (not served yet)
+Everything comes from one file: **`public/js/menu-data.js`**. The names, prices, descriptions, beans
+and bake times in it are **placeholders**. Replace them with the real menu before launch.
+
+- A category can have `cols: ['Hot', 'Iced']`; its items then take a price list in the same order,
+  for example `price: [140, 150]`, or `[null, 120]` when there is no hot version.
+- Without `cols`, `price` is a single number.
+- `extras: [['Extra shot', 25], ['Plant milk', 0]]` prints the "Add" line (0 shows as "free").
+- Each item can have `img` (a cut-out in `public/assets/menu/`), `notes` ("tastes like"), `pairs`
+  (id of another item), and `tags`: `sig` signature, `v` vegetarian, `vg` vegan, `n` contains nuts,
+  `new`, `soon` (not served yet).
 
 To add a photo, put a transparent PNG/WebP in `source/menu/` and run `bash tools/build-media.sh`.
+
+## The Refill cup
+
+The loader and every product frame use the logo's own geometry (cup width 1, lid 1.095 wide and 0.084
+thick, gap 0.17, cup 0.94 tall with a round bottom). On load the cup fills with coffee as the page's
+images actually arrive, the lid drops on, and the page opens. Products are served in the same cup
+shape, and the rating page asks you to fill a cup.
 
 ## Settings: links, opening, ordering and ratings
 

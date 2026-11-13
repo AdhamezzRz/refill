@@ -41,7 +41,7 @@
   var playBtn = $('.js-play'), playLbl = $('.js-play-label'), nowBtn = $('.js-to-now');
 
   /* ---------- frames ---------- */
-  var set = null, frames = [], focus = { x: 0.5, y: 0.5 };
+  var set = null, frames = [], focus = { x: 0.5, y: 0.5 }, onFrame = function () {};
   function pickSet() { return window.innerWidth / window.innerHeight < 0.85 ? 'p' : 'l'; }
   function pad(i) { return (i < 10 ? '0' : '') + i; }
   function loadSet(name, firstIdx) {
@@ -58,7 +58,7 @@
           active++;
           var img = new Image(); img.decoding = 'async';
           img.onload = function () {
-            frames[idx] = img; active--;
+            frames[idx] = img; active--; onFrame();
             if (set === name) draw();
             if (order.indexOf(idx) < 5 && --keysLeft === 0) res();
             pump();
@@ -203,42 +203,35 @@
     rt = setTimeout(function () { if (pickSet() !== set) loadSet(pickSet(), frameAt(t)); size(); }, 120);
   });
 
-  /* ---------- intro: the day plays from 06:00 to right now ---------- */
-  var curtain = $('.js-curtain'), count = $('.js-curtain-count');
+  /* ---------- intro: the Refill cup fills as the frames load, then the day plays from 06:00 to now ---------- */
+  var L = R.loader;
   live = R.cairoMinutes(); setNowMark();
   var target = dialT(live);
+  var loaded = 0;
+  onFrame = function () { loaded++; };
   var ready = loadSet(pickSet(), frameAt(target));
   size(); paint();
 
-  var seen = false; try { seen = sessionStorage.getItem('refill-intro') === '1'; } catch (e) {}
-  var minWait = reduce || seen ? 200 : 1300;
-  var c0 = performance.now(), counting = !reduce;
-  (function tick(now) {
-    if (!counting) return;
-    var k = Math.min((now - c0) / 1300, 1);
-    count.textContent = R.hhmm(360 + (target - 360) * (1 - Math.pow(1 - k, 3)));
-    requestAnimationFrame(tick);
-  })(c0);
-
-  Promise.race([ready, new Promise(function (r) { setTimeout(r, 4500); })]).then(function () {
-    var wait = Math.max(0, minWait - (performance.now() - c0));
-    setTimeout(start, wait);
-  });
+  if (!L) { t = target; setMode('now'); paint(); return; }
+  var c0 = performance.now(), minMs = R.seenBefore ? 500 : 1500, keysIn = false;
+  ready.then(function () { keysIn = true; });
+  (function feed() {
+    var el = performance.now() - c0;
+    var real = keysIn ? Math.min(1, 0.35 + loaded / (N * 0.5) * 0.65) : loaded / N;
+    if (el > 5000) real = 1;
+    L.set(Math.min(real, el / minMs));
+    if (real < 1 || el < minMs) requestAnimationFrame(feed); else L.set(1);
+  })();
+  L.onFull(function () { L.lift(start); });
 
   function start() {
-    counting = false;
-    try { sessionStorage.setItem('refill-intro', '1'); } catch (e) {}
-    if (!gsap || reduce) {
-      if (curtain) curtain.remove();
-      t = target; setMode('now'); paint(); return;
-    }
     t = 360; paint();
-    gsap.to(curtain, { clipPath: 'inset(0% 0% 100% 0%)', duration: 1.1, ease: 'expo.inOut', onComplete: function () { curtain.remove(); } });
+    if (!gsap || reduce) { t = target; setMode('now'); paint(); return; }
     gsap.fromTo(canvas, { scale: 1.12 }, { scale: 1, duration: 2.6, ease: 'expo.out', clearProps: 'transform' });
-    setTimeout(R.introLines, 450);
-    gsap.from(['.day__head .label', '.day__now', '.dial'], { opacity: 0, y: 16, duration: 1.2, ease: 'expo.out', stagger: 0.1, delay: 0.9 });
+    setTimeout(R.introLines, 250);
+    gsap.from(['.day__head .label', '.day__now', '.dial'], { opacity: 0, y: 16, duration: 1.2, ease: 'expo.out', stagger: 0.1, delay: 0.7 });
     setTimeout(function () {
-      go(target, seen ? 1.4 : 2.8, 'power3.inOut', function () { setMode('now'); paint(); });
-    }, 350);
+      go(target, R.seenBefore ? 1.4 : 2.8, 'power3.inOut', function () { setMode('now'); paint(); });
+    }, 150);
   }
 })();
