@@ -1,9 +1,13 @@
 # REFILL website
 
-**The website is a cup.** Scrolling pours a day at Refill: coffee in the morning, the bakehouse at noon,
-pizza after dark. Every section rises like liquid, each photo is poured into a cup in the logo's
-proportions, and the line-art founder is drawn stroke by stroke as he goes from running on empty to
-100% refilled.
+**The website is a cup.** A quiet plaster page with one big moment: a small cup-shaped window of
+steam that opens to fill the whole screen. After that, a day at Refill: coffee in the morning, the
+bakehouse at noon, pizza after dark. Each chapter has one living window of real footage (espresso
+flowing, a croissant torn open, a pizza by the fire) poured in as you scroll. The line-art founder
+appears only twice: in the Refill-o-meter, and jumping when the wordmark fills to 100%.
+
+Built phone-first: a floating dock at thumb reach (fill gauge, menu, order), a full-screen menu, swipe
+gallery, and an optional café sound toggle.
 
 - `docs/walkthrough-desktop.mp4`, `docs/walkthrough-phone.mp4`: recordings of the real site.
 - Zero dependencies. Plain Node `http` server, nothing to install, no build step.
@@ -76,8 +80,13 @@ The clock in the menu bar is "Refill time" (it runs 06:00 to 23:59 as you scroll
 
 ## How it is built
 
-- `public/js/site.js`: one wave engine drives every liquid edge (section tides, cup surfaces, the
+- `public/js/site.js`: one wave engine drives every liquid edge (section tides, window surfaces, the
   wordmark fill, the loader, the gauge, the room clip). Scrolling fast makes it slosh.
+- `public/assets/video/*.mp4`: five short slow-motion clips made with Higgsfield. Each one sits on top
+  of its own first frame (`assets/img/v-*.webp`) and fades back to it before restarting, so the loop
+  never jumps. Clips load and play only while on screen. The server sends them with byte ranges,
+  which Safari on iPhone requires.
+- `public/assets/audio/cafe.mp3`: café ambience for the sound toggle. Off until the visitor asks.
 - `public/assets/poses/*.svg`: the founder, traced from the Higgsfield line art into centre-line
   strokes by `tools/vectorize.py` so each line can be drawn in order.
 - GSAP, ScrollTrigger and Lenis are vendored in `public/vendor/`, and fonts are self-hosted, so the

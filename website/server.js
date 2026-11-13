@@ -23,14 +23,16 @@ const PUBLIC_CFG = { instagram: CFG.instagram, maps: CFG.maps, googleReview: CFG
 /* ---- static files ---- */
 const TYPES = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
   '.json': 'application/json; charset=utf-8', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.jpg': 'image/jpeg', '.png': 'image/png',
-  '.woff2': 'font/woff2', '.ico': 'image/x-icon', '.txt': 'text/plain; charset=utf-8', '.xml': 'application/xml' };
+  '.woff2': 'font/woff2', '.ico': 'image/x-icon', '.txt': 'text/plain; charset=utf-8', '.xml': 'application/xml',
+  '.mp4': 'video/mp4', '.mp3': 'audio/mpeg' };
 const COMPRESS = new Set(['.html', '.css', '.js', '.json', '.svg', '.txt', '.xml']);
-const LONG = new Set(['.woff2', '.webp', '.jpg', '.png']);
+const LONG = new Set(['.woff2', '.webp', '.jpg', '.png', '.mp4', '.mp3']);
+const MEDIA = new Set(['.mp4', '.mp3']);   // served with byte ranges: Safari will not play video without them
 const cache = new Map();   // path -> { mtimeMs, raw, br, gz, etag }
 
 const HEADERS = {
   'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'strict-origin-when-cross-origin', 'X-Frame-Options': 'SAMEORIGIN',
-  'Content-Security-Policy': "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; font-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'",
+  'Content-Security-Policy': "default-src 'self'; img-src 'self' data:; media-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; font-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'",
 };
 
 function load(fp) {
@@ -54,6 +56,18 @@ function send(req, res, fp, status = 200) {
   const h = { ...HEADERS, 'Content-Type': TYPES[ext] || 'application/octet-stream', ETag: e.etag, Vary: 'Accept-Encoding',
     'Cache-Control': ext === '.html' ? 'no-cache' : LONG.has(ext) ? 'public, max-age=604800' : 'public, max-age=3600' };
   if (status === 200 && req.headers['if-none-match'] === e.etag) { res.writeHead(304, h); return res.end(); }
+  if (MEDIA.has(ext)) {
+    h['Accept-Ranges'] = 'bytes';
+    const m = /^bytes=(\d*)-(\d*)$/.exec(String(req.headers.range || '')), size = e.raw.length;
+    if (m && (m[1] || m[2])) {
+      let start = m[1] ? parseInt(m[1], 10) : Math.max(0, size - parseInt(m[2], 10));
+      let end = m[1] && m[2] ? Math.min(parseInt(m[2], 10), size - 1) : size - 1;
+      if (start >= size || start > end) { res.writeHead(416, { ...h, 'Content-Range': `bytes */${size}` }); return res.end(); }
+      h['Content-Range'] = `bytes ${start}-${end}/${size}`; h['Content-Length'] = end - start + 1;
+      res.writeHead(206, h);
+      return res.end(req.method === 'HEAD' ? undefined : e.raw.subarray(start, end + 1));
+    }
+  }
   const ae = String(req.headers['accept-encoding'] || '');
   let bodyOut = e.raw;
   if (e.br && /\bbr\b/.test(ae)) { bodyOut = e.br; h['Content-Encoding'] = 'br'; }
