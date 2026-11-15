@@ -16,8 +16,9 @@ const CSS = `@font-face{font-family:M;src:url(${FONTS}montserrat-latin.woff2) fo
 @font-face{font-family:A;src:url(${FONTS}alexandria-arabic.woff2) format('woff2');font-weight:300 600}
 *{margin:0;padding:0;box-sizing:border-box}html,body{width:1080px;height:1920px;overflow:hidden;background:transparent}
 body{font-family:M;position:relative;-webkit-font-smoothing:antialiased}
-.abs{position:absolute}.label{font:500 24px/1.2 M;letter-spacing:.24em;text-transform:uppercase}
-.h{font-weight:300;letter-spacing:-.045em;line-height:.98}.ar{font-family:A;font-weight:300;direction:rtl}
+.abs{position:absolute}.label{font:600 18px/1.2 M;letter-spacing:.2em;text-transform:uppercase}
+.h{font-weight:500;letter-spacing:-.03em;line-height:1.02;text-wrap:balance}.t{font:400 30px/1.4 I}
+.ar{font-family:A;font-weight:500;direction:rtl;text-align:right;line-height:1.25}
 .lock{display:flex;align-items:center;gap:14px}.lock i{width:34px;height:34px;display:block}.lock span{font:600 19px/1 M;letter-spacing:.6em}`;
 const LOCK = c => `<div class="lock" style="color:${c}"><i>${CUP(c)}</i><span>REFILL</span></div>`;
 const html = body => `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}</style></head><body>${body}</body></html>`;
@@ -55,28 +56,29 @@ async function stopTheReel() {
   ];
   const b = await chromium.launch();
   const frames = [];
-  const head = `<div class="abs" style="left:0;right:0;top:0;height:520px;background:linear-gradient(180deg,rgba(20,13,8,.75),rgba(20,13,8,0))"></div>
-    <div class="abs" style="left:70px;right:70px;top:120px;color:#FBF9F4;display:flex;justify-content:space-between;align-items:center"><p class="label" style="font-size:26px">Stop the reel</p>${LOCK('#FBF9F4')}</div>
-    <p class="abs" style="left:70px;right:70px;top:190px;color:#FBF9F4;font:300 50px/1.1 M;letter-spacing:-.02em">Pause it. That's your<br>order tomorrow.</p>`;
-  const intro = await shoot(b, 'intro', `<div class="abs" style="inset:0;background:#352317"></div>
-    <div class="abs" style="left:80px;top:150px">${LOCK('#F3EFE6')}</div>
-    <div class="abs" style="left:80px;right:80px;top:560px;color:#F3EFE6">
-      <p class="label" style="color:#C9B49C">A little game</p>
-      <h1 class="h" style="font-size:150px;margin-top:30px">Stop<br>the reel.</h1>
-      <p style="font:300 52px/1.15 M;letter-spacing:-.02em;margin-top:44px">Whatever you land on is<br>your order tomorrow.</p>
-      <p class="ar" style="font-size:44px;margin-top:30px;color:#C9B49C;text-align:left">وقّف الريل… وده طلبك بكرة</p>
-    </div>`);
+  const INK = '#352317', PAPER = '#F3EFE6', MUTED = '#7A6A5C', SAND = '#C9B49C';
+  const head = `<div class="abs" style="left:0;right:0;top:0;height:330px;background:${PAPER}"></div>
+    <div class="abs" style="left:72px;right:72px;top:150px;display:flex;justify-content:space-between;align-items:baseline;color:${INK}">
+      <p class="h" style="font-size:58px">Stop the reel.</p><p class="ar" style="font-size:44px">وقّف الريل</p></div>
+    <p class="abs label" style="left:72px;top:250px;color:${MUTED}">Pause it. That's your order tomorrow.</p>`;
+  const intro = await shoot(b, 'intro', `<div class="abs" style="inset:0;background:${INK}"></div>
+    <div class="abs" style="left:80px;right:80px;top:640px;color:${PAPER}">
+      <h1 class="h" style="font-size:150px">Stop the reel.</h1>
+      <p class="h" style="font-size:52px;font-weight:400;margin-top:44px">Whatever you land on is your order tomorrow.</p>
+      <p class="ar" style="font-size:52px;margin-top:40px;color:${SAND}">وقّف الريل، وده طلبك بكرة</p>
+    </div>
+    <div class="abs" style="left:80px;bottom:150px;width:40px;height:40px">${CUP(SAND, 8)}</div>`);
   for (const [i, [f, name, line]] of items.entries()) {
-    frames.push(await shoot(b, 'item' + i, `<img class="abs" src="file://${SRC}/${f}.jpg" style="left:-468px;top:-48px;width:2016px;height:2016px;object-fit:cover">
+    frames.push(await shoot(b, 'item' + i, `<img class="abs" src="file://${SRC}/${f}.jpg" style="left:-468px;top:210px;width:2016px;height:2016px;object-fit:cover">
       ${head}
-      <div class="abs" style="left:0;right:0;bottom:0;height:700px;background:linear-gradient(0deg,rgba(20,13,8,.85),rgba(20,13,8,0))"></div>
-      <div class="abs" style="left:70px;right:70px;bottom:190px;color:#FBF9F4"><h2 class="h" style="font-size:112px">${name}</h2><p style="font:400 38px/1.3 I;margin-top:20px;opacity:.9">${line}</p></div>`));
+      <div class="abs" style="left:0;bottom:0;width:1080px;background:${PAPER};padding:46px 72px 140px">
+        <h2 class="h" style="font-size:92px;color:${INK}">${name}</h2><p class="t" style="margin-top:14px;color:${MUTED}">${line}</p></div>`));
   }
-  const outro = await shoot(b, 'outro', `<div class="abs" style="inset:0;background:#F3EFE6"></div>
-    <div class="abs" style="left:80px;top:150px">${LOCK('#352317')}</div>
-    <div class="abs" style="left:80px;right:80px;top:640px;color:#352317"><h1 class="h" style="font-size:140px">What did<br>you get?</h1>
-      <p style="font:300 50px/1.15 M;margin-top:40px;letter-spacing:-.02em">Tell us in the comments.<br>We'll have it ready.</p>
-      <p class="ar" style="font-size:44px;margin-top:30px;color:#7A6A5C;text-align:left">قولنا طلعلك إيه</p></div>`);
+  const outro = await shoot(b, 'outro', `<div class="abs" style="inset:0;background:${PAPER}"></div>
+    <div class="abs" style="left:80px;right:80px;top:640px;color:${INK}"><h1 class="h" style="font-size:140px">What did you get?</h1>
+      <p class="h" style="font-size:50px;font-weight:400;margin-top:40px">Tell us in the comments. We'll have it ready.</p>
+      <p class="ar" style="font-size:52px;margin-top:40px">قولنا طلعلك إيه</p></div>
+    <div class="abs" style="left:80px;bottom:150px;width:40px;height:40px">${CUP(MUTED, 8)}</div>`);
   await b.close();
 
   // timeline: intro 1.8 s, two passes through the menu (fast), outro 2.4 s
@@ -97,12 +99,12 @@ async function stopTheReel() {
 async function latte() {
   const vid = path.join(SRC, 'latte-pour.mp4'), wav = path.join(SRC, 'latte-pour.wav');
   const b = await chromium.launch();
-  const top = await shoot(b, 'latte-top', `<div class="abs" style="left:0;right:0;top:0;height:560px;background:linear-gradient(180deg,rgba(20,13,8,.6),rgba(20,13,8,0))"></div>
-    <div class="abs" style="left:70px;right:70px;top:130px;color:#FBF9F4;display:flex;justify-content:space-between;align-items:center"><p class="label">Watch closely</p>${LOCK('#FBF9F4')}</div>`, true);
-  const end = await shoot(b, 'latte-end', `<div class="abs" style="left:0;right:0;bottom:0;height:760px;background:linear-gradient(0deg,rgba(20,13,8,.82),rgba(20,13,8,0))"></div>
-    <div class="abs" style="left:70px;right:70px;bottom:190px;color:#FBF9F4"><h1 class="h" style="font-size:118px">Poured,<br>not printed.</h1>
-    <p style="font:400 36px/1.35 I;margin-top:22px;opacity:.9">Every cup at Refill is made by hand.</p>
-    <p class="ar" style="font-size:40px;margin-top:12px;opacity:.85;text-align:left">كل كوباية بتتعمل بالإيد</p></div>`, true);
+  const INK = '#352317', PAPER = '#F3EFE6', MUTED = '#7A6A5C';
+  const top = await shoot(b, 'latte-top', `<div class="abs" style="left:72px;right:72px;top:150px;display:flex;justify-content:space-between;align-items:baseline;color:${INK}">
+    <p class="label">Watch closely</p></div>`, true);
+  const end = await shoot(b, 'latte-end', `<div class="abs" style="left:0;right:0;bottom:0;background:${PAPER};padding:56px 72px 150px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;color:${INK}"><h1 class="h" style="font-size:96px">Poured, not printed.</h1></div>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:22px;gap:30px"><p class="t" style="color:${MUTED}">Every cup at Refill is made by hand.</p><p class="ar" style="font-size:42px;color:${INK}">كل كوباية بالإيد</p></div></div>`, true);
   await b.close();
   const dur = parseFloat(execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', vid]).toString());
   const hold = 2.6, total = dur + hold, t1 = dur - 0.6;
@@ -111,7 +113,7 @@ async function latte() {
     '-filter_complex',
     `[0:v]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,setsar=1,fps=30,tpad=stop_mode=clone:stop_duration=${hold}[v];` +
     `[1:v]format=rgba,fade=t=in:st=0.2:d=0.5:alpha=1,fade=t=out:st=${t1 - 0.8}:d=0.6:alpha=1[a];` +
-    `[2:v]format=rgba,fade=t=in:st=${t1}:d=0.7:alpha=1[b];` +
+    `[2:v]format=rgba,fade=t=in:st=${t1}:d=0.5:alpha=1[b];` +
     `[v][a]overlay=0:0:shortest=1[v1];[v1][b]overlay=0:0:shortest=1,format=yuv420p[vout];` +
     `[3:a]apad,atrim=0:${total},afade=t=out:st=${total - 1}:d=1[aout]`,
     '-map', '[vout]', '-map', '[aout]', '-t', String(total), '-c:v', 'libx264', '-crf', '18', '-preset', 'slow', '-c:a', 'aac', '-b:a', '160k', '-movflags', '+faststart', path.join(dir, 'our-logo-poured.mp4')]);
