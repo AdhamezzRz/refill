@@ -5,6 +5,7 @@
 - `out/<post>/NN.jpg`: the slides, 1080 × 1350 (Instagram 4:5); the story is 1080 × 1920. Post carousels in file order.
 - `out/19-our-logo-poured/our-logo-poured.mp4` and `out/20-stop-the-reel/stop-the-reel.mp4`: the reels (1080 × 1920, with sound).
 - `captions.md`: posting date, caption in English and Egyptian Arabic, and hashtags for every post.
+- Type and colour follow the REFILL identity (NAJ): Montserrat Bold capitals, a formal script for the voice, Alexandria for Arabic; brown `#653d26`, caramel `#c7ad91`, grey `#8e847e`, cream `#f2e9db`. The script here is Great Vibes (free, `tools/fonts/great-vibes.woff2`), standing in for the identity's licensed Vladimir Script: drop the licensed font into `tools/fonts/` and point the `S` font-face in `build.js` and `reels.js` at it.
 - `src/`: the Higgsfield images, generated to read as real photography (the room is inspired by the designer's renders, not copied from them).
 - `tools/reels.js`: assembles the two reels (`node campaign/04-december/tools/reels.js stop|latte`).
 - `tools/build.js`: the layout for every slide. Change copy there, then `node campaign/04-december/tools/build.js` (or add a prefix, e.g. `… build.js 08`, to rebuild one post).
