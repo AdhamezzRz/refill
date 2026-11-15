@@ -1,7 +1,7 @@
 # REFILL · December 2026 · posts and captions
 
 Dates assume opening on **Thursday 3 December**; move week 1 with the real date.
-Every slide is 1080 × 1350 (Instagram 4:5) in `out/<post>/`. Hashtags on every post:
+Every slide is 1080 × 1350 (Instagram 4:5) in `out/<post>/`; reels are 1080 × 1920. Hashtags on every post:
 `#RefillElShorouk #ElShorouk #NewCairo #SpecialtyCoffee`
 
 ---
@@ -100,3 +100,39 @@ Merry everything. Today every hot chocolate comes with a Refill note, baked into
 
 The last refill of 2026. Thank you for every cup this month. See you in 2027 with a full one. ✨
 آخر ريفيل في ٢٠٢٦… نشوفكم في ٢٠٢٧ بكوباية مليانة.
+
+---
+
+# The 5 new pieces (no faces, hands only)
+
+Drop them between the plan posts, roughly one every three or four days. Suggested dates below.
+
+## 16 · The receipt · Tue 8 Dec · static
+`out/16-the-receipt/`
+
+Your receipt from this morning. 🧾 Table 04 ordered a flat white, a croissant and a "five-minute" coffee that lasted three hours. What would be on yours?
+فاتورتك النهارده… إيه اللي كان هيبقى عليها؟
+
+## 17 · Anatomy of a croissant · Thu 10 Dec · carousel, 5 slides
+`out/17-anatomy-of-a-croissant/`
+
+We tore one open for science. Shattered crust, open honeycomb, thin buttery layers folded by hand over three days. By 11:00 there's usually nothing left, so save this and come early. 🥐
+فتحناها للعلم… تعالى بدري قبل ما تخلص.
+
+## 18 · Texts from your coffee · Wed 16 Dec · carousel, 4 slides
+`out/18-texts-from-your-coffee/`
+
+If your coffee could text you. 📱 Swipe for the full conversation, then send this to the friend who needs to hear it.
+لو القهوة بتاعتك بتبعتلك رسايل… ابعتها لصاحبك.
+
+## 19 · We poured our logo · Sun 13 Dec · reel (animation)
+`out/19-our-logo-poured/our-logo-poured.mp4` · cover `out/19-reel-cover-our-logo-poured/01.jpg`
+
+Watch closely. ☕ Poured, not printed: every cup at Refill is made by hand, including this one. Sound on.
+ركز كويس… كل كوباية بتتعمل بالإيد.
+
+## 20 · Stop the reel · Tue 22 Dec · reel (animation)
+`out/20-stop-the-reel/stop-the-reel.mp4` · cover `out/20-stop-the-reel/cover.png`
+
+Stop the reel. Whatever you land on is your order tomorrow. 👀 Screenshot it, tell us in the comments, and we'll have it ready.
+وقّف الريل… وده طلبك بكرة. قولنا طلعلك إيه.

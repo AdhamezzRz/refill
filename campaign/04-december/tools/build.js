@@ -22,6 +22,7 @@ const CUP_FILL = (k, ink, liquid, sw = 5) => {
 };
 const LOCK = (color) => `<div class="lock" style="color:${color}"><i>${CUP()}</i><span>REFILL</span></div>`;
 
+const GRAIN = `<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .45  0 0 0 0 .4  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(#n)'/></svg>`;
 const CSS = `
 @font-face{font-family:M;src:url(${FONTS}montserrat-latin.woff2) format('woff2');font-weight:200 700}
 @font-face{font-family:I;src:url(${FONTS}inter-latin.woff2) format('woff2');font-weight:400 600}
@@ -43,11 +44,12 @@ body{font-family:M;color:#352317;background:#F3EFE6;-webkit-font-smoothing:antia
 .shade-t{position:absolute;inset:0;background:linear-gradient(180deg,rgba(25,16,10,.55) 0%,rgba(25,16,10,0) 34%)}
 .white{color:#FBF9F4}
 .ink{color:#352317}
+.finish{position:absolute;inset:0;pointer-events:none;z-index:50;background:url("data:image/svg+xml;utf8,${encodeURIComponent(GRAIN)}"),radial-gradient(120% 90% at 50% 45%,rgba(0,0,0,0) 60%,rgba(30,18,10,.18) 100%);mix-blend-mode:multiply;opacity:.55}
 .pill{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:999px;font:500 17px/1 M;letter-spacing:.18em;text-transform:uppercase}
 `;
 
 const page = (w, h, body, extra = '') =>
-  `<!doctype html><html><head><meta charset="utf-8"><style>:root{--w:${w}px;--h:${h}px}${CSS}${extra}</style></head><body>${body}</body></html>`;
+  `<!doctype html><html><head><meta charset="utf-8"><style>:root{--w:${w}px;--h:${h}px}${CSS}${extra}</style></head><body>${body}<div class="finish"></div></body></html>`;
 
 /* ---------- posts ---------- */
 const posts = [];
@@ -72,7 +74,7 @@ const ticketCss = `
 .t-stub i{width:46px;height:46px;display:block;margin-top:8px}`;
 add('01-grand-opening', [
   { html: page(1080, 1350, `
-    <img class="full" src="${SRC}facade-night.jpg" style="object-position:50% 40%">
+    <div class="abs" style="inset:0;background:linear-gradient(180deg,#0559a8 0%,#0873d6 100%)"></div><img class="abs" src="${SRC}facade-night.jpg" style="left:0;top:230px;width:1080px;height:1341px;object-fit:cover;-webkit-mask:linear-gradient(180deg,transparent 0,#000 160px)">
     <div class="shade-t" style="background:linear-gradient(180deg,rgba(14,18,30,.62) 0%,rgba(14,18,30,0) 36%)"></div>
     <div class="abs white" style="left:70px;top:70px;right:70px;display:flex;justify-content:space-between">${LOCK('#FBF9F4')}<span class="label" style="font-size:17px">El Shorouk</span></div>
     <div class="abs white" style="left:70px;top:150px">
@@ -83,7 +85,7 @@ add('01-grand-opening', [
 ]);
 add('01-grand-opening-story', [
   { w: 1080, h: 1920, html: page(1080, 1920, `
-    <img class="full" src="${SRC}facade-night.jpg" style="object-position:50% 100%">
+    <div class="abs" style="inset:0;background:linear-gradient(180deg,#0559a8 0%,#0873d6 100%)"></div><img class="abs" src="${SRC}facade-night.jpg" style="left:-234px;top:330px;width:1548px;height:1922px;object-fit:cover;-webkit-mask:linear-gradient(180deg,transparent 0,#000 200px)">
     <div class="shade-t" style="background:linear-gradient(180deg,rgba(14,18,30,.7) 0%,rgba(14,18,30,0) 32%)"></div>
     <div class="abs white" style="left:80px;top:150px;right:80px">
       ${LOCK('#FBF9F4')}
@@ -137,7 +139,7 @@ add('02-save-us-on-maps', [
 /* 03 · Every relationship has a Refill story (panorama 1→2, then 3 stories) */
 const storyText = (n, q, sub, ar) => `
   <div class="shade-b"></div>
-  <div class="abs white" style="left:70px;top:70px;right:70px;display:flex;justify-content:space-between;align-items:center"><span class="label" style="font-size:17px">A Refill story · ${n}/05</span>${LOCK('#FBF9F4')}</div>
+  <div class="abs white" style="left:70px;top:70px;right:70px;display:flex;justify-content:space-between;align-items:center"><span class="label" style="font-size:17px">A Refill story</span>${LOCK('#FBF9F4')}</div>
   <div class="abs white" style="left:70px;right:70px;bottom:80px">
     <h2 class="h" style="font-size:66px;line-height:1.02">${q}</h2>
     <p style="font:400 26px/1.4 I;margin-top:22px;opacity:.9">${sub}</p>
@@ -156,7 +158,7 @@ add('03-refill-stories', [
     </div>
     <div class="abs swipe" style="left:70px;bottom:76px;color:#C9B49C">Swipe</div>
     <div class="shade-b" style="left:1080px;background:linear-gradient(0deg,rgba(25,16,10,.75) 0%,rgba(25,16,10,.25) 36%,rgba(25,16,10,0) 58%)"></div>
-    <div class="abs white" style="left:1150px;top:70px"><span class="label" style="font-size:17px">A Refill story · 02/05</span></div>
+    <div class="abs white" style="left:1150px;top:70px"><span class="label" style="font-size:17px">A Refill story</span></div>
     <div class="abs white" style="left:1150px;right:70px;bottom:80px">
       <h2 class="h" style="font-size:66px;line-height:1.02">“Just a quick coffee.”<br>Three hours later.</h2>
       <p style="font:400 26px/1.4 I;margin-top:22px;opacity:.9">For the friends who never run out of things to say.</p>
@@ -205,11 +207,11 @@ add('06-good-coffee-for-everyone', [
     </div>`) },
 ]);
 
+const cover = (sw, sh, W = 1080, H = 1350) => { const k = Math.max(W / sw, H / sh); return { k, ox: (W - sw * k) / 2, oy: (H - sh * k) / 2 }; };
 /* coaster artwork printed onto the blank coaster (multiply, so the board texture shows through) */
 const COASTER = { cx: 1226 / 1792, cy: 1574 / 2240, r: 418 / 1792 };
 const coasterPrint = (side, W = 1080, H = 1350) => {
-  // the photo is cropped with object-fit:cover from 1792×2240 (same 4:5), so coordinates scale directly
-  const s = W / 1792, cx = 1226 * s, cy = 1574 * s, r = 418 * s;
+  const m = cover(1856, 2304, W, H), cx = m.ox + 1354 * m.k, cy = m.oy + 1590 * m.k, r = 290 * m.k;
   const front = side === 'front';
   return `<div class="abs" style="left:${cx - r}px;top:${cy - r}px;width:${2 * r}px;height:${2 * r}px;border-radius:50%;display:grid;place-items:center;mix-blend-mode:multiply;color:#352317;transform:rotate(-8deg)">
     <div style="display:grid;justify-items:center;gap:${r * 0.1}px;opacity:.92">
@@ -232,22 +234,22 @@ add('07-teaser-flip-it', [
 add('08-the-winter-refill', [
   { html: page(1080, 1350, `
     <img class="full" src="${SRC}coaster-empty.jpg">${coasterPrint('front')}
-    <div class="abs" style="left:70px;top:70px;right:70px;display:flex;justify-content:space-between;align-items:center"><p class="label">The Winter Refill · 1/4</p>${LOCK('#352317')}</div>
+    <div class="abs" style="left:70px;top:70px;right:70px;display:flex;justify-content:space-between;align-items:center"><p class="label">The Winter Refill</p>${LOCK('#352317')}</div>
     <h1 class="abs h" style="right:70px;top:270px;font-size:92px;text-align:right">Finished<br>your hot<br>chocolate?</h1>
     <div class="abs swipe" style="right:70px;top:640px">Flip</div>`) },
   { html: page(1080, 1350, `
     <img class="full" src="${SRC}coaster-empty.jpg">${coasterPrint('back')}
-    <div class="abs" style="left:70px;top:70px;right:70px;display:flex;justify-content:space-between;align-items:center"><p class="label">The Winter Refill · 2/4</p>${LOCK('#352317')}</div>
+    <div class="abs" style="left:70px;top:70px;right:70px;display:flex;justify-content:space-between;align-items:center"><p class="label">The Winter Refill</p>${LOCK('#352317')}</div>
     <h1 class="abs h" style="right:70px;top:270px;font-size:92px;text-align:right">Flip the<br>coaster.</h1>
     <p class="abs ar" style="right:70px;top:500px;font-size:32px">اقلب الكوستر</p>`) },
   { html: page(1080, 1350, `
     <img class="full" src="${SRC}pour.jpg" style="object-position:50% 50%">
     <div class="shade-t"></div><div class="shade-b"></div>
-    <div class="abs white" style="left:70px;top:70px;right:70px;display:flex;justify-content:space-between;align-items:center"><p class="label">The Winter Refill · 3/4</p>${LOCK('#FBF9F4')}</div>
+    <div class="abs white" style="left:70px;top:70px;right:70px;display:flex;justify-content:space-between;align-items:center"><p class="label">The Winter Refill</p>${LOCK('#FBF9F4')}</div>
     <div class="abs white" style="left:70px;bottom:80px"><h1 class="h" style="font-size:100px">We bring<br>the pot.</h1><p class="ar" style="font-size:32px;margin-top:16px;text-align:left">وإحنا نملاها</p></div>`) },
   { html: page(1080, 1350, `
     <div class="abs" style="inset:0;background:#352317"></div>
-    <div class="abs" style="left:70px;top:70px;right:70px;display:flex;justify-content:space-between;align-items:center;color:#C9B49C"><p class="label">The Winter Refill · 4/4</p>${LOCK('#F3EFE6')}</div>
+    <div class="abs" style="left:70px;top:70px;right:70px;display:flex;justify-content:space-between;align-items:center;color:#C9B49C"><p class="label">The Winter Refill</p>${LOCK('#F3EFE6')}</div>
     <div class="abs" style="left:70px;right:70px;top:250px;color:#F3EFE6">
       <i style="display:block;width:150px;height:150px">${CUP_FILL(0.82, '#F3EFE6', '#8A5A3B', 5)}</i>
       <h1 class="h" style="font-size:118px;margin-top:60px">The Winter<br>Refill.</h1>
@@ -261,8 +263,8 @@ add('08-the-winter-refill', [
 
 /* 09 · The Winter Refill Pass: swipe = fill */
 const passFront = (W = 1080) => {
-  const s = W / 1792, x = 106 * s, y = 1446 * s, w = 880 * s, h = 530 * s;
-  return `<div class="abs" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;padding:${h * 0.11}px ${w * 0.07}px;display:grid;grid-template-rows:auto 1fr auto;color:#F1E7DA;mix-blend-mode:screen;opacity:.92">
+  const m = cover(1856, 2304, W, 1350), w = 880 * m.k, h = 580 * m.k, x = m.ox + 704 * m.k - w / 2, y = m.oy + 1638 * m.k - h / 2;
+  return `<div class="abs" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;padding:${h * 0.11}px ${w * 0.07}px;display:grid;grid-template-rows:auto 1fr auto;color:#F1E7DA;mix-blend-mode:screen;opacity:.9;transform:rotate(3.4deg)">
     <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:600 ${h * 0.06}px/1 M;letter-spacing:.5em">REFILL</span><i style="width:${h * 0.12}px;height:${h * 0.12}px;display:block">${CUP('#F1E7DA', 8)}</i></div>
     <p style="align-self:end;font:300 ${h * 0.15}px/1 M;letter-spacing:-.03em"><span style="display:block;font:500 ${h * 0.055}px/1 M;letter-spacing:.26em;color:#D8C2A6;margin-bottom:${h * 0.05}px">WINTER 2026 · NO. 0247</span>The Winter<br>Refill Pass</p>
     <div style="display:flex;justify-content:space-between;font:400 ${h * 0.055}px/1 I;color:#D8C2A6;margin-top:${h * 0.06}px"><span>Five cups to full.</span><span class="ar">خمس كوبايات وتتملي</span></div>
@@ -302,7 +304,7 @@ add('09-winter-refill-pass', [
 
 /* 10 · What's your coffee personality? */
 const persona = [
-  ['p-spanish', 'Spanish latte', 'Sweet talker. Always iced.', '62% 50%', 1.9],
+  ['p-spanish', 'Spanish latte', 'Sweet talker. Always iced.', '50% 50%', 1],
   ['p-caramel', 'Caramel latte', 'Main character. Extra drizzle.', '50% 50%', 1],
   ['p-cappuccino', 'Cappuccino', 'A classic. Owns one good coat.', '50% 50%', 1],
   ['p-flatwhite', 'Flat white', 'Quietly particular. Knows the bean.', '50% 50%', 1],
@@ -330,7 +332,7 @@ const ingSlide = (n, bg, cut, name, items, ar) => page(1080, 1350, `
   <div class="abs" style="left:50%;top:600px;transform:translate(-50%,-50%);width:560px;height:560px;border-radius:50%;background:#F3EFE6;box-shadow:0 30px 80px rgba(25,16,10,.4)"></div>
   <img class="abs" src="${cut}" style="left:50%;top:600px;transform:translate(-50%,-52%);width:${name === 'Butter croissant' ? 460 : 420}px;filter:drop-shadow(0 22px 22px rgba(53,35,23,.3))">
   <div class="abs" style="left:50%;top:930px;transform:translateX(-50%);text-align:center;width:520px;background:#F3EFE6;border-radius:24px;padding:26px 20px 24px;box-shadow:0 20px 50px rgba(25,16,10,.3)">
-    <p class="label" style="font-size:14px;color:#A39077">0${n}/05 · What’s inside</p>
+    <p class="label" style="font-size:14px;color:#A39077">What’s inside</p>
     <p style="font:400 40px/1.1 M;letter-spacing:-.02em;margin-top:10px">${name}</p>
     <p class="ar" style="font-size:24px;margin-top:6px;color:#7A6A5C">${ar}</p>
   </div>`);
@@ -338,7 +340,7 @@ add('11-what-can-you-order', [
   { html: page(1080, 1350, `
     <img class="full" src="${SRC}lineup.jpg" style="object-position:50% 60%">
     <div class="abs" style="left:0;right:0;top:0;height:520px;background:linear-gradient(180deg,rgba(243,239,230,.96) 0%,rgba(243,239,230,.8) 55%,rgba(243,239,230,0) 100%)"></div>
-    <div class="abs" style="left:70px;top:70px;right:70px;display:flex;justify-content:space-between;align-items:center"><p class="label" style="color:#A39077">The menu · 01/05</p>${LOCK('#352317')}</div>
+    <div class="abs" style="left:70px;top:70px;right:70px;display:flex;justify-content:space-between;align-items:center"><p class="label" style="color:#A39077">The menu</p>${LOCK('#352317')}</div>
     <h1 class="abs h" style="left:70px;top:160px;font-size:92px">What can you<br>order at Refill?</h1>
     <p class="abs ar" style="left:70px;top:370px;font-size:30px;color:#7A6A5C">تطلب إيه من ريفيل؟</p>
     <div class="abs swipe white" style="right:70px;bottom:76px;text-shadow:0 2px 10px rgba(0,0,0,.3)">Swipe</div>`) },
@@ -346,7 +348,7 @@ add('11-what-can-you-order', [
   { html: ingSlide(3, 'ing-hotchoc', SRC + 'cut-hotchoc.webp', 'Hot chocolate', ['Dark chocolate', 'Milk', 'Whipped cream', 'Cocoa powder'], 'هوت شوكليت') },
   { html: ingSlide(4, 'ing-croissant', SRC + 'cut-croissant.webp', 'Butter croissant', ['Flour', 'French butter', 'Milk', 'Yeast'], 'كرواسون بالزبدة') },
   { html: page(1080, 1350, `
-    <div class="abs" style="left:70px;top:70px;right:70px;display:flex;justify-content:space-between;align-items:center"><p class="label" style="color:#A39077">The menu · 05/05</p>${LOCK('#352317')}</div>
+    <div class="abs" style="left:70px;top:70px;right:70px;display:flex;justify-content:space-between;align-items:center"><p class="label" style="color:#A39077">The menu</p>${LOCK('#352317')}</div>
     <h1 class="abs h" style="left:70px;top:200px;font-size:110px">And a lot<br>more.</h1>
     <p class="abs ar" style="left:70px;top:450px;font-size:32px;color:#7A6A5C">ولسه في كتير</p>
     <div class="abs" style="left:40px;right:40px;top:560px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
@@ -358,14 +360,14 @@ add('11-what-can-you-order', [
 /* 12 · The longest night (21 December) */
 add('12-longest-night', [
   { html: page(1080, 1350, `
-    <img class="full" src="${SRC}night-bar.jpg" style="object-position:22% 50%">
+    <img class="full" src="${SRC}night-bar.jpg">
     <div class="shade-t" style="background:linear-gradient(180deg,rgba(10,10,20,.66) 0%,rgba(10,10,20,0) 40%)"></div><div class="shade-b" style="background:linear-gradient(0deg,rgba(18,11,7,.92) 0%,rgba(18,11,7,.6) 34%,rgba(18,11,7,0) 58%)"></div>
     <div class="abs white" style="left:70px;top:70px;right:70px;display:flex;justify-content:space-between;align-items:center"><p class="label">Monday 21 December</p>${LOCK('#FBF9F4')}</div>
     <h1 class="abs h white" style="left:70px;top:170px;font-size:92px">The longest night<br>of the year.</h1>
-    <div class="abs white" style="left:500px;right:70px;bottom:80px;text-align:right">
+    <div class="abs white" style="left:70px;right:70px;bottom:80px">
       <p style="font:300 60px/1.05 M;letter-spacing:-.03em">Deserves the<br>longest refill.</p>
       <p style="font:400 24px/1.45 I;margin-top:22px;opacity:.9">Hot chocolate refills all evening, from sunset to close.</p>
-      <p class="ar" style="font-size:28px;margin-top:10px;opacity:.85;text-align:right">أطول ليلة في السنة… وأطول ريفيل</p>
+      <p class="ar" style="font-size:28px;margin-top:10px;opacity:.85;text-align:left">أطول ليلة في السنة… وأطول ريفيل</p>
     </div>`) },
 ]);
 
@@ -424,6 +426,119 @@ add('15-last-refill-of-2026', [
       <p style="font:400 26px/1.45 I;margin-top:22px;opacity:.92">See you in 2027 with a full cup.</p>
       <p class="ar" style="font-size:30px;margin-top:10px;opacity:.85;text-align:left">آخر ريفيل في ٢٠٢٦… نشوفكم في ٢٠٢٧ بكوباية مليانة</p>
     </div>`) },
+]);
+
+
+/* =====================================================================
+   NEW · five pieces with no faces (hands at most)
+   ===================================================================== */
+const TOOLFONTS = 'file://' + path.join(__dirname, 'fonts') + '/';
+const MONO = `@font-face{font-family:C;src:url(${TOOLFONTS}courier-prime-1.woff2) format('woff2');font-weight:400}
+@font-face{font-family:C;src:url(${TOOLFONTS}courier-prime-2.woff2) format('woff2');font-weight:700}`;
+
+/* 16 · The receipt: a real thermal receipt in a real hand */
+const rcpt = (l, r = '', b = false) => `<div class="rr${b ? ' b' : ''}"><span>${l}</span><span>${r}</span></div>`;
+const receiptCss = MONO + `
+.rc{position:absolute;font:400 18px/1.5 C;color:#262321;mix-blend-mode:multiply;opacity:.9;filter:blur(.25px);letter-spacing:.02em}
+.rr{display:flex;justify-content:space-between;gap:10px}.rr.b{font-weight:700}
+.rc hr{border:0;border-top:2px dashed #262321;margin:10px 0;opacity:.75}
+.rc .c{text-align:center}
+.bars{height:46px;margin:14px 10px 0;background:repeating-linear-gradient(90deg,#262321 0 2px,transparent 2px 4px,#262321 4px 7px,transparent 7px 9px,#262321 9px 10px,transparent 10px 14px)}`;
+{
+  const m = cover(1856, 2304), z = 1.6, k = m.k * z;
+  const left = 540 - 930 * k, top = 60 - 420 * k;
+  const rx = 516 - 175, rw = 350;
+  add('16-the-receipt', [
+    { html: page(1080, 1350, `
+      <img class="abs" src="${SRC}receipt-hand.jpg" style="left:${left}px;top:${top}px;width:${1856 * k}px;height:${2304 * k}px">
+      <div class="rc" style="left:${rx}px;top:215px;width:${rw}px;transform:rotate(.7deg)">
+        <div class="c"><i style="display:inline-block;width:40px;height:40px">${CUP('#262321', 8)}</i></div>
+        <p class="c" style="font-weight:700;letter-spacing:.5em;margin:6px 0 0 .5em">REFILL</p>
+        <p class="c" style="font-size:15px">SPECIALTY COFFEE · EL SHOROUK</p>
+        <hr>${rcpt('TABLE 04', 'SAT 08:41')}${rcpt('ORDER', '#0001')}<hr>
+        ${rcpt('1 FLAT WHITE', '135')}${rcpt('1 BUTTER CROISSANT', '95')}${rcpt('1 WINDOW SEAT', 'FREE')}
+        ${rcpt('1 "JUST 5 MINUTES"', '3 HRS')}${rcpt('1 BAD MOOD', 'REMOVED')}${rcpt('1 REFILL', 'YES')}<hr>
+        ${rcpt('TOTAL', '230 EGP', true)}${rcpt('CHANGE', 'A BETTER DAY')}<hr>
+        <p class="c">THANK YOU. COME BACK HUNGRY.</p>
+        <p class="c ar" style="font-family:A;font-size:20px;direction:rtl">شكراً… ونورتنا</p>
+        <div class="bars"></div>
+      </div>`, receiptCss) },
+  ]);
+}
+
+/* 17 · Anatomy of a butter croissant */
+const callout = (x, y, lx, ly, title, sub, align = 'left') => `
+  <svg class="abs" style="left:0;top:0;z-index:3" width="1080" height="1350"><g fill="none" stroke="#FBF9F4" stroke-width="2"><path d="M${lx} ${ly + 16} L${lx} ${ly + 40} L${x} ${y}"/></g><circle cx="${x}" cy="${y}" r="7" fill="#FBF9F4"/><circle cx="${x}" cy="${y}" r="14" fill="none" stroke="#FBF9F4" stroke-width="1.5" opacity=".6"/></svg>
+  <div class="abs white" style="${align === 'left' ? 'left' : 'right'}:${align === 'left' ? lx - 4 : 1080 - lx - 4}px;top:${ly - 74}px;text-align:${align};z-index:4;width:260px">
+    <p style="font:500 24px/1.15 M">${title}</p><p style="font:400 17px/1.35 I;opacity:.8;margin-top:4px">${sub}</p></div>`;
+add('17-anatomy-of-a-croissant', [
+  { html: page(1080, 1350, `
+    <img class="full" src="${SRC}croissant-tear.jpg">
+    <div class="shade-t"></div><div class="shade-b"></div>
+    <div class="abs white" style="left:70px;top:70px;right:70px;display:flex;justify-content:space-between;align-items:center"><p class="label">Anatomy of a croissant</p>${LOCK('#FBF9F4')}</div>
+    <div class="abs white" style="left:70px;right:70px;bottom:80px"><h1 class="h" style="font-size:104px">We tore one open.<br>For science.</h1><p class="ar" style="font-size:30px;margin-top:16px;text-align:left">فتحناها… للعلم</p></div>`) },
+  { html: page(1080, 1350, `
+    <img class="full" src="${SRC}croissant-cut.jpg" style="transform:scale(1.04)">
+    <div class="abs" style="left:0;right:0;top:0;height:380px;background:linear-gradient(180deg,rgba(28,18,11,.75),rgba(28,18,11,0))"></div>
+    <div class="abs white" style="left:70px;top:70px;right:70px;display:flex;justify-content:space-between;align-items:center"><p class="label">Butter croissant, cross-section</p>${LOCK('#FBF9F4')}</div>
+    ${callout(330, 560, 90, 300, 'Shattered crust', 'Deep gold, glossy, loud.')}
+    ${callout(470, 790, 380, 300, 'Open honeycomb', 'Air where the butter melted.')}
+    ${callout(800, 700, 990, 300, 'Thin buttery layers', 'Folded by hand, not by machine.', 'right')}
+    <div class="abs white" style="left:70px;bottom:70px;right:70px;display:flex;justify-content:space-between;align-items:end">
+      <p style="font:300 44px/1.08 M;letter-spacing:-.02em">Three days<br>from dough to oven.</p><p class="label" style="font-size:16px;opacity:.85">Crumbs included</p></div>`) },
+  { html: page(1080, 1350, `
+    <img class="abs" src="${SRC}croissant-lamination.jpg" style="left:0;top:0;width:1080px;height:960px;object-fit:cover;object-position:50% 40%">
+    <div class="abs" style="left:0;right:0;bottom:0;height:390px;background:#F3EFE6;padding:54px 70px 0">
+      <div style="display:flex;justify-content:space-between;align-items:center"><p class="label" style="color:#A39077">How it's made</p>${LOCK('#352317')}</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:34px">
+        ${[['Day 1', 'The dough is mixed and rests overnight.'], ['Day 2', 'Cold butter is folded in by hand, three turns.'], ['Day 3', 'Shaped, proofed and baked at dawn.']].map(([d, t]) => `<div style="border-top:1.5px solid #352317;padding-top:16px"><p style="font:300 46px/1 M;letter-spacing:-.03em">${d}</p><p style="font:400 20px/1.4 I;color:#7A6A5C;margin-top:12px">${t}</p></div>`).join('')}
+      </div></div>`) },
+  { html: page(1080, 1350, `
+    <img class="full" src="${SRC}croissant-tray.jpg">
+    <div class="abs" style="left:0;right:0;bottom:0;height:520px;background:linear-gradient(0deg,rgba(28,18,11,.82),rgba(28,18,11,0))"></div>
+    <div class="abs white" style="left:70px;top:70px">${LOCK('#FBF9F4')}</div>
+    <div class="abs white" style="left:70px;right:70px;bottom:80px"><p class="label" style="opacity:.85">11:00 at the bakehouse</p><h1 class="h" style="font-size:88px;margin-top:18px">This is usually<br>all that's left.</h1><p class="ar" style="font-size:30px;margin-top:16px;text-align:left">الساعة ١١… ده اللي بيفضل</p></div>`) },
+  { html: page(1080, 1350, `
+    <div class="abs" style="left:70px;top:70px;right:70px;display:flex;justify-content:space-between;align-items:center"><p class="label" style="color:#A39077">Butter croissant</p>${LOCK('#352317')}</div>
+    <img class="abs" src="${MENU}croissant.webp" style="left:50%;top:150px;transform:translateX(-50%) rotate(-8deg);width:700px;filter:drop-shadow(0 30px 30px rgba(53,35,23,.28))">
+    <div class="abs" style="left:70px;right:70px;bottom:70px">
+      <h1 class="h" style="font-size:110px">Come early.</h1>
+      <p style="font:400 26px/1.45 I;color:#7A6A5C;margin-top:18px">Out of the oven at 07:00 and again at 19:00. Save this for your next visit.</p>
+      <p class="ar" style="font-size:30px;margin-top:10px;color:#7A6A5C;text-align:left">تعالى بدري… واحفظ البوست</p>
+    </div>`) },
+]);
+
+/* 18 · Notifications from your coffee (lock screen) */
+const lockCss = `
+.ls-date{font:500 30px/1 I;color:#FBF9F4;text-align:center;letter-spacing:.01em;text-shadow:0 2px 20px rgba(0,0,0,.25)}
+.ls-time{font:600 190px/1 I;color:#FBF9F4;text-align:center;letter-spacing:-.04em;margin-top:6px;text-shadow:0 4px 30px rgba(0,0,0,.25)}
+.nt{background:rgba(246,241,233,.62);-webkit-backdrop-filter:blur(28px) saturate(1.4);backdrop-filter:blur(28px) saturate(1.4);border-radius:34px;padding:22px 26px;display:grid;grid-template-columns:74px 1fr;gap:18px;align-items:center;box-shadow:0 10px 40px rgba(0,0,0,.12)}
+.nt + .nt{margin-top:12px}
+.nt .ic{width:74px;height:74px;border-radius:18px;background:#352317;display:grid;place-items:center}
+.nt .ic i{width:42px;height:42px;display:block}
+.nt .hd{display:flex;justify-content:space-between;font:600 24px/1.2 I;color:#1d1813}
+.nt .hd span{font-weight:400;color:#5a5048}
+.nt .bd{font:400 25px/1.32 I;color:#1d1813;margin-top:4px}`;
+const notif = (when, body) => `<div class="nt"><div class="ic"><i>${CUP('#F3EFE6', 9)}</i></div><div><div class="hd">Refill<span>${when}</span></div><div class="bd">${body}</div></div></div>`;
+const lock = (img, date, time, notes, top = 470, tint = .25, z = 1) => page(1080, 1350, `
+  <img class="full" src="${SRC}${img}.jpg" style="transform:scale(${z})">
+  <div class="abs" style="inset:0;background:linear-gradient(180deg,rgba(0,0,0,${tint}) 0%,rgba(0,0,0,0) 40%)"></div>
+  <div class="abs" style="left:0;right:0;top:110px"><p class="ls-date">${date}</p><p class="ls-time">${time}</p></div>
+  <div class="abs" style="left:50px;right:50px;top:${top}px">${notes}</div>
+  <div class="abs" style="left:50%;bottom:26px;transform:translateX(-50%);width:200px;height:7px;border-radius:7px;background:rgba(251,249,244,.85)"></div>`, lockCss);
+add('18-texts-from-your-coffee', [
+  { html: lock('notif-sunrise', 'Monday 7 December', '07:02', notif('now', 'Good morning. I’m warm and ready when you are ☕') + notif('1m ago', 'P.S. the croissants just came out.'), 470, .35) },
+  { html: lock('notif-empty', 'Wednesday 16 December', '15:10', notif('now', 'You left me empty 3 hours ago.') + notif('now', 'Flip the coaster. I’ll get refilled 🤎'), 430, .2) },
+  { html: lock('notif-rain', 'Thursday 17 December', '17:48', notif('now', 'It’s raining. You know what that means.') + notif('now', 'Hot chocolate refills, all winter.'), 470, .25, 1.06) },
+  { html: lock('notif-night', 'Sunday 20 December', '23:31', notif('now', 'Last refill of the day in 29 minutes.') + notif('now', 'Not that I’m counting.'), 470, .1) },
+]);
+
+/* 19 · Cover for the latte-art reel */
+add('19-reel-cover-our-logo-poured', [
+  { html: page(1080, 1350, `
+    <img class="full" src="${SRC}latte-logo.jpg" style="object-position:50% 50%">
+    <div class="shade-t"></div>
+    <div class="abs white" style="left:70px;top:70px;right:70px"><p class="label">Watch closely</p><h1 class="h" style="font-size:84px;margin-top:16px">We poured<br>our logo.</h1></div>`) },
 ]);
 
 /* ---------- render ---------- */

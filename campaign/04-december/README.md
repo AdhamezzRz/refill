@@ -1,10 +1,12 @@
 # REFILL · December 2026 posts and carousels
 
-15 posts (38 slides) for the December content plan and the Winter Refill campaign, ready to post.
+21 pieces for the December content plan and the Winter Refill campaign, ready to post: the plan's posts and carousels plus 5 new ones (no faces, hands only), two of them animated reels.
 
 - `out/<post>/NN.jpg`: the slides, 1080 × 1350 (Instagram 4:5); the story is 1080 × 1920. Post carousels in file order.
+- `out/19-our-logo-poured/our-logo-poured.mp4` and `out/20-stop-the-reel/stop-the-reel.mp4`: the reels (1080 × 1920, with sound).
 - `captions.md`: posting date, caption in English and Egyptian Arabic, and hashtags for every post.
 - `src/`: the Higgsfield images (made from the designer's renders, so the room matches the real café).
+- `tools/reels.js`: assembles the two reels (`node campaign/04-december/tools/reels.js stop|latte`).
 - `tools/build.js`: the layout for every slide. Change copy there, then `node campaign/04-december/tools/build.js` (or add a prefix, e.g. `… build.js 08`, to rebuild one post).
 
 | Date | Post | Format |
@@ -24,6 +26,11 @@
 | Thu 24 Dec | 13 The Hot Chocolate Atelier | Static |
 | Fri 25 Dec | 14 Refill notes | Carousel · 6 |
 | Thu 31 Dec | 15 The last refill of 2026 | Static |
+| Tue 8 Dec | 16 The receipt · new | Static |
+| Thu 10 Dec | 17 Anatomy of a croissant · new | Carousel · 5 |
+| Sun 13 Dec | 19 We poured our logo · new | Reel (animation) |
+| Wed 16 Dec | 18 Texts from your coffee · new | Carousel · 4 |
+| Tue 22 Dec | 20 Stop the reel · new | Reel (animation) |
 
 Not included (need the real team on camera): Post 1 "Now open" video and Post 10 barista video.
 
