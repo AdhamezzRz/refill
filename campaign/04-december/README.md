@@ -5,7 +5,7 @@
 - `out/<post>/NN.jpg`: the slides, 1080 × 1350 (Instagram 4:5); the story is 1080 × 1920. Post carousels in file order.
 - `out/19-our-logo-poured/our-logo-poured.mp4` and `out/20-stop-the-reel/stop-the-reel.mp4`: the reels (1080 × 1920, with sound).
 - `captions.md`: posting date, caption in English and Egyptian Arabic, and hashtags for every post.
-- `src/`: the Higgsfield images (made from the designer's renders, so the room matches the real café).
+- `src/`: the Higgsfield images, generated to read as real photography (the room is inspired by the designer's renders, not copied from them).
 - `tools/reels.js`: assembles the two reels (`node campaign/04-december/tools/reels.js stop|latte`).
 - `tools/build.js`: the layout for every slide. Change copy there, then `node campaign/04-december/tools/build.js` (or add a prefix, e.g. `… build.js 08`, to rebuild one post).
 
