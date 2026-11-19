@@ -154,7 +154,7 @@
     }
     var tuck = y > (hero ? hero.offsetHeight : 300) && y > lastY + 2 && !document.body.classList.contains('index-open');
     if (y < lastY - 2 || y < 120) tuck = false;
-    if (Math.abs(y - lastY) > 2) top.classList.toggle('is-tucked', tuck);
+    if (Math.abs(y - lastY) > 2) { top.classList.toggle('is-tucked', tuck); document.body.classList.toggle('top-tucked', tuck); }
     lastY = y;
   }
   paintTop();
@@ -227,15 +227,15 @@
   /* ---------- counter rail (home) ---------- */
   var rail = $('.js-rail');
   if (rail && window.MENU) {
-    var pick = ['butter-croissant', 'plaster', 'pistachio-cruffin', 'flat-white', 'cardamom-knot', 'shorouk', 'basque-cheesecake', 'v60', 'zaatar-twist', 'karkade', 'sourdough', 'ahwa'];
+    var pick = ['croissant', 'salted-vanilla', 'san-sebastian', 'spanish-latte', 'french-toast', 'honey-matcha', 'mojito', 'fudge', 'v60', 'caesar', 'hot-chocolate', 'salmon-croissant'];
     var all = {};
     window.MENU.sections.forEach(function (s) { s.groups.forEach(function (g) { g.items.forEach(function (it) { all[it.id] = it; }); }); });
     rail.innerHTML = pick.filter(function (id) { return all[id]; }).map(function (id) {
       var it = all[id], sig = (it.tags || []).indexOf('sig') > -1;
       return '<a class="ci" href="/menu#i-' + id + '" draggable="false">' +
         '<div class="ci__plate">' + (sig ? '<span class="ci__tag">Signature</span>' : '') +
-        '<img src="/assets/menu/' + it.img + '.webp" alt="' + it.name + '" loading="lazy" width="900" height="900" draggable="false"></div>' +
-        '<div class="ci__row"><span class="ci__name">' + it.name + '</span><span class="ci__price">' + (Array.isArray(it.price) ? it.price.filter(function (p) { return p != null; })[0] : it.price) + ' EGP</span></div>' +
+        '<img src="/assets/menu/' + (it.img || it.iced || (it.options && it.options[0][1])) + '.webp" alt="' + it.real + '" loading="lazy" width="900" height="900" draggable="false"></div>' +
+        '<div class="ci__row"><span class="ci__name">' + it.name + '</span><span class="ci__price">' + (it.price != null ? (Array.isArray(it.price) ? it.price.filter(function (p) { return p != null; })[0] : it.price) + ' EGP' : it.real) + '</span></div>' +
         '<p class="ci__desc">' + it.desc + '</p></a>';
     }).join('');
     var prev = $('.js-rail-prev'), next = $('.js-rail-next');

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Menu · REFILL</title>
-<meta name="description" content="Coffee, bakehouse and kitchen menu at Refill, El Shorouk.">
+<meta name="description" content="The Refill menu: coffee, matcha, cold drinks, croissants, cakes, omelettes, salads and sandwiches in El Shorouk.">
 <meta name="theme-color" content="#F3EFE6">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -46,10 +46,10 @@
 <div class="index js-index" id="index" hidden>
   <nav class="index__nav" aria-label="Index">
     <a href="#coffee"><span>01</span>Coffee</a>
-    <a href="#bakehouse"><span>02</span>Bakehouse</a>
-    <a href="#kitchen"><span>03</span>Kitchen</a>
-    <a href="/"><span>04</span>Home</a>
-    <a href="/#visit"><span>05</span>Visit</a>
+    <a href="#not-coffee"><span>02</span>Not coffee</a>
+    <a href="#bakehouse"><span>03</span>Bakehouse</a>
+    <a href="#kitchen"><span>04</span>Kitchen</a>
+    <a href="/"><span>05</span>Home</a>
   </nav>
   <div class="index__foot">
     <p>El Shorouk, New Cairo<br>Every day, 07:00 to 00:00</p>
@@ -65,29 +65,43 @@
         <h1 class="mn-hero__title"><span class="ln"><span>The menu</span></span></h1>
       </div>
       <div class="mn-hero__side">
-        <p class="mn-hero__lede">Prices in Egyptian pounds, VAT included. Tap anything to see it up close.</p>
+        <p class="mn-hero__lede">Every drink and dish has a house name. The plain name, in English and Arabic, sits right under it, so you always know what you are ordering.</p>
         <p class="table-pill js-table" hidden></p>
       </div>
     </div>
 
     <nav class="toc js-toc" aria-label="Contents"></nav>
 
-    <div class="diet" role="group" aria-label="Dietary filter">
-      <span class="label">Show</span>
-      <button class="chip is-on" type="button" data-diet="">Everything</button>
-      <button class="chip" type="button" data-diet="v">Vegetarian</button>
-      <button class="chip" type="button" data-diet="vg">Vegan</button>
-      <button class="chip" type="button" data-diet="nf">Nut-free</button>
-      <span class="diet__count js-diet-count" aria-live="polite"></span>
+    <div class="mn-tools">
+      <div class="mn-tools__temp">
+        <div class="temp" role="radiogroup" aria-label="Show drinks served">
+          <i class="temp__thumb" aria-hidden="true"></i>
+          <button type="button" class="is-on" role="radio" aria-checked="true" data-temp-set="all">All</button>
+          <button type="button" role="radio" aria-checked="false" data-temp-set="hot">Hot</button>
+          <button type="button" role="radio" aria-checked="false" data-temp-set="iced">Iced</button>
+        </div>
+        <p class="mn-tools__line js-temp-line" aria-live="polite">Everything, hot and iced.</p>
+      </div>
+      <button class="spinbtn js-spin-open" type="button">
+        <span class="spinbtn__cup" aria-hidden="true"><i></i></span>
+        <span><b>Can’t decide?</b> Stop the reel and we’ll choose for you.</span>
+      </button>
     </div>
   </section>
 
   <nav class="tabs js-tabs" aria-label="Menu sections">
     <div class="tabs__in">
       <a href="#coffee" data-tab="coffee"><span>01</span>Coffee</a>
-      <a href="#bakehouse" data-tab="bakehouse"><span>02</span>Bakehouse</a>
-      <a href="#kitchen" data-tab="kitchen"><span>03</span>Kitchen</a>
+      <a href="#not-coffee" data-tab="not-coffee"><span>02</span>Not coffee</a>
+      <a href="#bakehouse" data-tab="bakehouse"><span>03</span>Bakehouse</a>
+      <a href="#kitchen" data-tab="kitchen"><span>04</span>Kitchen</a>
       <span class="tabs__ink js-ink" aria-hidden="true"></span>
+      <div class="temp temp--bar" role="radiogroup" aria-label="Show drinks served">
+        <i class="temp__thumb" aria-hidden="true"></i>
+        <button type="button" class="is-on" role="radio" aria-checked="true" data-temp-set="all">All</button>
+        <button type="button" role="radio" aria-checked="false" data-temp-set="hot">Hot</button>
+        <button type="button" role="radio" aria-checked="false" data-temp-set="iced">Iced</button>
+      </div>
     </div>
     <div class="subs js-subs" aria-label="Categories"></div>
   </nav>
@@ -100,6 +114,7 @@
         <div class="stage__meta">
           <p class="stage__kicker js-stage-kicker"></p>
           <h3 class="stage__name js-stage-name"></h3>
+          <p class="stage__real js-stage-real"></p>
           <p class="stage__notes js-stage-notes"></p>
         </div>
       </div>
@@ -108,7 +123,7 @@
 
   <section class="mn-foot">
     <div class="legend js-legend"></div>
-    <p>Allergies or preferences? Tell us at the bar and we will take care of you. Oat, almond and lactose-free milk at no extra cost.</p>
+    <p>Allergies or preferences? Tell us at the bar and we will take care of you.</p>
     <p class="ar" lang="ar" dir="rtl">عندك حساسية من أي حاجة؟ قول لنا وإحنا نتصرف.</p>
   </section>
 </main>
@@ -122,12 +137,29 @@
     <div class="sheet__body">
       <p class="label js-sheet-kicker"></p>
       <div class="sheet__row"><h3 id="sheetName" class="js-sheet-name"></h3><span class="sheet__price js-sheet-price"></span></div>
+      <p class="sheet__real js-sheet-real"></p>
       <p class="js-sheet-desc"></p>
-      <p class="sheet__notes js-sheet-notes"></p>
-      <div class="sheet__tags js-sheet-tags"></div>
+      <div class="sheet__opts js-sheet-opts"></div>
       <button class="sheet__pair js-sheet-pair" type="button" hidden></button>
     </div>
   </article>
+</div>
+
+<div class="spin js-spin" hidden>
+  <div class="spin__scrim js-spin-close"></div>
+  <div class="spin__card" role="dialog" aria-modal="true" aria-label="Can’t decide? We choose for you">
+    <button class="sheet__close js-spin-close" type="button" aria-label="Close">×</button>
+    <p class="label spin__kicker">Stop the reel <span class="ar" lang="ar" dir="rtl">وقّف الريل</span></p>
+    <div class="spin__cup cupf js-spin-cup"><img class="js-spin-img" alt=""></div>
+    <p class="spin__hint">Your order is</p>
+    <h3 class="spin__name js-spin-name"></h3>
+    <p class="spin__real js-spin-real"></p>
+    <button class="btn spin__stop js-spin-stop" type="button">Stop</button>
+    <div class="spin__done js-spin-done" hidden>
+      <button class="btn js-spin-go" type="button">Show me</button>
+      <button class="btn btn--ghost js-spin-again" type="button">Spin again</button>
+    </div>
+  </div>
 </div>
 
 <footer class="foot">

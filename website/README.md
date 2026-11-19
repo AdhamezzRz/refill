@@ -8,10 +8,10 @@ on the rack."). The rest of the site is quiet: plaster, hairlines, one idea per 
 
 - **Home** (`/`): the day, a short statement, the day in three acts (coffee, bakehouse, pizza
   soon), a swipeable "On the counter today", the room, and visit details.
-- **Menu** (`/menu`): the full demo menu. Desktop: point at an item and it appears on an arch to the
-  right. Phone: tap an item and a sheet slides up with the photo, tasting notes and a pairing
-  suggestion. It also has this week's beans with a roast scale, and a live "out of the oven" bake
-  schedule.
+- **Menu** (`/menu`): the real Refill menu (73 items), each with a house name, the plain name and the
+  Arabic name, and its own photo. Desktop: point at an item and it is served in the Refill cup on the
+  right. Phone: tap an item and a sheet slides up. A Hot / Iced switch re-pours every drink, flavour
+  chips swap the photo, and "Can't decide?" spins through the menu until you tap Stop.
 - **Rate** (`/rate`): the page behind the rating QR code. Five arch "cups" to fill.
 - `docs/walkthrough-phone.mp4`, `docs/walkthrough-desktop.mp4`: recordings of the real site.
 - Zero dependencies. Plain Node `http` server, nothing to install, no build step.
@@ -49,26 +49,33 @@ Needs a Business or Cloud hosting plan. Steps follow Hostinger's own docs
 
 The server listens on `process.env.PORT` and `0.0.0.0`, as Hostinger requires.
 
-## The menu (demo content)
+## The menu
 
-The menu is set like a printed restaurant menu: a contents page, three numbered sections (01 Coffee,
-02 Bakehouse, 03 Kitchen), numbered categories (1.1 Espresso bar, 1.2 Signatures …), dotted leaders,
-price columns where it matters (Hot / Iced, Half / Whole, Slice / Whole), an "Add" line for extras,
-dietary tags and a filter (Vegetarian, Vegan, Nut-free). A sticky bar keeps the section and category
-in view while you scroll.
+Four numbered sections (01 Coffee, 02 Not coffee, 03 Bakehouse, 04 Kitchen, with a pizza "coming soon"
+card), numbered categories, and a sticky bar that keeps the section and category in view.
 
-Everything comes from one file: **`public/js/menu-data.js`**. The names, prices, descriptions, beans
-and bake times in it are **placeholders**. Replace them with the real menu before launch.
+Every item has a **house name** (`name`, e.g. "Quietly Particular") and right under it the **plain
+name** people order by (`real`, "Flat white") and the Arabic (`ar`, "فلات وايت"), so the menu is
+playful but never confusing. Some names tie in with the December posts (Sweet Talker, Main
+Character, Soft Heart, Unbothered).
 
-- A category can have `cols: ['Hot', 'Iced']`; its items then take a price list in the same order,
-  for example `price: [140, 150]`, or `[null, 120]` when there is no hot version.
-- Without `cols`, `price` is a single number.
-- `extras: [['Extra shot', 25], ['Plant milk', 0]]` prints the "Add" line (0 shows as "free").
-- Each item can have `img` (a cut-out in `public/assets/menu/`), `notes` ("tastes like"), `pairs`
-  (id of another item), and `tags`: `sig` signature, `v` vegetarian, `vg` vegan, `n` contains nuts,
-  `new`, `soon` (not served yet).
+Everything comes from one file: **`public/js/menu-data.js`**. The items are from the café's menu
+sheet; the house names and short descriptions were written for the site, so check them with the bar
+and the kitchen.
 
-To add a photo, put a transparent PNG/WebP in `source/menu/` and run `bash tools/build-media.sh`.
+- `serve: ['hot', 'iced']` prints Hot / Iced and drives the switch. `img` is the hot photo, `iced` the
+  iced one; when the menu is set to Iced, drinks with an `iced` photo swap to it and hot-only drinks
+  step back.
+- `options: [['Cheese', 'croissant-cheese'], …]` prints flavour chips; tapping one swaps the photo.
+- **Prices:** none yet. Add `price: 95` to an item and prices appear everywhere (list, stage, sheet,
+  home page); until then the menu shows none.
+- Also: `pairs` (id of another item, shown as "Goes well with"), `tags` (`v`, `n` contains nuts, `new`,
+  `soon`).
+
+Photos: 72 transparent cut-outs made with Higgsfield in one style (cream speckled stoneware, clear
+glasses, soft window light). Sources are in `source/menu/`; after adding one, run
+`bash tools/build-media.sh` (or the menu block in it) to make the 900 px and 240 px WebPs. Red Bull and
+water are text-only on purpose.
 
 ## The Refill cup
 
@@ -104,7 +111,7 @@ webhook to keep them.
 
 ## Before launch, check
 
-- The whole menu in `public/js/menu-data.js` (all demo).
+- The menu in `public/js/menu-data.js`: house names, descriptions, Hot / Iced availability, and prices.
 - Exact address and the maps link; opening date; hours.
 - The images are AI visualisations made from the designer's 3D render (the bar in four lights,
   three time-lapse clips) and AI product photos. Swap in real photography once the café is open.
@@ -115,7 +122,7 @@ webhook to keep them.
   phones) are drawn on a canvas and cross-faded, so the light moves smoothly at any minute. Key frames
   load first, the rest stream in. On load the day plays from 06:00 to the current time in Cairo.
 - `public/js/menu.js`: renders the menu, the desktop stage, the phone sheet (swipe down to close),
-  the tab underline that follows your scroll, and the live bake schedule.
+  the tab underline that follows your scroll, the Hot / Iced switch, flavour chips and the spin.
 - `public/js/site.js`: top bar, index overlay, reveals, smooth wheel scrolling (Lenis), the counter
   rail.
 - `public/vendor/`: GSAP 3, ScrollTrigger and Lenis, vendored (no CDN).
