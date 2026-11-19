@@ -1,5 +1,5 @@
 /* REFILL — the menu.
-   Contents page, four numbered sections, house names with the plain name underneath (and in Arabic).
+   Contents page, four numbered sections, every item named plainly, with its Arabic name underneath.
    Hot / Iced switch: flip it and every drink is re-poured (photos swap to the iced version, the rest steps back).
    Flavour chips swap the photo. "Can't decide?" spins the bar like the reel: tap Stop, that's your order.
    Desktop: the item you point at is served in the Refill cup on the right. Phone: tap for a detail sheet.
@@ -29,6 +29,8 @@
     if (temp === 'hot' && it.img) return it.img;
     return it.img || it.iced || null;
   }
+  function both(it) { return it.serve && it.serve.length > 1; }
+  function nameFor(it) { return temp === 'iced' && both(it) ? 'Iced ' + it.name : it.name; }
   function optLabel(it) { return it.options ? it.options[opt[it.id] || 0][0] : ''; }
   function priceText(it) {
     if (it.price == null) return '';
@@ -45,7 +47,7 @@
   }
   function opts(it, cls) {
     if (!it.options) return '';
-    return '<div class="opts ' + (cls || '') + '" role="radiogroup" aria-label="' + esc(it.real) + ' flavour">' + it.options.map(function (o, i) {
+    return '<div class="opts ' + (cls || '') + '" role="radiogroup" aria-label="' + esc(it.name) + ' flavour">' + it.options.map(function (o, i) {
       return '<button type="button" class="opt' + ((opt[it.id] || 0) === i ? ' is-on' : '') + '" role="radio" aria-checked="' + ((opt[it.id] || 0) === i) + '" data-opt="' + i + '">' + esc(o[0]) + '</button>';
     }).join('') + '</div>';
   }
@@ -82,9 +84,9 @@
           g.items.map(function (it) {
             var im = imgFor(it);
             return '<div class="item' + (im ? '' : ' item--text') + '" id="i-' + it.id + '" data-id="' + it.id + '">' +
-              '<button class="item__open" type="button" aria-label="' + esc(it.name + ', ' + it.real + (priceText(it) ? ', ' + priceText(it) : '')) + '">' +
-                '<span class="item__name">' + esc(it.name) + (tags(it) ? ' <span class="tags">' + tags(it) + '</span>' : '') + '</span>' +
-                '<span class="item__real">' + esc(it.real) + '<span class="ar" lang="ar" dir="rtl">' + esc(it.ar) + '</span></span>' +
+              '<button class="item__open" type="button" aria-label="' + esc(it.name + (priceText(it) ? ', ' + priceText(it) : '')) + '">' +
+                '<span class="item__name"><span class="item__nm">' + esc(it.name) + '</span>' + (tags(it) ? ' <span class="tags">' + tags(it) + '</span>' : '') + '</span>' +
+                '<span class="item__real"><span class="ar" lang="ar" dir="rtl">' + esc(it.ar) + '</span></span>' +
               '</button>' +
               '<span class="item__side">' + (priceText(it) ? '<span class="item__p">' + priceText(it) + '</span>' : '') + serve(it) + '</span>' +
               '<p class="item__desc">' + esc(it.desc) + '</p>' +
@@ -120,6 +122,7 @@
   function paintItem(el) {
     var it = byId[el.getAttribute('data-id')], im = imgFor(it), th = $('.item__thumb img', el);
     el.classList.toggle('is-dim', !fits(it));
+    var nm = $('.item__nm', el); if (nm) nm.textContent = nameFor(it);
     if (th && im && th.getAttribute('src') !== src(im, true)) {
       if (gsap && !reduce) gsap.fromTo(th, { opacity: 0, y: 10, scale: .92 }, { opacity: 1, y: 0, scale: 1, duration: .6, ease: 'expo.out' });
       th.src = src(im, true);
@@ -195,8 +198,8 @@
     if (im) setImg(src(im));
     var temps = it.serve && it.serve.length ? (temp !== 'all' && it.serve.indexOf(temp) > -1 ? (temp === 'hot' ? 'Hot' : 'Iced') : it.serve.map(function (k) { return k === 'hot' ? 'Hot' : 'Iced'; }).join(' or ')) : '';
     $('.js-stage-kicker').textContent = [g.title, temps, optLabel(it), priceText(it)].filter(Boolean).join(' · ');
-    $('.js-stage-name').textContent = it.name;
-    $('.js-stage-real').innerHTML = esc(it.real) + ' <span class="ar" lang="ar" dir="rtl">' + esc(it.ar) + '</span>';
+    $('.js-stage-name').textContent = nameFor(it);
+    $('.js-stage-real').innerHTML = '<span class="ar" lang="ar" dir="rtl">' + esc(it.ar) + '</span>';
     var pair = it.pairs && byId[it.pairs];
     $('.js-stage-notes').textContent = it.desc + (pair ? '  Goes well with ' + pair.name + '.' : '');
   }
@@ -233,16 +236,16 @@
     var s = secOf[it.id], g = grpOf[it.id], im = imgFor(it);
     var cup = $('.js-sheet-cup'); cup.style.setProperty('--tone', TONE[s.id]); cup.classList.toggle('is-empty', !im);
     var img = $('.js-sheet-img');
-    if (im && img.getAttribute('src') !== src(im)) { img.src = src(im); img.alt = it.real; if (gsap && !reduce && !sheet.hidden) gsap.fromTo(img, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .7, ease: 'expo.out' }); }
+    if (im && img.getAttribute('src') !== src(im)) { img.src = src(im); img.alt = it.name; if (gsap && !reduce && !sheet.hidden) gsap.fromTo(img, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .7, ease: 'expo.out' }); }
     $('.js-sheet-kicker').textContent = s.title + ' · ' + g.title;
-    $('.js-sheet-name').textContent = it.name;
-    $('.js-sheet-real').innerHTML = esc(it.real) + ' <span class="ar" lang="ar" dir="rtl">' + esc(it.ar) + '</span>';
+    $('.js-sheet-name').textContent = nameFor(it);
+    $('.js-sheet-real').innerHTML = '<span class="ar" lang="ar" dir="rtl">' + esc(it.ar) + '</span>';
     $('.js-sheet-price').textContent = priceText(it);
     $('.js-sheet-desc').textContent = it.desc;
     $('.js-sheet-opts').innerHTML = opts(it, 'opts--sheet') + serve(it);
     var pair = it.pairs && byId[it.pairs], pb = $('.js-sheet-pair');
     pb.hidden = !pair;
-    if (pair) { pb.innerHTML = '<span>Goes well with <b>' + esc(pair.name) + '</b> · ' + esc(pair.real) + '</span><span aria-hidden="true">→</span>'; pb.onclick = function () { openSheet(pair); }; }
+    if (pair) { pb.innerHTML = '<span>Goes well with <b>' + esc(pair.name) + '</b></span><span aria-hidden="true">→</span>'; pb.onclick = function () { openSheet(pair); }; }
   }
   function openSheet(it) {
     sheetItem = it; paintSheet(it);
@@ -290,8 +293,8 @@
     var s = secOf[it.id];
     $('.js-spin-cup').style.setProperty('--tone', TONE[s.id]);
     $('.js-spin-img').src = src(imgFor(it), small);
-    $('.js-spin-name').textContent = it.name;
-    $('.js-spin-real').textContent = it.real + (optLabel(it) ? ' · ' + optLabel(it) : '');
+    $('.js-spin-name').textContent = nameFor(it);
+    $('.js-spin-real').textContent = [optLabel(it), it.ar].filter(Boolean).join(' · ');
   }
   function tick(delay) {
     spinIdx = (spinIdx + 1) % pool.length; spinShow(pool[spinIdx], true);

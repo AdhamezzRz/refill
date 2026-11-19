@@ -768,3 +768,5 @@ html[data-temp="iced"] .serve__iced { background: #4E6470; color: var(--bright);
 .item__name .tags { margin-left: 8px; vertical-align: 3px; }
 .tabs { transition: top .6s var(--ease); }
 .top-tucked .tabs { top: env(safe-area-inset-top); }
+.item__real .ar, .stage__real .ar, .sheet__real .ar { margin-left: 0; font-size: 14px; }
+.spin__real { font: 500 13px/1.4 var(--arabic); letter-spacing: 0; text-transform: none; color: var(--muted); }

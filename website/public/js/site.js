@@ -234,8 +234,8 @@
       var it = all[id], sig = (it.tags || []).indexOf('sig') > -1;
       return '<a class="ci" href="/menu#i-' + id + '" draggable="false">' +
         '<div class="ci__plate">' + (sig ? '<span class="ci__tag">Signature</span>' : '') +
-        '<img src="/assets/menu/' + (it.img || it.iced || (it.options && it.options[0][1])) + '.webp" alt="' + it.real + '" loading="lazy" width="900" height="900" draggable="false"></div>' +
-        '<div class="ci__row"><span class="ci__name">' + it.name + '</span><span class="ci__price">' + (it.price != null ? (Array.isArray(it.price) ? it.price.filter(function (p) { return p != null; })[0] : it.price) + ' EGP' : it.real) + '</span></div>' +
+        '<img src="/assets/menu/' + (it.img || it.iced || (it.options && it.options[0][1])) + '.webp" alt="' + it.name + '" loading="lazy" width="900" height="900" draggable="false"></div>' +
+        '<div class="ci__row"><span class="ci__name">' + it.name + '</span><span class="ci__price">' + (it.price != null ? (Array.isArray(it.price) ? it.price.filter(function (p) { return p != null; })[0] : it.price) + ' EGP' : '<span class="ar" lang="ar" dir="rtl">' + it.ar + '</span>') + '</span></div>' +
         '<p class="ci__desc">' + it.desc + '</p></a>';
     }).join('');
     var prev = $('.js-rail-prev'), next = $('.js-rail-next');

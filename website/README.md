@@ -8,8 +8,8 @@ on the rack."). The rest of the site is quiet: plaster, hairlines, one idea per 
 
 - **Home** (`/`): the day, a short statement, the day in three acts (coffee, bakehouse, pizza
   soon), a swipeable "On the counter today", the room, and visit details.
-- **Menu** (`/menu`): the real Refill menu (73 items), each with a house name, the plain name and the
-  Arabic name, and its own photo. Desktop: point at an item and it is served in the Refill cup on the
+- **Menu** (`/menu`): the real Refill menu (60 items), each with its name in English and Arabic and its
+  own photo. Desktop: point at an item and it is served in the Refill cup on the
   right. Phone: tap an item and a sheet slides up. A Hot / Iced switch re-pours every drink, flavour
   chips swap the photo, and "Can't decide?" spins through the menu until you tap Stop.
 - **Rate** (`/rate`): the page behind the rating QR code. Five arch "cups" to fill.
@@ -54,14 +54,11 @@ The server listens on `process.env.PORT` and `0.0.0.0`, as Hostinger requires.
 Four numbered sections (01 Coffee, 02 Not coffee, 03 Bakehouse, 04 Kitchen, with a pizza "coming soon"
 card), numbered categories, and a sticky bar that keeps the section and category in view.
 
-Every item has a **house name** (`name`, e.g. "Quietly Particular") and right under it the **plain
-name** people order by (`real`, "Flat white") and the Arabic (`ar`, "فلات وايت"), so the menu is
-playful but never confusing. Some names tie in with the December posts (Sweet Talker, Main
-Character, Soft Heart, Unbothered).
+Every item has a clear, well-known name (`name`, e.g. "Flat White", "Caffè Latte") and its Arabic
+name under it (`ar`, "فلات وايت").
 
 Everything comes from one file: **`public/js/menu-data.js`**. The items are from the café's menu
-sheet; the house names and short descriptions were written for the site, so check them with the bar
-and the kitchen.
+sheet; the short descriptions were written for the site, so check them with the bar and the kitchen.
 
 - `serve: ['hot', 'iced']` prints Hot / Iced and drives the switch. `img` is the hot photo, `iced` the
   iced one; when the menu is set to Iced, drinks with an `iced` photo swap to it and hot-only drinks
