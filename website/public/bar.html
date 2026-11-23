@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bar · REFILL orders</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#352317">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<link rel="stylesheet" href="/css/site.css">
+</head>
+<body class="bar-page">
+<main class="bar">
+  <header class="bar__head">
+    <p class="bar__mark">REFILL · Orders</p>
+    <p class="bar__mode js-bar-mode"></p>
+    <p class="bar__clock js-bar-clock"></p>
+  </header>
+  <form class="bar__login js-bar-login" hidden>
+    <h1>Start the shift</h1>
+    <p>Enter the staff key. This screen plays a sound for every new paid order, so keep it open on the bar tablet.</p>
+    <input class="field" name="key" type="password" autocomplete="current-password" placeholder="Staff key" required>
+    <button class="btn" type="submit">Start</button>
+    <p class="bar__err js-bar-err" role="alert"></p>
+  </form>
+  <div class="bar__board js-bar-board" hidden>
+    <section><h2>To make <span class="js-n-paid"></span></h2><div class="bar__col js-col-paid"></div></section>
+    <section><h2>Ready for pick-up <span class="js-n-ready"></span></h2><div class="bar__col js-col-ready"></div></section>
+    <section class="bar__done"><h2>Collected today <span class="js-n-collected"></span></h2><div class="bar__col js-col-collected"></div></section>
+  </div>
+</main>
+<script src="/js/bar.js"></script>
+</body>
+</html>

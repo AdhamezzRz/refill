@@ -1,0 +1,5 @@
+# secrets and runtime data: never commit
+.env
+website/.env
+website/data/
+node_modules/

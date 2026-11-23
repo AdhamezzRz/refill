@@ -74,6 +74,43 @@ glasses, soft window light). Sources are in `source/menu/`; after adding one, ru
 `bash tools/build-media.sh` (or the menu block in it) to make the 900 px and 240 px WebPs. Red Bull and
 water are text-only on purpose.
 
+## Online ordering and payment (Kashier)
+
+Customers add items to a bag on the menu, choose a pick-up time (or "bring it to table 07" when they
+came from a table QR), enter their name and mobile, and pay on Kashier's secure hosted payment page
+(card or mobile wallet). Then they get a live order page (`/pickup`) with their order number, and the
+bar sees the order on `/bar` with a chime.
+
+- **Switched on automatically** when `KASHIER_MID` and `KASHIER_API_KEY` are set **and** the menu has
+  prices. Until then the menu shows no bag and no add buttons.
+- **Prices:** add `price: 95` to an item in `public/js/menu-data.js`; `price: { hot: 100, iced: 115 }`
+  for drinks that cost more iced; a third value on an option for flavours with their own price,
+  e.g. `['Almond', 'croissant-almond', 95]`. The server always recalculates the total from this file,
+  so a price can't be changed from the browser.
+- **Safety:** the order hash and both Kashier signatures (the customer's return and the server webhook)
+  are checked with the Payment API Key, and were verified against Kashier's own documented examples.
+  An order is only marked paid when a signature matches and the amount equals the order total.
+- **Orders** are saved in `website/data/orders.json` on the server (not in git). Every step is also
+  written to the runtime log as `[order] …`.
+- **Test vs live:** `KASHIER_MODE=test` uses Kashier test cards (e.g. 5123450000000008, expiry 06/25 for
+  an approved payment, CVV 100) and shows "Test mode" everywhere. Test and live have **different** API
+  keys in Kashier. In live mode orders are only accepted when `isOpen` is true and during opening hours.
+
+Environment variables (Hostinger → the web app → Environment variables; locally `website/.env`, which
+git ignores):
+
+| Name | What |
+|---|---|
+| `KASHIER_MID` | Merchant ID, e.g. `MID-12345-678` (Kashier dashboard, under your name at the top) |
+| `KASHIER_API_KEY` | Payment API Key of this business (Kashier dashboard → Integrations) |
+| `KASHIER_MODE` | `test` or `live` |
+| `SITE_URL` | the site's public address, e.g. `https://refillcoffee.com` |
+| `STAFF_KEY` | passphrase for the bar screen `/bar` (at least 6 characters) |
+
+In the Kashier dashboard, also add a webhook (Integrations → Webhooks) pointing to
+`https://<your domain>/api/kashier/webhook` for payment events, in the same mode (test or live). It
+confirms a payment even when a customer closes the tab before coming back to the site.
+
 ## The Refill cup
 
 The loader and every product frame use the logo's own geometry (cup width 1, lid 1.095 wide and 0.084

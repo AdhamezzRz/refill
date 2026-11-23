@@ -145,6 +145,45 @@
   </article>
 </div>
 
+<button class="bag js-bag" type="button" hidden>
+  <span class="bag__cup" aria-hidden="true"><i></i></span>
+  <span class="bag__count js-bag-count"></span>
+  <span class="bag__total js-bag-total"></span>
+  <span class="bag__go">Review & pay</span>
+</button>
+<p class="toast js-toast" role="status" aria-live="polite"></p>
+
+<div class="co js-co" hidden>
+  <div class="co__scrim js-co-close"></div>
+  <form class="co__card js-co-form" role="dialog" aria-modal="true" aria-labelledby="coTitle" novalidate>
+    <button class="sheet__close co__close js-co-close" type="button" aria-label="Close">×</button>
+    <p class="label co__kicker">Order ahead · pick up at the bar</p>
+    <h3 class="co__title" id="coTitle">Your order</h3>
+    <p class="co__test js-co-test" hidden>Test mode: use a Kashier test card. No real money is taken.</p>
+    <ul class="co__lines js-co-lines"></ul>
+    <div class="co__sum"><span>Total</span><b class="js-co-total"></b></div>
+
+    <p class="label co__h">When</p>
+    <div class="co__when js-co-when" role="radiogroup" aria-label="Pick-up time">
+      <button type="button" class="opt is-on" role="radio" aria-checked="true" data-pick="asap">As soon as possible</button>
+      <button type="button" class="opt" role="radio" aria-checked="false" data-pick="15">In 15 min</button>
+      <button type="button" class="opt" role="radio" aria-checked="false" data-pick="30">In 30 min</button>
+      <button type="button" class="opt" role="radio" aria-checked="false" data-pick="60">In 1 hour</button>
+    </div>
+
+    <p class="label co__h">Who's it for</p>
+    <div class="co__fields">
+      <label class="co__f"><span>Name</span><input name="name" autocomplete="given-name" maxlength="60" required></label>
+      <label class="co__f"><span>Mobile</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="01xxxxxxxxx" maxlength="16" required></label>
+      <label class="co__f co__f--wide"><span>Anything we should know? <em>Optional</em></span><input name="note" maxlength="240" placeholder="Oat milk, extra hot, no sugar…"></label>
+    </div>
+
+    <p class="co__err js-co-err" role="alert"></p>
+    <button class="btn co__pay js-co-pay" type="submit">Pay</button>
+    <p class="co__secure">Secure payment by Kashier · card or mobile wallet. We start making it as soon as it's paid.</p>
+  </form>
+</div>
+
 <div class="spin js-spin" hidden>
   <div class="spin__scrim js-spin-close"></div>
   <div class="spin__card" role="dialog" aria-modal="true" aria-label="Can’t decide? We choose for you">
@@ -178,6 +217,7 @@
 <script src="/vendor/ScrollTrigger.min.js"></script>
 <script src="/vendor/lenis.min.js"></script>
 <script src="/js/site.js"></script>
+<script src="/js/cart.js"></script>
 <script src="/js/menu.js"></script>
 </body>
 </html>

@@ -3,6 +3,15 @@
 'use strict';
 const http = require('http'), fs = require('fs'), path = require('path'), zlib = require('zlib');
 
+/* ---- secrets: website/.env (never committed). On Hostinger, set these as environment variables instead. ---- */
+try {
+  for (const line of fs.readFileSync(path.join(__dirname, '.env'), 'utf8').split(/\r?\n/)) {
+    const m = /^\s*([A-Z][A-Z0-9_]*)\s*=\s*(.*?)\s*$/.exec(line);
+    if (m && process.env[m[1]] === undefined) process.env[m[1]] = m[2].replace(/^(['"])(.*)\1$/, '$2');
+  }
+} catch (e) { /* no .env: use the host's environment variables */ }
+const orders = require('./orders');
+
 const PUB = path.join(__dirname, 'public');
 const PORT = Number(process.env.PORT) || 3000;
 const HOST = '0.0.0.0';
@@ -119,10 +128,11 @@ const server = http.createServer((req, res) => {
   let p; try { p = decodeURIComponent(url.pathname); } catch (e) { return text(res, 400, 'Bad request'); }
 
   if (p === '/api/rate') return req.method === 'POST' ? rate(req, res) : text(res, 405, 'Method not allowed', { Allow: 'POST' });
+  if (orders.handle(req, res, p, url, IS_OPEN)) return;
   if (req.method !== 'GET' && req.method !== 'HEAD') return text(res, 405, 'Method not allowed', { Allow: 'GET, HEAD' });
 
   if (p === '/healthz') return text(res, 200, 'ok');
-  if (p === '/config.js') { res.writeHead(200, { ...HEADERS, 'Content-Type': TYPES['.js'], 'Cache-Control': 'no-cache' }); return res.end('window.REFILL=' + JSON.stringify(PUBLIC_CFG) + ';'); }
+  if (p === '/config.js') { res.writeHead(200, { ...HEADERS, 'Content-Type': TYPES['.js'], 'Cache-Control': 'no-cache' }); return res.end('window.REFILL=' + JSON.stringify({ ...PUBLIC_CFG, ...orders.publicConfig() }) + ';'); }
   if (p === '/order' || p === '/rate') {
     const target = p === '/order' ? CFG.order : CFG.rate;
     if (target) { res.writeHead(302, { ...HEADERS, Location: tableLink(target, cleanTable(url.searchParams)), 'Cache-Control': 'no-store' }); return res.end(); }
@@ -130,6 +140,8 @@ const server = http.createServer((req, res) => {
     return send(req, res, path.join(PUB, p === '/order' ? 'menu.html' : 'rate.html'));
   }
   if (p === '/menu' || p === '/menu/') return send(req, res, path.join(PUB, 'menu.html'));
+  if (p === '/pickup') return send(req, res, path.join(PUB, 'pickup.html'));
+  if (p === '/bar') return send(req, res, path.join(PUB, 'bar.html'));
   if (p.endsWith('/')) p += 'index.html';
   const fp = path.normalize(path.join(PUB, p));
   if (fp !== PUB && !fp.startsWith(PUB + path.sep)) return text(res, 403, 'Forbidden');

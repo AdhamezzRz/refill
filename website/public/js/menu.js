@@ -15,7 +15,7 @@
 
   var byId = {}, secOf = {}, grpOf = {}, list = [], total = 0;
   M.sections.forEach(function (s) { s.groups.forEach(function (g) { g.items.forEach(function (it) { byId[it.id] = it; secOf[it.id] = s; grpOf[it.id] = g; list.push(it); total++; }); }); });
-  var hasPrices = list.some(function (it) { return it.price != null; });
+  var hasPrices = list.some(function (it) { return it.price != null || (it.options || []).some(function (o) { return o[2] != null; }); });
   document.body.classList.toggle('no-prices', !hasPrices);
 
   /* ---------- state ---------- */
@@ -32,10 +32,21 @@
   function both(it) { return it.serve && it.serve.length > 1; }
   function nameFor(it) { return temp === 'iced' && both(it) ? 'Iced ' + it.name : it.name; }
   function optLabel(it) { return it.options ? it.options[opt[it.id] || 0][0] : ''; }
+  var up = function (it, t, o) { return R.cart ? R.cart.unitPrice(it, t, o) : null; };
   function priceText(it) {
-    if (it.price == null) return '';
-    return (Array.isArray(it.price) ? it.price.filter(function (p) { return p != null; }).join(' / ') : it.price) + ' ' + M.currency;
+    if (it.options && it.options.some(function (o) { return o[2] != null; })) {
+      var ps = it.options.map(function (o) { return o[2]; }).filter(function (v) { return v != null; });
+      var lo = Math.min.apply(null, ps), hi = Math.max.apply(null, ps);
+      return (lo === hi ? lo : 'From ' + lo) + ' ' + M.currency;
+    }
+    var p = it.price; if (p == null) return '';
+    if (typeof p === 'object' && !Array.isArray(p)) {
+      return (it.serve || ['hot', 'iced']).filter(function (k) { return p[k] != null; }).map(function (k) { return (k === 'hot' ? 'Hot ' : 'Iced ') + p[k]; }).join(' · ') + ' ' + M.currency;
+    }
+    return (Array.isArray(p) ? p.filter(function (x) { return x != null; }).join(' / ') : p) + ' ' + M.currency;
   }
+  var canOrder = function (it) { return !!(R.cart && R.cart.enabled && R.cart.orderable(it)); };
+  function chosenTemp(it) { return it.serve ? (temp !== 'all' && it.serve.indexOf(temp) > -1 ? temp : it.serve[0]) : null; }
   function serve(it) {
     if (!it.serve) return '';
     return '<span class="serve">' + it.serve.map(function (k) { return '<i class="serve__' + k + '">' + (k === 'hot' ? 'Hot' : 'Iced') + '</i>'; }).join('') + '</span>';
@@ -88,7 +99,8 @@
                 '<span class="item__name"><span class="item__nm">' + esc(it.name) + '</span>' + (tags(it) ? ' <span class="tags">' + tags(it) + '</span>' : '') + '</span>' +
                 '<span class="item__real"><span class="ar" lang="ar" dir="rtl">' + esc(it.ar) + '</span></span>' +
               '</button>' +
-              '<span class="item__side">' + (priceText(it) ? '<span class="item__p">' + priceText(it) + '</span>' : '') + serve(it) + '</span>' +
+              '<span class="item__side">' + (priceText(it) ? '<span class="item__p">' + priceText(it) + '</span>' : '') + serve(it) +
+                (canOrder(it) ? '<button type="button" class="add" data-add aria-label="Add ' + esc(it.name) + ' to your order"><i aria-hidden="true"></i></button>' : '') + '</span>' +
               '<p class="item__desc">' + esc(it.desc) + '</p>' +
               opts(it) +
               (im ? '<span class="item__thumb cupf" style="--tone:' + TONE[s.id] + '"><img src="' + src(im, true) + '" alt="" loading="lazy" width="240" height="240"></span>' : '') +
@@ -224,6 +236,7 @@
   root.addEventListener('click', function (e) {
     var b = e.target.closest('.item'); if (!b) return;
     var it = byId[b.getAttribute('data-id')], o = e.target.closest('.opt');
+    if (e.target.closest('[data-add]')) { R.cart.add(it, opt[it.id] || 0, chosenTemp(it)); return; }
     if (o) { opt[it.id] = +o.getAttribute('data-opt'); paintItem(b); if (desktop.matches) { picked = b; mark(b); showItem(it); } return; }
     if (e.target.closest('a')) return;
     if (desktop.matches) { picked = b; mark(b); showItem(it); }
@@ -231,7 +244,7 @@
   });
 
   /* ---------- sheet (phones) ---------- */
-  var sheet = $('.js-sheet'), card = sheet && $('.sheet__card', sheet), lastFocus = null, sheetItem = null;
+  var sheet = $('.js-sheet'), card = sheet && $('.sheet__card', sheet), lastFocus = null, sheetItem = null, sheetTemp = null;
   function paintSheet(it) {
     var s = secOf[it.id], g = grpOf[it.id], im = imgFor(it);
     var cup = $('.js-sheet-cup'); cup.style.setProperty('--tone', TONE[s.id]); cup.classList.toggle('is-empty', !im);
@@ -242,12 +255,22 @@
     $('.js-sheet-real').innerHTML = '<span class="ar" lang="ar" dir="rtl">' + esc(it.ar) + '</span>';
     $('.js-sheet-price').textContent = priceText(it);
     $('.js-sheet-desc').textContent = it.desc;
-    $('.js-sheet-opts').innerHTML = opts(it, 'opts--sheet') + serve(it);
+    if (!sheetTemp || !it.serve || it.serve.indexOf(sheetTemp) < 0) sheetTemp = chosenTemp(it);
+    var order = '';
+    if (canOrder(it)) {
+      var u = up(it, sheetTemp, opt[it.id] || 0);
+      order = (it.serve && it.serve.length > 1 ? '<div class="opts opts--sheet" role="radiogroup" aria-label="Hot or iced">' + it.serve.map(function (k) {
+        return '<button type="button" class="opt' + (k === sheetTemp ? ' is-on' : '') + '" role="radio" aria-checked="' + (k === sheetTemp) + '" data-stemp="' + k + '">' + (k === 'hot' ? 'Hot' : 'Iced') + '</button>';
+      }).join('') + '</div>' : '') +
+        '<button type="button" class="btn sheet__add" data-sheet-add' + (u == null ? ' disabled' : '') + '>' + (u == null ? 'Not available like this' : 'Add to order · ' + u + ' ' + M.currency) + '</button>';
+    }
+    $('.js-sheet-opts').innerHTML = opts(it, 'opts--sheet') + (order ? '' : serve(it)) + order;
     var pair = it.pairs && byId[it.pairs], pb = $('.js-sheet-pair');
     pb.hidden = !pair;
     if (pair) { pb.innerHTML = '<span>Goes well with <b>' + esc(pair.name) + '</b></span><span aria-hidden="true">→</span>'; pb.onclick = function () { openSheet(pair); }; }
   }
   function openSheet(it) {
+    if (sheetItem !== it) sheetTemp = null;
     sheetItem = it; paintSheet(it);
     card.scrollTop = 0;
     if (!sheet.hidden) return;
@@ -267,7 +290,10 @@
   }
   if (sheet) {
     $('.js-sheet-opts').addEventListener('click', function (e) {
-      var o = e.target.closest('.opt'); if (!o || !sheetItem) return;
+      if (!sheetItem) return;
+      if (e.target.closest('[data-sheet-add]')) { R.cart.add(sheetItem, opt[sheetItem.id] || 0, sheetTemp); closeSheet(); return; }
+      var tb = e.target.closest('[data-stemp]'); if (tb) { sheetTemp = tb.getAttribute('data-stemp'); paintSheet(sheetItem); return; }
+      var o = e.target.closest('.opt[data-opt]'); if (!o) return;
       opt[sheetItem.id] = +o.getAttribute('data-opt'); paintSheet(sheetItem); paintItem($('#i-' + sheetItem.id));
     });
     $$('.js-sheet-close', sheet).forEach(function (b) { b.addEventListener('click', closeSheet); });
