@@ -16,9 +16,9 @@ const NAMES = ['latte', 'spanish', 'matcha', 'hotchoc', 'fudge', 'sansebastian',
 // 1. clip frames (the hero is 1080 CSS px wide; at 2× that is 2160 px)
 for (const n of NAMES) {
   const d = path.join(WORK, 'frames', n);
-  if (fs.existsSync(path.join(d, '150.jpg'))) continue;
+  if (fs.existsSync(path.join(d, '164.jpg'))) continue;
   fs.mkdirSync(d, { recursive: true });
-  ff(['-i', path.join(CLIPS, n + '.mp4'), '-vf', `fps=${FPS},scale=2160:1620:flags=lanczos`, '-frames:v', '150', '-q:v', '3', path.join(d, '%03d.jpg')]);
+  ff(['-i', path.join(CLIPS, n + '.mp4'), '-vf', `fps=${FPS},scale=2160:1620:flags=lanczos`, '-frames:v', '164', '-q:v', '3', path.join(d, '%03d.jpg')]);
 }
 
 (async () => {

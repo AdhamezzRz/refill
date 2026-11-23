@@ -174,10 +174,10 @@
       if (k === slot) o = k === 0 ? 1 : clamp((lt - start + FADE) / FADE, 0, 1);
       else if (k === slot + 1 && within > SLOT - FADE) o = clamp((within - (SLOT - FADE)) / FADE, 0, 1);
       el.style.opacity = o;
-      var local = clamp(lt - start + FADE, 0, 5.96);
+      var local = clamp(lt - start + FADE, 0, 6.5);
       el.style.transform = 'scale(' + (1.06 - 0.06 * clamp(local / 6.5, 0, 1)).toFixed(4) + ')';
       if (CAPTURE) {
-        if (o > 0) { var fr = String(Math.min(150, Math.floor(local * 25) + 1)).padStart(3, '0'), src = '/screens/frames/' + c.f + '/' + fr + '.jpg'; if (el.getAttribute('src') !== src) el.setAttribute('src', src); }
+        if (o > 0) { var fr = String(Math.min(164, Math.floor(local * 25) + 1)).padStart(3, '0'), src = '/screens/frames/' + c.f + '/' + fr + '.jpg'; if (el.getAttribute('src') !== src) el.setAttribute('src', src); }
       } else if (o > 0) {
         if (el.paused || Math.abs(el.currentTime - local) > 0.35) { try { el.currentTime = local; } catch (e) { /* not loaded */ } var pr = el.play(); if (pr && pr.catch) pr.catch(function () {}); }
       } else if (!el.paused) el.pause();
