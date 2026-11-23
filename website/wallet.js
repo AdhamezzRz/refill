@@ -10,7 +10,7 @@
    Settings (environment variables, or website/.env locally):
      APPLE_TEAM_ID        Apple Developer Team ID (10 characters, Membership page)
      APPLE_PASS_TYPE_ID   e.g. pass.com.therefillcafe (Identifiers → Pass Type IDs)
-     APPLE_PASS_CERT      the Pass Type ID certificate, PEM text or base64 of it (from the .cer Apple gives you)
+     APPLE_PASS_CERT      optional: the Pass Type ID certificate (default: wallet/pass-cert.pem, valid until 23 Dec 2027)
      APPLE_PASS_KEY       its private key, PEM text or base64 of it (default: wallet/secret/pass.key)
      APPLE_PASS_KEY_PASSWORD   only if the key is encrypted
      SITE_URL             https address of the site (Apple calls back to SITE_URL/wallet) */
@@ -27,7 +27,7 @@ const pem = (v, file) => {
 };
 const W = {
   team: env('APPLE_TEAM_ID'), type: env('APPLE_PASS_TYPE_ID'), site: env('SITE_URL').replace(/\/+$/, ''),
-  cert: pem(env('APPLE_PASS_CERT'), path.join(ROOT, 'wallet', 'secret', 'pass.pem')),
+  cert: pem(env('APPLE_PASS_CERT'), path.join(ROOT, 'wallet', 'pass-cert.pem')),   // the certificate is public; it ships with the code
   key: pem(env('APPLE_PASS_KEY'), path.join(ROOT, 'wallet', 'secret', 'pass.key')),
   keyPass: env('APPLE_PASS_KEY_PASSWORD'),
   wwdr: fs.readFileSync(path.join(ROOT, 'wallet', 'AppleWWDRCAG4.pem'), 'utf8'),
@@ -304,6 +304,23 @@ function handle(req, res, p, url, staffOk) {
       }
       json(res, 200, { ...publicCard(c), token: c.token, added });
     });
+    return true;
+  }
+
+  /* staff check: can this server talk to Apple's push service with the pass certificate?
+     Expected answer: 400 BadDeviceToken (Apple accepted the certificate; the test device is made up). */
+  if (p === '/api/bar/wallet-check') {
+    if (!staffOk(req)) return json(res, 401, { error: 'Wrong staff key.' }), true;
+    if (!enabled()) return json(res, 200, { wallet: false, reason: 'Apple Wallet settings are missing or the key does not load.' }), true;
+    const c = http2.connect('https://api.push.apple.com', { cert: W.cert, key: W.key, passphrase: W.keyPass || undefined });
+    let done = false; const finish = o => { if (done) return; done = true; try { c.close(); } catch (e) { /* */ } json(res, 200, o); };
+    c.on('error', e => finish({ wallet: true, apns: 'error', reason: e.message }));
+    const r = c.request({ ':method': 'POST', ':path': '/3/device/' + '0'.repeat(64), 'apns-topic': W.type });
+    let st = 0, b = ''; r.on('response', h => { st = h[':status']; }); r.on('data', d => { b += d; });
+    r.on('end', () => { let reason = ''; try { reason = JSON.parse(b).reason; } catch (e) { /* */ }
+      finish({ wallet: true, passType: W.type, apns: st, reason, ok: st === 400 && reason === 'BadDeviceToken' }); });
+    r.setTimeout(10000, () => finish({ wallet: true, apns: 'timeout' }));
+    r.end('{}');
     return true;
   }
 

@@ -131,7 +131,7 @@ const server = http.createServer((req, res) => {
 
   if (p === '/api/rate') return req.method === 'POST' ? rate(req, res) : text(res, 405, 'Method not allowed', { Allow: 'POST' });
   if (orders.handle(req, res, p, url, IS_OPEN)) return;
-  if ((p.startsWith('/wallet/') || p.startsWith('/api/card') || p === '/api/bar/card') && wallet.handle(req, res, p, url, orders.staffOk)) return;
+  if ((p.startsWith('/wallet/') || p.startsWith('/api/card') || p === '/api/bar/card' || p === '/api/bar/wallet-check') && wallet.handle(req, res, p, url, orders.staffOk)) return;
   if (req.method !== 'GET' && req.method !== 'HEAD') return text(res, 405, 'Method not allowed', { Allow: 'GET, HEAD' });
 
   if (p === '/healthz') return text(res, 200, 'ok');
