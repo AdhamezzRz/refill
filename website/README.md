@@ -106,6 +106,7 @@ git ignores):
 | `KASHIER_MODE` | `test` or `live` |
 | `SITE_URL` | the site's public address, e.g. `https://refillcoffee.com` |
 | `STAFF_KEY` | passphrase for the bar screen `/bar` (at least 6 characters) |
+| `ORDERS_BEFORE_OPENING` | `true` to accept live orders before opening day and outside opening hours, e.g. for one real test order. Remove it afterwards. |
 
 In the Kashier dashboard, also add a webhook (Integrations → Webhooks) pointing to
 `https://<your domain>/api/kashier/webhook` for payment events, in the same mode (test or live). It

@@ -15,7 +15,8 @@
      KASHIER_API_KEY   Payment API Key for this business (Kashier dashboard → Integrations / API keys)
      KASHIER_MODE      test or live. Test and live have different API keys.
      SITE_URL          public address, e.g. https://refillcoffee.com (used for the return link)
-     STAFF_KEY         passphrase for the /bar screen */
+     STAFF_KEY         passphrase for the /bar screen
+     ORDERS_BEFORE_OPENING  true to accept live orders before opening day and outside hours (for a real test order) */
 'use strict';
 const fs = require('fs'), path = require('path'), crypto = require('crypto'), vm = require('vm');
 
@@ -118,8 +119,9 @@ function checkout(req, res, isOpen) {
     let b; try { b = JSON.parse(raw); } catch (e) { return json(res, 400, { error: 'Bad request' }); }
     loadMenu();
     const now = cairo(), h = menu.hours || { open: 420, close: 1440 };
-    if (K.mode === 'live' && !isOpen) return json(res, 409, { error: 'We are not open yet. Ordering starts on opening day.' });
-    if (K.mode === 'live' && (now.minutes < h.open || now.minutes >= h.close - 15)) return json(res, 409, { error: 'The bar is closed right now. See you tomorrow from 07:00.' });
+    const early = /^(1|true|yes)$/i.test(env('ORDERS_BEFORE_OPENING'));
+    if (K.mode === 'live' && !isOpen && !early) return json(res, 409, { error: 'We are not open yet. Ordering starts on opening day.' });
+    if (K.mode === 'live' && !early && (now.minutes < h.open || now.minutes >= h.close - 15)) return json(res, 409, { error: 'The bar is closed right now. See you tomorrow from 07:00.' });
 
     const lines = Array.isArray(b.items) ? b.items.slice(0, 30) : [];
     const items = [];
