@@ -1,0 +1,88 @@
+/* REFILL · in-store menu screens (43" portrait, 1080 × 1920 CSS px; sharp on 4K panels). */
+@font-face { font-family: 'Script'; src: url(/assets/fonts/great-vibes.woff2) format('woff2'); font-display: block; }
+:root { --brown: #653d26; --deep: #1f130b; --deep2: #2c1a10; --caramel: #c7ad91; --cream: #f2e9db; --muted: rgba(242, 233, 219, .55); --line: rgba(199, 173, 145, .22); }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; cursor: none; }
+body { font-family: 'Montserrat', sans-serif; color: var(--cream); -webkit-font-smoothing: antialiased; }
+.tv { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: hidden; transform-origin: 0 0;
+  background: radial-gradient(120% 70% at 85% 0%, #3a2316 0%, var(--deep) 60%) var(--deep); }
+.stage { position: absolute; inset: 0; }
+.ar { font-family: 'Alexandria', sans-serif; direction: rtl; }
+
+/* header */
+.hd { position: absolute; left: 64px; right: 64px; top: 0; height: 140px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1.5px solid var(--line); }
+.hd__mark { display: inline-flex; align-items: center; gap: 18px; font: 600 26px/1 'Montserrat'; letter-spacing: .5em; }
+.hd__mark i { position: relative; width: 34px; height: 38px; }
+.hd__mark i::before { content: ""; position: absolute; left: -2px; right: -2px; top: 0; height: 3px; background: var(--cream); }
+.hd__mark i::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 29px; border: 3px solid var(--cream); border-radius: 0 0 99px 99px; }
+.hd__sec { display: flex; align-items: baseline; gap: 18px; font: 600 19px/1 'Montserrat'; letter-spacing: .3em; color: var(--caramel); text-transform: uppercase; }
+.hd__sec .ar { font-size: 26px; letter-spacing: 0; color: var(--cream); }
+
+/* hero: motion clips */
+.hero { position: absolute; left: 0; right: 0; top: 140px; height: 810px; overflow: hidden; background: #120a05; }
+.hero__clips > * { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+.hero__shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(31, 19, 11, .35) 0%, rgba(31, 19, 11, 0) 22%, rgba(31, 19, 11, 0) 50%, rgba(31, 19, 11, .92) 100%); }
+.hero__tag { position: absolute; left: 64px; top: 40px; padding: 12px 20px; border-radius: 999px; background: rgba(31, 19, 11, .55); font: 700 15px/1 'Montserrat'; letter-spacing: .3em; color: var(--cream); text-transform: uppercase; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.hero__tag i { display: inline-block; width: 10px; height: 10px; margin-right: 12px; border-radius: 50%; background: #e0a458; vertical-align: 1px; }
+.hero__title { position: absolute; left: 64px; right: 64px; bottom: 44px; }
+.hero__title > div { position: absolute; left: 0; right: 0; bottom: 0; opacity: 0; }
+.hero__name { font: 400 112px/1 'Script'; color: var(--cream); text-shadow: 0 2px 24px rgba(0, 0, 0, .35); }
+.hero__meta { display: flex; justify-content: space-between; align-items: baseline; margin-top: 14px; }
+.hero__meta b { font: 700 22px/1 'Montserrat'; letter-spacing: .28em; color: var(--caramel); text-transform: uppercase; }
+.hero__meta .ar { font-size: 30px; color: var(--cream); }
+
+/* menu list */
+.list { position: absolute; left: 64px; right: 64px; top: 1000px; bottom: 96px; }
+.page { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; }
+.grp { display: grid; gap: 0; }
+.grp__h { display: flex; align-items: center; gap: 22px; padding-bottom: 12px; margin-bottom: 4px; border-bottom: 1.5px solid var(--line); }
+.grp__h b { font: 700 18px/1 'Montserrat'; letter-spacing: .32em; color: var(--caramel); text-transform: uppercase; }
+.grp__h .ar { font-size: 22px; color: var(--muted); }
+.grp__h .cols { margin-left: auto; display: flex; }
+.grp__h .cols span { width: 120px; text-align: right; font: 700 14px/1 'Montserrat'; letter-spacing: .26em; color: var(--muted); }
+.row { display: flex; align-items: baseline; gap: 16px; height: var(--rh, 46px); padding-top: 8px; }
+.row__n { font: 500 31px/1.1 'Montserrat'; letter-spacing: -.01em; white-space: nowrap; }
+.row__n small { margin-left: 12px; font: 600 15px/1 'Montserrat'; letter-spacing: .2em; color: var(--caramel); text-transform: uppercase; }
+.row .ar { font-size: 22px; color: var(--muted); white-space: nowrap; }
+.row__dots { flex: 1; align-self: center; height: 2px; margin-top: 10px; background: radial-gradient(circle, rgba(199, 173, 145, .45) 1px, transparent 1.4px) 0 0 / 10px 2px repeat-x; }
+.row__p { width: 120px; text-align: right; font: 500 31px/1 'Montserrat'; font-variant-numeric: tabular-nums; }
+.row__p.is-na { color: rgba(242, 233, 219, .25); }
+.row--opts .row__n { font-size: 27px; }
+
+/* footer */
+.ft { position: absolute; left: 64px; right: 64px; bottom: 0; height: 96px; display: flex; justify-content: space-between; align-items: center; border-top: 1.5px solid var(--line); font: 600 16px/1 'Montserrat'; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); }
+.ft b { color: var(--cream); font-weight: 600; }
+
+/* takeovers: one picture across both screens (a 2160 px canvas, each screen shows its half) */
+.tk { position: absolute; inset: 0; overflow: hidden; visibility: hidden; }
+.tk__w { position: absolute; top: 0; left: 0; width: 2160px; height: 1920px; }
+.screen-2 .tk__w { left: -1080px; }
+.tk--card .tk__w { background: radial-gradient(70% 80% at 50% 40%, #7a4a2f 0%, var(--brown) 45%, #3e2416 100%); }
+.tk--cream .tk__w { background: radial-gradient(70% 80% at 50% 40%, #fbf5ea 0%, var(--cream) 55%, #e4d6c1 100%); color: var(--brown); }
+.tk .abs { position: absolute; }
+.tk__kick { font: 700 20px/1 'Montserrat'; letter-spacing: .4em; text-transform: uppercase; }
+.tk__script { font: 400 200px/1 'Script'; }
+.tk__big { font: 700 92px/1.02 'Montserrat'; letter-spacing: -.01em; text-transform: uppercase; }
+.tk__p { font: 500 34px/1.35 'Montserrat'; }
+.tk .ar { font-size: 46px; }
+.cupx { position: absolute; width: 230px; height: 230px; }
+.cupx svg { width: 100%; height: 100%; overflow: visible; }
+.qr { position: absolute; background: #fff; border-radius: 28px; padding: 30px; }
+.qr svg { display: block; width: 100%; height: auto; }
+.qr p { margin-top: 18px; text-align: center; font: 700 20px/1 'Montserrat'; letter-spacing: .26em; color: var(--deep); }
+.step { display: flex; gap: 28px; align-items: baseline; }
+.step b { font: 400 92px/1 'Script'; color: var(--caramel); width: 70px; }
+.step span { font: 600 46px/1.15 'Montserrat'; }
+.notif { position: absolute; width: 760px; border-radius: 36px; padding: 26px 30px; background: rgba(255, 255, 255, .82); box-shadow: 0 30px 70px rgba(60, 34, 20, .25); display: grid; grid-template-columns: 84px 1fr; gap: 22px; align-items: center; }
+.notif__ic { width: 84px; height: 84px; border-radius: 20px; background: var(--brown); display: grid; place-items: center; }
+.notif__ic i { position: relative; width: 40px; height: 44px; }
+.notif__ic i::before { content: ""; position: absolute; left: -2px; right: -2px; top: 0; height: 3px; background: var(--cream); }
+.notif__ic i::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 34px; border: 3px solid var(--cream); border-radius: 0 0 99px 99px; }
+.notif b { display: flex; justify-content: space-between; font: 600 26px/1.2 'Inter', 'Montserrat'; color: #1d1813; }
+.notif b span { font-weight: 400; color: #6b625b; font-size: 22px; }
+.notif p { margin-top: 6px; font: 400 28px/1.3 'Inter', 'Montserrat'; color: #1d1813; }
+
+.grain { position: absolute; inset: 0; pointer-events: none; opacity: .5; mix-blend-mode: overlay;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .45  0 0 0 0 .4  0 0 0 .35 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+.row__p { white-space: nowrap; }
+.row__p--r { width: auto; min-width: 120px; font-size: 27px; }

@@ -135,6 +135,8 @@ const server = http.createServer((req, res) => {
   if (req.method !== 'GET' && req.method !== 'HEAD') return text(res, 405, 'Method not allowed', { Allow: 'GET, HEAD' });
 
   if (p === '/healthz') return text(res, 200, 'ok');
+  if (p === '/api/time') { res.writeHead(200, { ...HEADERS, 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }); return res.end(JSON.stringify({ now: Date.now() })); }
+  if (p === '/screen/1' || p === '/screen/2' || p === '/screen') return send(req, res, path.join(PUB, 'screen.html'));
   if (p === '/config.js') { res.writeHead(200, { ...HEADERS, 'Content-Type': TYPES['.js'], 'Cache-Control': 'no-cache' }); return res.end('window.REFILL=' + JSON.stringify({ ...PUBLIC_CFG, ...orders.publicConfig(), wallet: wallet.enabled() }) + ';'); }
   if (p === '/order' || p === '/rate') {
     const target = p === '/order' ? CFG.order : CFG.rate;

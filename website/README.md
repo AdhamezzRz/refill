@@ -140,6 +140,28 @@ confirms a payment even when a customer closes the tab before coming back to the
 The "Add to Apple Wallet" button uses `public/assets/wallet-badge.svg`; replace it with Apple's
 official badge artwork from the Add to Apple Wallet guidelines (Apple developer sign-in required).
 
+## In-store menu screens (two 43" portrait TVs)
+
+- **Screen 1 (drinks):** `https://therefillcafe.com/screen/1` · **Screen 2 (bakehouse & kitchen):** `/screen/2`.
+- One **72-second loop**: page A with motion clips on top and the menu with prices underneath (coffee /
+  bakehouse), then the two TVs join into **one picture** for the Refill Card (six cups fill across both
+  screens), then page B (not coffee / kitchen), then a second joined moment: **order ahead** with a QR code.
+- **Live and in sync:** both screens take their time from the server (`/api/time`), so the joined moments
+  line up. Names and prices come from `public/js/menu-data.js`: change a price there and the screens
+  update the next morning (they reload at 04:00) or immediately on a reload.
+- **Clips:** `public/assets/screens/*.mp4` with a `.jpg` poster each (8 slow-motion Higgsfield clips:
+  latte art, iced Spanish latte, matcha, hot chocolate, fudge cake, San Sebastián, croissant, French toast).
+  The mapping clip → menu item is at the top of `public/js/screen.js`.
+- **Any resolution:** the layout is drawn at 1080 × 1920 and scaled to the TV, so it is sharp on 4K panels.
+- **Video files for USB:** `node website/tools/build-screens.js <clips-dir> <out-dir>` (with the site running
+  on :3100) exports `refill-screen-1-4k.mp4`, `refill-screen-2-4k.mp4` and 1080p versions. Two separate
+  USB players are not frame-synced, so the joined moments can drift; the web version stays in sync.
+
+**TV setup (web, recommended):** set each TV to portrait (or mount it rotated and set the TV's rotation),
+open the link in the TV's browser or on a small Android TV / Fire TV stick with a kiosk browser (for
+example Fully Kiosk Browser: start URL `https://therefillcafe.com/screen/1`, auto-start on boot, keep
+screen on), and tap once to go full screen.
+
 ## The Refill cup
 
 The loader and every product frame use the logo's own geometry (cup width 1, lid 1.095 wide and 0.084
