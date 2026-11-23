@@ -11,6 +11,8 @@ try {
   }
 } catch (e) { /* no .env: use the host's environment variables */ }
 const orders = require('./orders');
+const wallet = require('./wallet');
+orders.connect(wallet); wallet.attach(orders);
 
 const PUB = path.join(__dirname, 'public');
 const PORT = Number(process.env.PORT) || 3000;
@@ -129,10 +131,11 @@ const server = http.createServer((req, res) => {
 
   if (p === '/api/rate') return req.method === 'POST' ? rate(req, res) : text(res, 405, 'Method not allowed', { Allow: 'POST' });
   if (orders.handle(req, res, p, url, IS_OPEN)) return;
+  if ((p.startsWith('/wallet/') || p.startsWith('/api/card') || p === '/api/bar/card') && wallet.handle(req, res, p, url, orders.staffOk)) return;
   if (req.method !== 'GET' && req.method !== 'HEAD') return text(res, 405, 'Method not allowed', { Allow: 'GET, HEAD' });
 
   if (p === '/healthz') return text(res, 200, 'ok');
-  if (p === '/config.js') { res.writeHead(200, { ...HEADERS, 'Content-Type': TYPES['.js'], 'Cache-Control': 'no-cache' }); return res.end('window.REFILL=' + JSON.stringify({ ...PUBLIC_CFG, ...orders.publicConfig() }) + ';'); }
+  if (p === '/config.js') { res.writeHead(200, { ...HEADERS, 'Content-Type': TYPES['.js'], 'Cache-Control': 'no-cache' }); return res.end('window.REFILL=' + JSON.stringify({ ...PUBLIC_CFG, ...orders.publicConfig(), wallet: wallet.enabled() }) + ';'); }
   if (p === '/order' || p === '/rate') {
     const target = p === '/order' ? CFG.order : CFG.rate;
     if (target) { res.writeHead(302, { ...HEADERS, Location: tableLink(target, cleanTable(url.searchParams)), 'Cache-Control': 'no-store' }); return res.end(); }
@@ -142,6 +145,7 @@ const server = http.createServer((req, res) => {
   if (p === '/menu' || p === '/menu/') return send(req, res, path.join(PUB, 'menu.html'));
   if (p === '/pickup') return send(req, res, path.join(PUB, 'pickup.html'));
   if (p === '/bar') return send(req, res, path.join(PUB, 'bar.html'));
+  if (p === '/card') return send(req, res, path.join(PUB, 'card.html'));
   if (p.endsWith('/')) p += 'index.html';
   const fp = path.normalize(path.join(PUB, p));
   if (fp !== PUB && !fp.startsWith(PUB + path.sep)) return text(res, 403, 'Forbidden');

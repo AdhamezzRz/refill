@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Refill Card · REFILL</title>
+<meta name="description" content="Five stamps and the sixth drink is on us. The Refill Card, in your Apple Wallet or right here.">
+<meta name="theme-color" content="#653d26">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<link rel="stylesheet" href="/css/site.css">
+</head>
+<body class="small-page card-page">
+<header class="top top--solid js-top">
+  <a class="top__mark" href="/" aria-label="Refill, home">REFILL</a>
+  <div class="top__end"><a class="top__pill" style="display:inline-flex" href="/menu">Menu</a></div>
+</header>
+<main class="pg rc js-rc">
+  <div class="pg__main">
+    <p class="label">The Refill Card</p>
+    <h1 class="pg__title rc__title"><span class="ln"><span>Five cups.</span></span><span class="ln"><span>The sixth is on us.</span></span></h1>
+    <p class="ar" lang="ar" dir="rtl">خمس أختام، والسادس علينا.</p>
+
+    <form class="rc__join js-rc-join" hidden>
+      <p class="rc__lede">One stamp for every drink. Order online and the stamps land on your card by themselves; at the bar, show the card before you pay.</p>
+      <div class="rc__row"><input class="field" name="name" maxlength="40" placeholder="Your first name" autocomplete="given-name" required><button class="btn" type="submit">Get my card</button></div>
+      <p class="rc__err js-rc-err" role="alert"></p>
+    </form>
+
+    <div class="rc__card js-rc-card" hidden>
+      <article class="pass">
+        <header class="pass__head"><span class="pass__logo" aria-hidden="true"><i></i>REFILL</span><span class="pass__free"><small>ON US</small><b class="js-rc-free">—</b></span></header>
+        <img class="pass__strip js-rc-strip" alt="" width="750" height="246">
+        <div class="pass__row"><span><small>STAMPS</small><b class="js-rc-stamps"></b></span><span class="pass__r"><small>MEMBER</small><b class="js-rc-name"></b></span></div>
+        <p class="pass__next js-rc-next"></p>
+        <div class="pass__qr"><div class="js-rc-qr"></div><p class="js-rc-code"></p></div>
+      </article>
+      <div class="pg__actions rc__actions"><a class="wbadge js-rc-wallet" hidden><img src="/assets/wallet-badge.svg" alt="Add to Apple Wallet" width="220" height="64"></a><a class="btn btn--ghost" href="/menu">Order ahead</a></div>
+      <p class="rc__hint">Show this code at the bar to collect a stamp. Save this page to your home screen, or add the card to Apple Wallet.</p>
+    </div>
+  </div>
+  <footer class="pg__foot"><span>Good coffee. Better days.</span><a href="/">refill</a><a class="credit" href="https://najmarketing.co" target="_blank" rel="noopener">Powered by <b>najmarketing.co</b></a></footer>
+</main>
+<script src="/config.js"></script>
+<script src="/vendor/gsap.min.js"></script>
+<script src="/vendor/qrcode.js"></script>
+<script src="/js/site.js"></script>
+<script src="/js/card.js"></script>
+</body>
+</html>

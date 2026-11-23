@@ -15,6 +15,7 @@
   <header class="bar__head">
     <p class="bar__mark">REFILL · Orders</p>
     <p class="bar__mode js-bar-mode"></p>
+    <button class="bar__cardbtn js-rc-open" type="button" hidden>Refill Card</button>
     <p class="bar__clock js-bar-clock"></p>
   </header>
   <form class="bar__login js-bar-login" hidden>
@@ -29,7 +30,18 @@
     <section><h2>Ready for pick-up <span class="js-n-ready"></span></h2><div class="bar__col js-col-ready"></div></section>
     <section class="bar__done"><h2>Collected today <span class="js-n-collected"></span></h2><div class="bar__col js-col-collected"></div></section>
   </div>
+  <div class="rcb js-rcb" hidden>
+    <div class="rcb__card">
+      <button class="rcb__x js-rc-close" type="button" aria-label="Close">×</button>
+      <h2>Refill Card</h2>
+      <p class="rcb__lede">Scan the QR on the customer's card, or type the code under it.</p>
+      <div class="rcb__cam"><video class="js-rc-video" playsinline muted></video><span class="js-rc-camnote">Starting the camera…</span></div>
+      <form class="rcb__code js-rc-form"><input class="field" name="code" placeholder="RF-XXXXX" autocomplete="off" autocapitalize="characters"><button class="btn" type="submit">Find</button></form>
+      <div class="rcb__res js-rc-res"></div>
+    </div>
+  </div>
 </main>
+<script src="/vendor/jsQR.js"></script>
 <script src="/js/bar.js"></script>
 </body>
 </html>

@@ -112,6 +112,34 @@ In the Kashier dashboard, also add a webhook (Integrations → Webhooks) pointin
 `https://<your domain>/api/kashier/webhook` for payment events, in the same mode (test or live). It
 confirms a payment even when a customer closes the tab before coming back to the site.
 
+## Apple Wallet and the Refill Card
+
+- **Order ticket in Apple Wallet.** After paying, the order page offers "Add to Apple Wallet". The pass
+  shows the order number, the items and a status. Its strip is the Refill cup filling up. When the bar
+  taps **Ready**, the pass updates and the iPhone shows "Order #012: Ready at the bar"; after
+  **Collected** it is voided.
+- **The Refill Card (stamps).** One stamp per drink; five stamps and the sixth drink is on us. Online
+  orders stamp the card automatically (the browser remembers the card). At the bar, staff open
+  **Refill Card** on `/bar`, scan the QR code (tablet camera) or type the code (`RF-XXXXX`), and add
+  stamps or give the free drink. Customers get their card at `/card` or on the order page, in Apple
+  Wallet or in the browser (works on Android too).
+- **Artwork:** `node website/tools/build-wallet.js` renders `wallet/assets/` (icon, logo, order and
+  card strips) in the Refill identity.
+- **Data:** cards in `data/cards.json`, Wallet registrations in `data/wallet.json` (not in git).
+- **Signing:** passes are signed with the Pass Type ID certificate and Apple's WWDR G4 intermediate
+  (`wallet/AppleWWDRCAG4.pem`) using the bundled `lib/node-forge`; updates are pushed through APNs with
+  the same certificate. Apple Wallet switches on only when all of these are set:
+
+| Name | What |
+|---|---|
+| `APPLE_TEAM_ID` | Apple Developer Team ID (Membership page) |
+| `APPLE_PASS_TYPE_ID` | e.g. `pass.com.therefillcafe` |
+| `APPLE_PASS_CERT` | the Pass Type ID certificate (PEM, or base64 of the PEM) |
+| `APPLE_PASS_KEY` | its private key (PEM, or base64 of the PEM) |
+
+The "Add to Apple Wallet" button uses `public/assets/wallet-badge.svg`; replace it with Apple's
+official badge artwork from the Add to Apple Wallet guidelines (Apple developer sign-in required).
+
 ## The Refill cup
 
 The loader and every product frame use the logo's own geometry (cup width 1, lid 1.095 wide and 0.084

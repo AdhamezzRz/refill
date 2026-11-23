@@ -3,3 +3,4 @@
 website/.env
 website/data/
 node_modules/
+website/wallet/secret/

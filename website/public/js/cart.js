@@ -120,7 +120,7 @@
     fetch('/api/checkout', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ items: lines.map(function (l) { return { id: l.id, opt: l.opt, temp: l.temp, qty: l.qty }; }),
-        name: name, phone: phone, note: form.note.value, pickup: pickup, table: table })
+        name: name, phone: phone, note: form.note.value, pickup: pickup, table: table, card: (function () { try { return JSON.parse(localStorage.getItem('refill-card') || 'null'); } catch (e) { return null; } })() })
     }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); }).then(function (x) {
       if (!x.ok || !x.j.url) throw new Error(x.j.error || 'Something went wrong. Try again.');
       try { var mine = JSON.parse(localStorage.getItem('refill-orders') || '{}'); mine[x.j.id] = x.j.token; localStorage.setItem('refill-orders', JSON.stringify(mine)); } catch (y) { /* private mode */ }

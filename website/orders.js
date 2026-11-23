@@ -29,6 +29,10 @@ const K = {
   base: 'https://checkout.kashier.io/',
 };
 const CURRENCY = 'EGP';
+const listeners = {};
+const on = (ev, fn) => (listeners[ev] = listeners[ev] || []).push(fn);
+const emit = (ev, o) => (listeners[ev] || []).forEach(fn => { try { fn(o); } catch (e) { console.error('[orders] ' + ev + ' hook: ' + e.message); } });
+let wallet = null;   // connected by server.js
 
 /* ---------- the menu, read from the same file the site uses ---------- */
 const MENU_FILE = path.join(ROOT, 'public', 'js', 'menu-data.js');
@@ -108,7 +112,8 @@ const label = l => [l.temp === 'iced' && l.both ? 'Iced ' + l.name : l.name, l.o
 function publicOrder(o) {
   return { id: o.id, no: o.no, status: o.status, createdAt: o.createdAt, paidAt: o.paidAt || null, readyAt: o.readyAt || null,
     name: o.name.split(' ')[0], pickup: o.pickup, table: o.table, total: o.total, currency: o.currency, mode: o.mode,
-    items: o.items.map(l => ({ label: label(l), qty: l.qty, unit: l.unit })) };
+    items: o.items.map(l => ({ label: label(l), qty: l.qty, unit: l.unit })),
+    wallet: !!(wallet && wallet.enabled()), stamps: wallet ? wallet.orderCardInfo(o) : null };
 }
 
 /* ---------- 1. checkout ---------- */
@@ -150,7 +155,8 @@ function checkout(req, res, isOpen) {
     if (total > 20000) return json(res, 400, { error: 'For orders this big, please call us.' });
     const today = [...orders.values()].filter(o => o.day === now.day && o.status !== 'pending' && o.status !== 'failed').length;
     const id = 'RF' + Date.now().toString(36).toUpperCase() + crypto.randomBytes(2).toString('hex').toUpperCase();
-    const o = { id, token: crypto.randomBytes(16).toString('hex'), day: now.day, no: null, provisional: String(today + 1).padStart(3, '0'),
+    const card = b.card && wallet && wallet.verifyCard(b.card.id, b.card.token) ? String(b.card.id) : null;
+    const o = { id, token: crypto.randomBytes(16).toString('hex'), day: now.day, cardId: card, no: null, provisional: String(today + 1).padStart(3, '0'),
       createdAt: new Date().toISOString(), status: 'pending', name, phone, note, table, pickup, items, total, currency: CURRENCY, mode: K.mode };
     orders.set(id, o); save();
 
@@ -178,6 +184,7 @@ function settle(merchantOrderId, ok, info, via) {
     o.status = 'paid'; o.paidAt = new Date().toISOString();
     o.no = String([...orders.values()].filter(x => x.day === o.day && x.no).length + 1).padStart(3, '0');
     console.log(`[order] ${o.id} PAID via ${via} · #${o.no}`);
+    save(); emit('paid', o); emit('change', o);
   } else if (!ok && o.status === 'pending') { o.status = 'failed'; console.log(`[order] ${o.id} payment failed via ${via}`); }
   o.kashier = { ...(o.kashier || {}), ...Object.fromEntries(Object.entries(info).filter(([, v]) => v != null && v !== '')) };
   save(); return o;
@@ -220,7 +227,7 @@ function webhook(req, res) {
         { transactionId: d.transactionId, kashierOrderId: d.kashierOrderId, method: d.method, amount: d.amount }, 'webhook');
     } else if (b.event === 'refund' || b.event === 'void' || b.event === 'reversal') {
       const o = orders.get(String(d.merchantOrderId || ''));
-      if (o && d.status === 'SUCCESS') { o.status = 'refunded'; save(); console.log(`[order] ${o.id} ${b.event}`); }
+      if (o && d.status === 'SUCCESS') { o.status = 'refunded'; save(); emit('change', o); console.log(`[order] ${o.id} ${b.event}`); }
     }
     res.writeHead(200, HEAD); res.end();
   });
@@ -248,7 +255,7 @@ function barUpdate(req, res) {
     const o = orders.get(String(b.id || '')), to = String(b.status || '');
     const allowed = { paid: ['ready'], ready: ['collected', 'paid'], collected: ['ready'] };
     if (!o || !(allowed[o.status] || []).includes(to)) return json(res, 400, { error: 'Cannot change that order.' });
-    o.status = to; if (to === 'ready') o.readyAt = new Date().toISOString(); save();
+    o.status = to; if (to === 'ready') o.readyAt = new Date().toISOString(); save(); emit('change', o);
     json(res, 200, { ok: true });
   });
 }
@@ -263,5 +270,7 @@ function handle(req, res, p, url, isOpen) {
   return false;
 }
 const publicConfig = () => ({ ordering: enabled(), payMode: K.mode });
+const connect = w => { wallet = w; };
 
-module.exports = { handle, publicConfig, _test: { hmac, redirectSignatureOk, webhookSignatureOk, unitPrice, K } };
+module.exports = { handle, publicConfig, on, connect, staffOk, label, save, get: id => orders.get(String(id || '')),
+  _test: { hmac, redirectSignatureOk, webhookSignatureOk, unitPrice, K } };
