@@ -224,11 +224,17 @@
   }
 
   /* ---------- fit any TV resolution ---------- */
+  /* Rotation, for TVs that are mounted upright but whose picture cannot be rotated in their own settings:
+     ?rotate=90 turns the picture a quarter turn clockwise, ?rotate=270 the other way, ?rotate=0 never turns it.
+     With no ?rotate, a landscape screen is turned 90 automatically and a portrait one is left alone. */
+  var ROT = q.has('rotate') ? ((parseInt(q.get('rotate'), 10) || 0) % 360 + 360) % 360 : null;
   function fit() {
-    var s = Math.min(innerWidth / 1080, innerHeight / 1920), tv = $('.js-tv');
-    document.documentElement.style.cssText = 'width:' + innerWidth + 'px;height:' + innerHeight + 'px';
-    document.body.style.cssText = 'width:' + innerWidth + 'px;height:' + innerHeight + 'px';
-    tv.style.transform = 'translate(' + ((innerWidth - 1080 * s) / 2) + 'px,' + ((innerHeight - 1920 * s) / 2) + 'px) scale(' + s + ')';
+    var w = innerWidth, h = innerHeight, tv = $('.js-tv');
+    var rot = ROT == null ? (w > h ? 90 : 0) : ROT, side = rot === 90 || rot === 270;
+    var s = side ? Math.min(w / 1920, h / 1080) : Math.min(w / 1080, h / 1920);
+    document.documentElement.style.cssText = 'width:' + w + 'px;height:' + h + 'px';
+    document.body.style.cssText = 'width:' + w + 'px;height:' + h + 'px';
+    tv.style.transform = 'translate(' + (w / 2) + 'px,' + (h / 2) + 'px) rotate(' + rot + 'deg) scale(' + s + ') translate(-540px,-960px)';
   }
 
   if (CAPTURE) { window.__render = render; window.__ready = true; render(0); return; }

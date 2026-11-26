@@ -153,6 +153,8 @@ official badge artwork from the Add to Apple Wallet guidelines (Apple developer 
   latte art, iced Spanish latte, matcha, hot chocolate, fudge cake, San Sebastián, croissant, French toast).
   The mapping clip → menu item is at the top of `public/js/screen.js`.
 - **Any resolution:** the layout is drawn at 1080 × 1920 and scaled to the TV, so it is sharp on 4K panels.
+- **Rotation:** if a TV is mounted upright but still outputs a landscape picture, the page turns itself a
+  quarter turn clockwise. Add `?rotate=270` if it comes out upside down, or `?rotate=0` to switch turning off.
 - **Video files for USB:** `node website/tools/build-screens.js <clips-dir> <out-dir>` (with the site running
   on :3100) exports `refill-screen-1-4k.mp4`, `refill-screen-2-4k.mp4` and 1080p versions. Two separate
   USB players are not frame-synced, so the joined moments can drift; the web version stays in sync.
