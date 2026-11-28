@@ -16,3 +16,5 @@ The tagline reads SPECIALTY COFFEE (the identity file has SPECIALITY; changed at
 The overall width (200 cm) is a proposal: measure the bay above the door before production. The RAL numbers are nearest standard colours, not exact matches.
 
 **One-line variant:** `node signage/storefront/tools/build.js 200 one-line` makes the same files with SPECIALTY COFFEE on a single line (names end in `-one-line`). At 200 cm wide the sign is then 126.6 cm high.
+
+**Fitted to the shopfront (Rev C):** `node signage/storefront/tools/build.js 220 one-line bay=240x160`. The space above the door is 240 cm wide × 160 cm high; the one-line logo is 220 × 139.3 cm with about 10 cm clear on every side. `out/REFILL-sign-preview-morning.jpg` and `-night.jpg` are Higgsfield visualisations of the finished sign on the shopfront photo (for the look only); they also replace the reference photo on sheet 1.
