@@ -11,4 +11,6 @@ Production drawing for the sign manufacturer: the REFILL logo as 3D letters on a
 
 The artwork uses the identity's own outlines, with two corrections for fabrication: every line is level (in the identity file REFILL and COFFEE are 0.34° off), and the cup, REFILL and the tagline share one centre line.
 
+The tagline reads SPECIALTY COFFEE (the identity file has SPECIALITY; changed at the client's request, same letters and spacing).
+
 The overall width (200 cm) is a proposal: measure the bay above the door before production. The RAL numbers are nearest standard colours, not exact matches.

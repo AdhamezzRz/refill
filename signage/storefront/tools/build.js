@@ -38,8 +38,10 @@ function line(ids, xs, rot, baseline, letters) {   // a row of glyphs on a level
 const TOP = 363.16;   // top of the lid in the identity page
 const refill = line(['glyph-0-0', 'glyph-0-1', 'glyph-0-2', 'glyph-0-3', 'glyph-0-4', 'glyph-0-4'],
   [710.1696, 811.744836, 907.592482, 1000.576332, 1065.727673, 1155.579247], TILT, 607.036 - TOP, 'REFILL');
-const spec = line(['glyph-2-0', 'glyph-2-1', 'glyph-2-2', 'glyph-2-3', 'glyph-2-4', 'glyph-2-5', 'glyph-2-6', 'glyph-2-4', 'glyph-2-7', 'glyph-2-8'],
-  [844.6431, 868.743603, 895.00236, 919.950749, 946.260893, 962.396411, 989.785682, 1013.012606, 1029.148124, 1052.400741], 0, 673.9082 - TOP, 'SPECIALITY');
+// The identity file spells the tagline SPECIALITY; the sign uses SPECIALTY (the client's spelling, as on Google and the website).
+// Same glyphs and tracking, without the second I. L→T uses Montserrat Bold's own kerning for that pair (-75/1000 em = 1.95 units).
+const spec = line(['glyph-2-0', 'glyph-2-1', 'glyph-2-2', 'glyph-2-3', 'glyph-2-4', 'glyph-2-5', 'glyph-2-6', 'glyph-2-7', 'glyph-2-8'],
+  [844.6431, 868.743603, 895.00236, 919.950749, 946.260893, 962.396411, 989.785682, 1011.062682, 1034.315299], 0, 673.9082 - TOP, 'SPECIALTY');
 const coffee = line(['glyph-1-0', 'glyph-1-1', 'glyph-1-2', 'glyph-1-2', 'glyph-1-3', 'glyph-1-3'],
   [884.6978, 910.210949, 939.603741, 963.729468, 987.855195, 1012.803098], TILT, 703.804 - TOP, 'COFFEE');
 const WU = refill.w, CX = WU / 2;   // the wordmark is the widest element: it sets the overall width
@@ -88,8 +90,8 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}tr.on td{background
 .sw{display:grid;grid-template-columns:18mm 1fr;gap:3.4mm;align-items:center;margin-top:3mm}.sw i{display:block;width:18mm;height:18mm;border:.2mm solid #b9ada2;border-radius:.8mm}
 .sw b{font:700 3mm/1.2 M;text-transform:uppercase;letter-spacing:.04em}.sw span{display:block;font:400 2.6mm/1.45 I;color:#4a3d35}
 svg text{font-family:I,Arial,sans-serif}`;
-const head = (title, n) => `<div class="hd"><h1>${title}</h1><p>REFILL Speciality Coffee · Storefront sign · Sheet ${n} of 4</p></div>
-  <div class="ft"><span>REFILL · El Shorouk, New Cairo · therefillcafe.com</span><span>Rev A · ${today} · All sizes in centimetres unless noted · Do not scale from a print: use the stated sizes</span><span>Brand identity: NAJ</span></div>`;
+const head = (title, n) => `<div class="hd"><h1>${title}</h1><p>REFILL Specialty Coffee · Storefront sign · Sheet ${n} of 4</p></div>
+  <div class="ft"><span>REFILL · El Shorouk, New Cairo · therefillcafe.com</span><span>Rev B · ${today} · All sizes in centimetres unless noted · Do not scale from a print: use the stated sizes</span><span>Brand identity: NAJ</span></div>`;
 
 /* dimension helpers, drawing units = mm on the sheet */
 const DIM = '#b0462e';
@@ -131,7 +133,7 @@ function sheet1() {
       <div><p class="k">Sheets</p>
         <table style="margin-top:1.4mm"><tr><td>1</td><td>Overview</td></tr><tr><td>2</td><td>Sizes and proportions</td></tr><tr><td>3</td><td>Colours, materials and build</td></tr><tr><td>4</td><td>Cutting outlines, 1:10, all text as curves</td></tr></table>
         <p class="k" style="margin-top:4mm">Pieces</p>
-        <table style="margin-top:1.4mm"><tr><td>Cup symbol</td><td class="n">2</td></tr><tr><td>REFILL</td><td class="n">6</td></tr><tr><td>SPECIALITY COFFEE</td><td class="n">16</td></tr><tr><td>Support frame</td><td class="n">1</td></tr></table>
+        <table style="margin-top:1.4mm"><tr><td>Cup symbol</td><td class="n">2</td></tr><tr><td>REFILL</td><td class="n">6</td></tr><tr><td>SPECIALTY COFFEE</td><td class="n">15</td></tr><tr><td>Support frame</td><td class="n">1</td></tr></table>
       </div></div>
   </div></section>`;
 }
@@ -165,15 +167,15 @@ function sheet2() {
       <tr><td>Cup wall thickness</td><td class="n">${D0.wall}</td></tr>
       <tr><td>REFILL letter height</td><td class="n">${D0.refillH}</td></tr>
       <tr><td>REFILL stroke (width of the I)</td><td class="n">${D0.stem}</td></tr>
-      <tr><td>SPECIALITY / COFFEE letter height</td><td class="n">${D0.tagH}</td></tr>
-      <tr><td>SPECIALITY / COFFEE stroke</td><td class="n">${D0.tagStem}</td></tr>
+      <tr><td>SPECIALTY / COFFEE letter height</td><td class="n">${D0.tagH}</td></tr>
+      <tr><td>SPECIALTY / COFFEE stroke</td><td class="n">${D0.tagStem}</td></tr>
     </table>
     <p class="k" style="margin-top:6mm">Other widths (same proportions)</p>
     <table style="margin-top:1.6mm"><tr><th class="n">Width</th><th class="n">Height</th><th class="n">Cup W</th><th class="n">REFILL H</th><th class="n">Tagline H</th><th class="n">Tagline stroke</th></tr>
       ${widths.map(w => { const d = dims(w); return `<tr class="${w === WCM ? 'on' : ''}"><td class="n">${d.W}</td><td class="n">${d.H}</td><td class="n">${d.iconW}</td><td class="n">${d.refillH}</td><td class="n">${d.tagH}</td><td class="n">${d.tagStem}</td></tr>`; }).join('')}
     </table>
     <div class="box" style="margin-top:6mm"><p><b>Proportions.</b> Height = ${(HU / WU).toFixed(4)} × width. Scale everything together; do not stretch, re-space or re-draw the letters. The cup, REFILL and both tagline lines share one centre line.</p></div>
-    <div class="box" style="margin-top:3mm"><p><b>The tagline is small.</b> At this size its strokes are only ${D0.tagStem} cm wide, too thin to light from inside, so SPECIALITY COFFEE is made as flat-cut solid letters (see sheet 3).</p></div>
+    <div class="box" style="margin-top:3mm"><p><b>The tagline is small.</b> At this size its strokes are only ${D0.tagStem} cm wide, too thin to light from inside, so SPECIALTY COFFEE is made as flat-cut solid letters (see sheet 3).</p></div>
   </div></section>`;
 }
 
@@ -208,7 +210,7 @@ function sheet3() {
       <tr><th style="width:44mm">Piece</th><th style="width:16mm" class="n">Qty</th><th>Build</th><th style="width:60mm">Finish</th></tr>
       <tr><td><b>Cup symbol</b><br>lid bar and cup ring</td><td class="n">2</td><td>Fabricated 3D letters, 8 cm deep, lit through the face. The cup is one ring; do not join it to the lid.</td><td>Cream face, brown sides</td></tr>
       <tr><td><b>REFILL</b><br>letters ${D0.refillH} cm high</td><td class="n">6</td><td>Same build as the symbol: 8 cm deep, lit through the face.</td><td>Cream face, brown sides</td></tr>
-      <tr><td><b>SPECIALITY COFFEE</b><br>letters ${D0.tagH} cm high</td><td class="n">16</td><td>Flat-cut solid acrylic, 1 to 2 cm thick, not lit. Fix on a thin brown rail or on studs so the two lines stay level and evenly spaced.</td><td>Cream face, brown painted edges</td></tr>
+      <tr><td><b>SPECIALTY COFFEE</b><br>letters ${D0.tagH} cm high</td><td class="n">15</td><td>Flat-cut solid acrylic, 1 to 2 cm thick, not lit. Fix on a thin brown rail or on studs so the two lines stay level and evenly spaced.</td><td>Cream face, brown painted edges</td></tr>
       <tr><td><b>Support frame</b></td><td class="n">1</td><td>Square aluminium or steel tube, 2 × 2 cm, fixed to the shopfront frame. Run the cables inside the tube. Keep the members behind the letters where possible, as in the reference photo.</td><td>Black, RAL 9005 matt</td></tr>
     </table>
     <div style="display:grid;grid-template-columns:152mm 1fr;gap:8mm;margin-top:6mm">
@@ -232,7 +234,7 @@ function sheet4() {
   </svg>
   <div class="abs" style="left:14mm;top:34mm;width:80mm">
     <p class="k">For the cutting file</p>
-    <ul><li>Every shape on this sheet is a vector outline. All text is converted to curves: no fonts are needed.</li><li>24 pieces: the lid, the cup ring, and 6 + 10 + 6 letters.</li><li>The outline is the finished face edge. Add your own allowance for trim or returns.</li><li>Open this PDF in Illustrator or CorelDRAW, or use the SVG file sent with it (1 unit = 1 cm).</li></ul>
+    <ul><li>Every shape on this sheet is a vector outline. All text is converted to curves: no fonts are needed.</li><li>23 pieces: the lid, the cup ring, and 6 + 9 + 6 letters.</li><li>The outline is the finished face edge. Add your own allowance for trim or returns.</li><li>Open this PDF in Illustrator or CorelDRAW, or use the SVG file sent with it (1 unit = 1 cm).</li></ul>
     <div class="warn" style="margin-top:5mm"><p><b>Check the size first.</b> ${D0.W} cm is the proposed width. If the bay is different, scale the whole drawing in one step.</p></div>
   </div></section>`;
 }
