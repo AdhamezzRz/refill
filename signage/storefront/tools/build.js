@@ -253,6 +253,10 @@ function sheet4() {
   await p.setContent(`<!doctype html><html><head><meta charset="utf-8"><title>REFILL storefront sign</title><style>@page{size:420mm 297mm;margin:0}*{margin:0;padding:0}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}</style></head>
     <body><svg width="420mm" height="297mm" viewBox="0 0 420 297" style="display:block"><rect width="420" height="297" fill="#2a2e30"/>${logoAt(lx, ly, lw, sides + art(CREAM))}</svg></body></html>`, { waitUntil: 'load' });
   await p.pdf({ path: path.join(OUT, 'REFILL-storefront-sign-logo.pdf'), width: '420mm', height: '297mm', printBackground: true, preferCSSPageSize: true });
+  // the same, flat: cream logo only, no sides
+  await p.setContent(`<!doctype html><html><head><meta charset="utf-8"><title>REFILL storefront sign</title><style>@page{size:420mm 297mm;margin:0}*{margin:0;padding:0}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}</style></head>
+    <body><svg width="420mm" height="297mm" viewBox="0 0 420 297" style="display:block"><rect width="420" height="297" fill="#2a2e30"/>${logoAt(lx, ly, lw, art(CREAM))}</svg></body></html>`, { waitUntil: 'load' });
+  await p.pdf({ path: path.join(OUT, 'REFILL-storefront-sign-logo-2D.pdf'), width: '420mm', height: '297mm', printBackground: true, preferCSSPageSize: true });
   await b.close();
   // artwork only: 1 unit = 1 cm at the chosen width
   fs.writeFileSync(path.join(OUT, 'refill-sign-artwork.svg'),
