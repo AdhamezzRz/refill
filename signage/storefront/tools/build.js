@@ -1,6 +1,7 @@
 // REFILL · storefront sign: production PDF for the sign manufacturer.
 //   node signage/storefront/tools/build.js [overall width in cm, default 200]
-// → out/REFILL-storefront-sign-production.pdf (A3 landscape, 4 sheets, vector) and out/refill-sign-artwork.svg (outlines only, 1 unit = 1 cm)
+// → out/REFILL-storefront-sign-production.pdf (A3 landscape, 4 sheets, vector), out/REFILL-storefront-sign-logo.pdf (the logo alone in its final look)
+//   and out/refill-sign-artwork.svg (outlines only, 1 unit = 1 cm)
 //
 // The artwork is taken from the identity file (src/identity-logo-page.svg, exported from page 5 of REFILLL_IDENTITY.pdf):
 // the same Montserrat Bold outlines and the same cup. Two things are corrected for fabrication:
@@ -242,6 +243,16 @@ function sheet4() {
   const b = await chromium.launch(), p = await b.newPage();
   await p.setContent(html, { waitUntil: 'load' }); await p.evaluate(() => document.fonts.ready);
   await p.pdf({ path: path.join(OUT, 'REFILL-storefront-sign-production.pdf'), width: '420mm', height: '297mm', printBackground: true, preferCSSPageSize: true });
+  // the logo alone in its final look: cream faces, brown sides, on a dark ground. No notes.
+  const depth = 2.6 / K, steps = 14;   // the sides, seen slightly from the left and above (about 2.6 cm of the 8 cm depth shows)
+  const grp = (ds, fill) => `<g fill="${fill}" fill-rule="evenodd">${ds.map(d => `<path d="${d}"/>`).join('')}</g>`;
+  const big = [lidD, cupD, ...R.map(g => g.d)], small = [...SP, ...CO].map(g => g.d);   // the tagline letters are only 1–2 cm thick, so their sides show less
+  const side = (ds, dp) => Array.from({ length: steps }, (_, i) => `<g transform="translate(${(dp * (steps - i) / steps).toFixed(3)} ${(dp * (steps - i) / steps).toFixed(3)})">${grp(ds, i < 2 ? '#4a2b1a' : BROWN)}</g>`).join('');
+  const sides = side(big, depth) + side(small, depth * 0.28);
+  const lw = 250, lx = (420 - lw) / 2, ly = (297 - lw * HU / WU) / 2 - 2;
+  await p.setContent(`<!doctype html><html><head><meta charset="utf-8"><title>REFILL storefront sign</title><style>@page{size:420mm 297mm;margin:0}*{margin:0;padding:0}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}</style></head>
+    <body><svg width="420mm" height="297mm" viewBox="0 0 420 297" style="display:block"><rect width="420" height="297" fill="#2a2e30"/>${logoAt(lx, ly, lw, sides + art(CREAM))}</svg></body></html>`, { waitUntil: 'load' });
+  await p.pdf({ path: path.join(OUT, 'REFILL-storefront-sign-logo.pdf'), width: '420mm', height: '297mm', printBackground: true, preferCSSPageSize: true });
   await b.close();
   // artwork only: 1 unit = 1 cm at the chosen width
   fs.writeFileSync(path.join(OUT, 'refill-sign-artwork.svg'),
