@@ -14,3 +14,5 @@ The artwork uses the identity's own outlines, with two corrections for fabricati
 The tagline reads SPECIALTY COFFEE (the identity file has SPECIALITY; changed at the client's request, same letters and spacing).
 
 The overall width (200 cm) is a proposal: measure the bay above the door before production. The RAL numbers are nearest standard colours, not exact matches.
+
+**One-line variant:** `node signage/storefront/tools/build.js 200 one-line` makes the same files with SPECIALTY COFFEE on a single line (names end in `-one-line`). At 200 cm wide the sign is then 126.6 cm high.

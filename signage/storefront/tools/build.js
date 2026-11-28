@@ -1,5 +1,6 @@
 // REFILL · storefront sign: production PDF for the sign manufacturer.
-//   node signage/storefront/tools/build.js [overall width in cm, default 200]
+//   node signage/storefront/tools/build.js [overall width in cm, default 200] [one-line]
+//   one-line = SPECIALTY COFFEE on a single line; the files get the suffix -one-line
 // → out/REFILL-storefront-sign-production.pdf (A3 landscape, 4 sheets, vector), out/REFILL-storefront-sign-logo.pdf (the logo alone in its final look)
 //   and out/refill-sign-artwork.svg (outlines only, 1 unit = 1 cm)
 //
@@ -11,6 +12,8 @@ const { chromium } = require('playwright');
 const fs = require('fs'), path = require('path');
 const ROOT = path.resolve(__dirname, '..'), OUT = path.join(ROOT, 'out');
 const WCM = Number(process.argv[2]) || 200;
+const ONE = process.argv.includes('one-line');   // SPECIALTY COFFEE on one line instead of two
+const SUF = ONE ? '-one-line' : '';
 const BROWN = '#653d26', CARAMEL = '#c7ad91', GREY = '#8e847e', CREAM = '#f2e9db', INK = '#1d1410';
 
 /* ---------- 1. the artwork, rebuilt level and centred, in "logo units" ---------- */
@@ -31,19 +34,27 @@ function tf(d, rot, tx, ty) {   // absolute M/L/C/Z path → rotated by -rot and
   return [out.replace(/M[\d. -]+Z?$/, m => /Z$/.test(m) ? 'Z' : ''), bb];
 }
 function line(ids, xs, rot, baseline, letters) {   // a row of glyphs on a level baseline, later centred on the axis
-  const raw = ids.map((id, i) => tf(glyph[id], rot, xs[i] - xs[0], baseline));
+  const rt = i => Array.isArray(rot) ? rot[i] : rot;
+  const raw = ids.map((id, i) => tf(glyph[id], rt(i), xs[i] - xs[0], baseline));
   const x0 = Math.min(...raw.map(r => r[1][0])), x1 = Math.max(...raw.map(r => r[1][2]));
-  return { w: x1 - x0, place: cx => ids.map((id, i) => { const [d, bb] = tf(glyph[id], rot, xs[i] - xs[0] - x0 + cx - (x1 - x0) / 2, baseline); return { d, bb, ch: letters[i] }; }) };
+  return { w: x1 - x0, place: cx => ids.map((id, i) => { const [d, bb] = tf(glyph[id], rt(i), xs[i] - xs[0] - x0 + cx - (x1 - x0) / 2, baseline); return { d, bb, ch: letters[i] }; }) };
 }
 const TOP = 363.16;   // top of the lid in the identity page
 const refill = line(['glyph-0-0', 'glyph-0-1', 'glyph-0-2', 'glyph-0-3', 'glyph-0-4', 'glyph-0-4'],
   [710.1696, 811.744836, 907.592482, 1000.576332, 1065.727673, 1155.579247], TILT, 607.036 - TOP, 'REFILL');
 // The identity file spells the tagline SPECIALITY; the sign uses SPECIALTY (the client's spelling, as on Google and the website).
 // Same glyphs and tracking, without the second I. L→T uses Montserrat Bold's own kerning for that pair (-75/1000 em = 1.95 units).
-const spec = line(['glyph-2-0', 'glyph-2-1', 'glyph-2-2', 'glyph-2-3', 'glyph-2-4', 'glyph-2-5', 'glyph-2-6', 'glyph-2-7', 'glyph-2-8'],
-  [844.6431, 868.743603, 895.00236, 919.950749, 946.260893, 962.396411, 989.785682, 1011.062682, 1034.315299], 0, 673.9082 - TOP, 'SPECIALTY');
-const coffee = line(['glyph-1-0', 'glyph-1-1', 'glyph-1-2', 'glyph-1-2', 'glyph-1-3', 'glyph-1-3'],
-  [884.6978, 910.210949, 939.603741, 963.729468, 987.855195, 1012.803098], TILT, 703.804 - TOP, 'COFFEE');
+const SPEC_IDS = ['glyph-2-0', 'glyph-2-1', 'glyph-2-2', 'glyph-2-3', 'glyph-2-4', 'glyph-2-5', 'glyph-2-6', 'glyph-2-7', 'glyph-2-8'];
+const SPEC_X = [844.6431, 868.743603, 895.00236, 919.950749, 946.260893, 962.396411, 989.785682, 1011.062682, 1034.315299];
+const COF_IDS = ['glyph-1-0', 'glyph-1-1', 'glyph-1-2', 'glyph-1-2', 'glyph-1-3', 'glyph-1-3'];
+const COF_X = [884.6978, 910.210949, 939.603741, 963.729468, 987.855195, 1012.803098];
+// One line: COFFEE follows SPECIALTY on the same baseline after one word space with the same tracking
+// (Montserrat Bold: Y advance 17.579 + tracking 7.5, space 7.359 + tracking 7.5, at this type size).
+const COF_START = SPEC_X[8] + 25.079 + 14.859;
+const spec = ONE
+  ? line([...SPEC_IDS, ...COF_IDS], [...SPEC_X, ...COF_X.map(x => x - COF_X[0] + COF_START)], [...SPEC_IDS.map(() => 0), ...COF_IDS.map(() => TILT)], 673.9082 - TOP, 'SPECIALTYCOFFEE')
+  : line(SPEC_IDS, SPEC_X, 0, 673.9082 - TOP, 'SPECIALTY');
+const coffee = ONE ? { place: () => [] } : line(COF_IDS, COF_X, TILT, 703.804 - TOP, 'COFFEE');
 const WU = refill.w, CX = WU / 2;   // the wordmark is the widest element: it sets the overall width
 const LID = { w: 125.70, h: 14.29 }, CUP = { ro: 63.375, ri: 49.13, top: 26.86, itop: 41.15, yc: 79.23 };
 const r3 = n => n.toFixed(3);
@@ -51,9 +62,9 @@ const lidD = `M${r3(CX - LID.w / 2)} 0H${r3(CX + LID.w / 2)}V${LID.h}H${r3(CX - 
 const cupD = `M${r3(CX - CUP.ro)} ${CUP.top}H${r3(CX + CUP.ro)}V${CUP.yc}A${CUP.ro} ${CUP.ro} 0 0 1 ${r3(CX - CUP.ro)} ${CUP.yc}Z` +
   `M${r3(CX - CUP.ri)} ${CUP.itop}V${CUP.yc}A${CUP.ri} ${CUP.ri} 0 0 0 ${r3(CX + CUP.ri)} ${CUP.yc}V${CUP.itop}Z`;
 const R = refill.place(CX), SP = spec.place(CX), CO = coffee.place(CX);
-const HU = Math.max(...CO.map(g => g.bb[3]));   // overall height in units
+const HU = Math.max(...[...SP, ...CO].map(g => g.bb[3]));   // overall height in units
 const bbOf = gs => [Math.min(...gs.map(g => g.bb[0])), Math.min(...gs.map(g => g.bb[1])), Math.max(...gs.map(g => g.bb[2])), Math.max(...gs.map(g => g.bb[3]))];
-const bR = bbOf(R), bS = bbOf(SP), bC = bbOf(CO), capS = 18.203, capR = 62.65;
+const bR = bbOf(R), bS = bbOf(SP), bC = ONE ? [0, 0, 0, 0] : bbOf(CO), capS = 18.203, capR = 62.65;
 const art = (fill, stroke = 'none', sw = 0) => `<g fill="${fill}" stroke="${stroke}" stroke-width="${sw}" fill-rule="evenodd" stroke-linejoin="round"><path d="${lidD}"/><path d="${cupD}"/>` +
   [...R, ...SP, ...CO].map(g => `<path d="${g.d}"/>`).join('') + '</g>';
 
@@ -143,7 +154,8 @@ function sheet2() {
   const sc = WCM / WU;                   // at 1:10, 1 cm = 1 mm → wmm = WCM
   const x = 34, y = 62, u = v => v * sc, X = v => x + u(v), Y = v => y + u(v);
   const ys = { lid0: 0, lid1: LID.h, cup0: CUP.top, cup1: CUP.yc + CUP.ro, r0: bR[3] - capR - 0.3, r1: 607.036 - TOP, s0: 673.9082 - TOP - capS, s1: 673.9082 - TOP, c0: 703.804 - TOP - capS, c1: 703.804 - TOP };
-  const chain = [['lid0', 'lid1'], ['lid1', 'cup0'], ['cup0', 'cup1'], ['cup1', 'r0'], ['r0', 'r1'], ['r1', 's0'], ['s0', 's1'], ['s1', 'c0'], ['c0', 'c1']];
+  if (ONE) { delete ys.c0; delete ys.c1; }
+  const chain = [['lid0', 'lid1'], ['lid1', 'cup0'], ['cup0', 'cup1'], ['cup1', 'r0'], ['r0', 'r1'], ['r1', 's0'], ['s0', 's1'], ['s1', 'c0'], ['c0', 'c1']].filter(([a, b]) => a in ys && b in ys);
   const rx = X(WU) + 12;
   const widths = [160, 180, 200, 220, 240, 280].includes(WCM) ? [160, 180, 200, 220, 240, 280] : [160, 180, 200, 240, WCM].sort((a, b) => a - b);
   return `<section class="sheet">${head('Sizes and proportions · scale 1:10', 2)}
@@ -153,7 +165,7 @@ function sheet2() {
     ${dimH(X(0), X(WU), y - 14, `${D0.W} overall width`, true, 13)}
     ${dimV(x - 12, Y(0), Y(HU), `${D0.H}`, true, 11)}
     ${dimH(X(CX - CUP.ro), X(CX + CUP.ro), Y(CUP.yc + CUP.ro) + 5, `${D0.iconW} cup`, false)}
-    ${dimH(X(bS[0]), X(bS[2]), Y(HU) + 6, `${D0.specW}`, false)}${dimH(X(bC[0]), X(bC[2]), Y(HU) + 13, `${D0.cofW}`, false)}
+    ${dimH(X(bS[0]), X(bS[2]), Y(HU) + 6, `${D0.specW}`, false)}${ONE ? '' : dimH(X(bC[0]), X(bC[2]), Y(HU) + 13, `${D0.cofW}`, false)}
     ${chain.map(([a, b]) => dimV(rx, Y(ys[a]), Y(ys[b]), cm(ys[b] - ys[a]), false)).join('')}
     <g stroke="${DIM}" stroke-width=".12" stroke-dasharray=".6 .6">${Object.values(ys).map(v => `<path d="M${X(WU) + 1.5} ${Y(v)}H${rx}"/>`).join('')}</g>
     <text x="${x}" y="${Y(HU) + 24}" font-size="2.5" fill="#6b5d54">Drawn at 1:10 (1 mm on this A3 sheet = 1 cm on the sign). Shown in brown for legibility; face and side colours are on sheet 3. Letter heights are flat-letter (cap) heights; round letters overshoot by about 1%.</text>
@@ -167,14 +179,14 @@ function sheet2() {
       <tr><td>Cup wall thickness</td><td class="n">${D0.wall}</td></tr>
       <tr><td>REFILL letter height</td><td class="n">${D0.refillH}</td></tr>
       <tr><td>REFILL stroke (width of the I)</td><td class="n">${D0.stem}</td></tr>
-      <tr><td>SPECIALTY / COFFEE letter height</td><td class="n">${D0.tagH}</td></tr>
-      <tr><td>SPECIALTY / COFFEE stroke</td><td class="n">${D0.tagStem}</td></tr>
+      <tr><td>SPECIALTY COFFEE letter height</td><td class="n">${D0.tagH}</td></tr>
+      <tr><td>SPECIALTY COFFEE stroke</td><td class="n">${D0.tagStem}</td></tr>
     </table>
     <p class="k" style="margin-top:6mm">Other widths (same proportions)</p>
     <table style="margin-top:1.6mm"><tr><th class="n">Width</th><th class="n">Height</th><th class="n">Cup W</th><th class="n">REFILL H</th><th class="n">Tagline H</th><th class="n">Tagline stroke</th></tr>
       ${widths.map(w => { const d = dims(w); return `<tr class="${w === WCM ? 'on' : ''}"><td class="n">${d.W}</td><td class="n">${d.H}</td><td class="n">${d.iconW}</td><td class="n">${d.refillH}</td><td class="n">${d.tagH}</td><td class="n">${d.tagStem}</td></tr>`; }).join('')}
     </table>
-    <div class="box" style="margin-top:6mm"><p><b>Proportions.</b> Height = ${(HU / WU).toFixed(4)} × width. Scale everything together; do not stretch, re-space or re-draw the letters. The cup, REFILL and both tagline lines share one centre line.</p></div>
+    <div class="box" style="margin-top:6mm"><p><b>Proportions.</b> Height = ${(HU / WU).toFixed(4)} × width. Scale everything together; do not stretch, re-space or re-draw the letters. The cup, REFILL and ${ONE ? 'the tagline' : 'both tagline lines'} share one centre line.</p></div>
     <div class="box" style="margin-top:3mm"><p><b>The tagline is small.</b> At this size its strokes are only ${D0.tagStem} cm wide, too thin to light from inside, so SPECIALTY COFFEE is made as flat-cut solid letters (see sheet 3).</p></div>
   </div></section>`;
 }
@@ -210,7 +222,7 @@ function sheet3() {
       <tr><th style="width:44mm">Piece</th><th style="width:16mm" class="n">Qty</th><th>Build</th><th style="width:60mm">Finish</th></tr>
       <tr><td><b>Cup symbol</b><br>lid bar and cup ring</td><td class="n">2</td><td>Fabricated 3D letters, 8 cm deep, lit through the face. The cup is one ring; do not join it to the lid.</td><td>Cream face, brown sides</td></tr>
       <tr><td><b>REFILL</b><br>letters ${D0.refillH} cm high</td><td class="n">6</td><td>Same build as the symbol: 8 cm deep, lit through the face.</td><td>Cream face, brown sides</td></tr>
-      <tr><td><b>SPECIALTY COFFEE</b><br>letters ${D0.tagH} cm high</td><td class="n">15</td><td>Flat-cut solid acrylic, 1 to 2 cm thick, not lit. Fix on a thin brown rail or on studs so the two lines stay level and evenly spaced.</td><td>Cream face, brown painted edges</td></tr>
+      <tr><td><b>SPECIALTY COFFEE</b><br>letters ${D0.tagH} cm high</td><td class="n">15</td><td>Flat-cut solid acrylic, 1 to 2 cm thick, not lit. Fix on a thin brown rail or on studs so ${ONE ? 'the line stays' : 'the two lines stay'} level and evenly spaced.</td><td>Cream face, brown painted edges</td></tr>
       <tr><td><b>Support frame</b></td><td class="n">1</td><td>Square aluminium or steel tube, 2 × 2 cm, fixed to the shopfront frame. Run the cables inside the tube. Keep the members behind the letters where possible, as in the reference photo.</td><td>Black, RAL 9005 matt</td></tr>
     </table>
     <div style="display:grid;grid-template-columns:152mm 1fr;gap:8mm;margin-top:6mm">
@@ -234,7 +246,7 @@ function sheet4() {
   </svg>
   <div class="abs" style="left:14mm;top:34mm;width:80mm">
     <p class="k">For the cutting file</p>
-    <ul><li>Every shape on this sheet is a vector outline. All text is converted to curves: no fonts are needed.</li><li>23 pieces: the lid, the cup ring, and 6 + 9 + 6 letters.</li><li>The outline is the finished face edge. Add your own allowance for trim or returns.</li><li>Open this PDF in Illustrator or CorelDRAW, or use the SVG file sent with it (1 unit = 1 cm).</li></ul>
+    <ul><li>Every shape on this sheet is a vector outline. All text is converted to curves: no fonts are needed.</li><li>23 pieces: the lid, the cup ring, and ${ONE ? '6 + 15' : '6 + 9 + 6'} letters.</li><li>The outline is the finished face edge. Add your own allowance for trim or returns.</li><li>Open this PDF in Illustrator or CorelDRAW, or use the SVG file sent with it (1 unit = 1 cm).</li></ul>
     <div class="warn" style="margin-top:5mm"><p><b>Check the size first.</b> ${D0.W} cm is the proposed width. If the bay is different, scale the whole drawing in one step.</p></div>
   </div></section>`;
 }
@@ -244,7 +256,7 @@ function sheet4() {
   const html = `<!doctype html><html><head><meta charset="utf-8"><title>REFILL storefront sign · production drawing</title><style>${CSS}</style></head><body>${sheet1()}${sheet2()}${sheet3()}${sheet4()}</body></html>`;
   const b = await chromium.launch(), p = await b.newPage();
   await p.setContent(html, { waitUntil: 'load' }); await p.evaluate(() => document.fonts.ready);
-  await p.pdf({ path: path.join(OUT, 'REFILL-storefront-sign-production.pdf'), width: '420mm', height: '297mm', printBackground: true, preferCSSPageSize: true });
+  await p.pdf({ path: path.join(OUT, `REFILL-storefront-sign-production${SUF}.pdf`), width: '420mm', height: '297mm', printBackground: true, preferCSSPageSize: true });
   // the logo alone in its final look: cream faces, brown sides, on a dark ground. No notes.
   const depth = 2.6 / K, steps = 14;   // the sides, seen slightly from the left and above (about 2.6 cm of the 8 cm depth shows)
   const grp = (ds, fill) => `<g fill="${fill}" fill-rule="evenodd">${ds.map(d => `<path d="${d}"/>`).join('')}</g>`;
@@ -254,14 +266,14 @@ function sheet4() {
   const lw = 250, lx = (420 - lw) / 2, ly = (297 - lw * HU / WU) / 2 - 2;
   await p.setContent(`<!doctype html><html><head><meta charset="utf-8"><title>REFILL storefront sign</title><style>@page{size:420mm 297mm;margin:0}*{margin:0;padding:0}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}</style></head>
     <body><svg width="420mm" height="297mm" viewBox="0 0 420 297" style="display:block"><rect width="420" height="297" fill="#2a2e30"/>${logoAt(lx, ly, lw, sides + art(CREAM))}</svg></body></html>`, { waitUntil: 'load' });
-  await p.pdf({ path: path.join(OUT, 'REFILL-storefront-sign-logo.pdf'), width: '420mm', height: '297mm', printBackground: true, preferCSSPageSize: true });
+  await p.pdf({ path: path.join(OUT, `REFILL-storefront-sign-logo${SUF}.pdf`), width: '420mm', height: '297mm', printBackground: true, preferCSSPageSize: true });
   // the same, flat: cream logo only, no sides
   await p.setContent(`<!doctype html><html><head><meta charset="utf-8"><title>REFILL storefront sign</title><style>@page{size:420mm 297mm;margin:0}*{margin:0;padding:0}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}</style></head>
     <body><svg width="420mm" height="297mm" viewBox="0 0 420 297" style="display:block"><rect width="420" height="297" fill="#2a2e30"/>${logoAt(lx, ly, lw, art(CREAM))}</svg></body></html>`, { waitUntil: 'load' });
-  await p.pdf({ path: path.join(OUT, 'REFILL-storefront-sign-logo-2D.pdf'), width: '420mm', height: '297mm', printBackground: true, preferCSSPageSize: true });
+  await p.pdf({ path: path.join(OUT, `REFILL-storefront-sign-logo-2D${SUF}.pdf`), width: '420mm', height: '297mm', printBackground: true, preferCSSPageSize: true });
   await b.close();
   // artwork only: 1 unit = 1 cm at the chosen width
-  fs.writeFileSync(path.join(OUT, 'refill-sign-artwork.svg'),
+  fs.writeFileSync(path.join(OUT, `refill-sign-artwork${SUF}.svg`),
     `<?xml version="1.0" encoding="UTF-8"?>\n<!-- REFILL storefront sign artwork. Outlines only. 1 unit = 1 cm at ${D0.W} cm overall width. -->\n<svg xmlns="http://www.w3.org/2000/svg" width="${D0.W}cm" height="${D0.H}cm" viewBox="0 0 ${WU.toFixed(3)} ${HU.toFixed(3)}">${art(BROWN)}</svg>\n`);
   console.log(JSON.stringify(D0));
 })();
